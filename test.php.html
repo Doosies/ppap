@@ -2,39 +2,177 @@
 <html>
     <head>
         <style type="text/css">
-            html, body {
-                width: 100%; height: 100%;
+            #containner{
+                display: flex;
+                flex-direction: row;
+                margin:auto; 
+                flex-wrap : wrap;
+                width: 100%;
+                text-align: center;
+            }
+            #phoneName{
+                width:100%;
+            }
+            #center_sub{
+                width:150px;
+                float: left;
+            }
+            #center_radio{
+                float: left;
+            }
+            #image_pick{
+                margin-top: 20px;
+                display: inline-block;
+            }
+            #image_pick_sub{
+                float:left;
+                margin:0px 15px;
+            }
+            #containner_left{
+                display: inline-block;
+            }
+            #containner_center{
+                float:left;
+            }
+            #center_area{
+                padding: 20px;
+            }
+            #centerSelect{
+                
             }
         </style>
     </head>
-        <body>
-        <div id = "containner" style=" background:gray; margin:auto; display:flex; width:800px; flex-flow : row wrap;"><!--전체 랩-->
-            <div id="phoneName" style=""><!--상단 핸드폰 이름 -->
+        <body> 
+        <!--전체 랩-->
+        <div id = "containner">
+            <!--상단 핸드폰 이름 -->
+            <div id="phoneName" >
+                갤럭시s9
             </div>
-            <div id="main" style=""><!--하단 본문-->       
-                <div id="info" style=""><!--안내-->
-                    갤럭시s9
+            <!--왼쪽 이미지-->
+            <div id="containner_left">
+                <div id="image1">
+                    <img src="images/phone.png" alt="My Image" style="width:300px; height:300px;">
                 </div>
-                <div id="left_main" style=" background:yellow;"><!--왼쪽 이미지-->
-                    <center><img src="http://www.phoneflex.co.kr/thum/1590545178_3.png" idth="300" height="300"></center>
+                <div id="image_pick">
+                    <div id="image_pick_sub" >
+                        <div>
+                            <img id="image" src="images/phone.png" alt="My Image" style="width:40px; height:40px;">
+                        </div>
+                        <div >
+                            블루
+                        </div>
+                    </div>
+                    <div id="image_pick_sub">
+                        <div>
+                            <img id="image"  src="images/phone2.png" alt="My Image" style="width:40px; height:40px;">
+                        </div>
+                        <div >
+                            화이트
+                        </div>
+                    </div>
+                    <div id="image_pick_sub">
+                        <div>
+                            <img id="image"  src="images/phone3.png" alt="My Image" style="width:40px; height:40px;">
+                        </div>
+                        <div >
+                            핑크
+                        </div>
+                    </div>
                 </div>
-                <div id="center_main" style="background:green;"><!--가운데 표-->
-                    <div id="color">색상</div>
-                    <div id="now_service">사용중인 통신사</div>
-                    <div id="after_service">사용하실 통신사</div>
-                    <div id="select_contract">약정 선택</div>
-                    <div id="installment">할부개월</div>
-                    <div id="plan">요금제</div>
+            </div>
+            <!--가운데 표-->
+            <div id="containner_center">
+                <div id="center_area">
+                    <div id="center_sub">
+                        색상   
+                    </div>
+                    <div id="center_radio" >
+                        <input type="radio" name="radio_color" value="1" checked>
+                        색상1
+                        <input type="radio" name="radio_color" value="2" >
+                        색상2
+                        <input type="radio" name="radio_color" value="3" >
+                        색상3
+                    </div>
                 </div>
-                <div id="right_main" style="background:red;"><!--오른쪽 표-->
-                    <div id="info_price">가격정보</div>
-                    <div id="original_price">할부원금</div>
-                    <div id="info_installment">할부정보</div>
-                    <div id="info_total_result">결과</div>
-                    <div id="info_etc">기타정보</div>
-                    <div id="button">신청하기 버튼</div>
+                <div id="center_area">
+                    <div id="center_sub">
+                        사용중인 통신사
+                    </div>
+                    <div id="center_radio" >
+                        <input type="radio" name="radio_now_service" value="yyy" checked>
+                        SK
+                        <input type="radio" name="radio_now_service" value="yyy" >
+                        KT
+                        <input type="radio" name="radio_now_service" value="yyy" >
+                        LG
+                        <input type="radio" name="radio_now_service" value="yyy" >
+                        알뜰폰
+                    </div>
                 </div>
-            </div>       
+                <div id="center_area">                    
+                    <div id="center_sub">
+                        사용하실 통신사
+                    </div>
+                    <div id="center_radio" >
+                        <input type="radio" name="radio_after_service" value="yyy" checked>
+                        SK
+                        <input type="radio" name="radio_after_service" value="yyy" >
+                        KT
+                        <input type="radio" name="radio_after_service" value="yyy" >
+                        LG
+                    </div>
+                </div>
+                <div id="center_area">
+                    <div id="center_sub">
+                        약정 선택
+                    </div>
+                    <div id="center_radio">
+                        <input type="radio" name="radio_select_contract" value="yyy" checked>
+                        공시지원금(선택약정)
+                        <input type="radio" name="radio_select_contract" value="yyy" >
+                        요금제할인
+                    </div>
+                </div>
+                <div id="center_area">
+                    <div id="center_sub">
+                        할부개월    
+                    </div>
+                    <div id="center_radio" >
+                        <input type="radio" name="radio_info" value="yyy" checked>
+                        24개월
+                        <input type="radio" name="radio_info" value="yyy" >
+                        30개월
+                        <input type="radio" name="radio_info" value="yyy" >
+                        36개월
+                    </div>
+                </div>
+                <div id="center_area">
+                    <div id="center_sub">
+                        요금제
+                    </div>
+                    <div id="center_radio" >
+                        <select id="centerSelect">
+                            <option>요금1</option>
+                            <option>요금2</option>
+                            <option>요금3</option>
+                            <option>요금4</option>
+                            <option>요금5</option>
+                          </select>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--오른쪽 표-->
+            <!-- <div id="right_main" style="background:red; ">
+                <div id="info_price">가격정보</div>
+                <div id="original_price">할부원금</div>
+                <div id="info_installment">할부정보</div>
+                <div id="info_total_result">결과</div>
+                <div id="info_etc">기타정보</div>
+                <div id="button">신청하기 버튼</div>
+            </div> -->
         </div> 
     </body>
 </html> 
