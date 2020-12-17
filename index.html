@@ -169,10 +169,28 @@
                 $("#main_image").attr("src", "./images/phone"+number+".png");
                 $('input[name="radio_color"]:radio[value='+number+']').prop('checked',true);
             }
+            $(function(){
+                $('.radio_calc').click(function(e){
+                    var name = $(this).attr('name');
+                    //현재 통신사 선택
+                    if(name == 'radio_now_service'){
 
-            function onClick_now_service(){
-
-            }
+                    }
+                    //옮길 통신사 선택
+                    else if(name == 'radio_after_service'){
+                        
+                    }
+                    //약정선택
+                    else if(name == 'radio_contract'){
+                        
+                    }
+                    //radio_info
+                    //할부개월
+                    else{
+                        
+                    }
+                });
+            });
         </script>
         <script type="text/javascript" language="javascript">
             function calc_price(){
@@ -228,15 +246,15 @@
                     </div>
                     <div id="radio_color" class="center_value"  >
                         <label>
-                            <input type="radio" name="radio_color" value='1' onclick="onClick_changeColor(this.value)" checked>
+                            <input class="select_color"  type="radio" name="radio_color" value='1' onclick="onClick_changeColor(this.value)" checked>
                             블루
                         </label>
                         <label>
-                            <input type="radio" name="radio_color" value='2' onclick="onClick_changeColor(this.value)">
+                            <input class="select_color" type="radio" name="radio_color" value='2' onclick="onClick_changeColor(this.value)">
                             화이트
                         </label>
                         <label>
-                            <input type="radio" name="radio_color" value='3' onclick="onClick_changeColor(this.value)">
+                            <input class="select_color" type="radio" name="radio_color" value='3' onclick="onClick_changeColor(this.value)">
                             핑크
                         </label>
                     </div>
@@ -247,19 +265,19 @@
                     </div>
                     <div id="now_service" class="center_value"  >
                         <label>
-                            <input type="radio" name="radio_now_service" value="sk" checked>
+                            <input class="radio_calc" type="radio" name="radio_now_service" value="sk" checked>
                             SK
                         </label>
                         <label>
-                            <input type="radio" name="radio_now_service" value="kt" >
+                            <input class="radio_calc" type="radio" name="radio_now_service" value="kt" >
                             KT
                         </label>
                         <label>
-                            <input type="radio" name="radio_now_service" value="lg" >
+                            <input class="radio_calc" type="radio" name="radio_now_service" value="lg" >
                             LG
                         </label>
                         <label>
-                            <input type="radio" name="radio_now_service" value="etc" >
+                            <input class="radio_calc" type="radio" name="radio_now_service" value="etc" >
                             알뜰폰
                         </label>
                     </div>
@@ -270,15 +288,15 @@
                     </div>
                     <div id="after_service" class="center_value"  >
                         <label>
-                        <input type="radio" name="radio_after_service" value="sk" checked>
+                        <input class="radio_calc" type="radio" name="radio_after_service" value="sk" checked>
                         SK
                     </label>
                         <label>
-                        <input type="radio" name="radio_after_service" value="kt" >
+                        <input class="radio_calc" type="radio" name="radio_after_service" value="kt" >
                         KT
                     </label>
                         <label>
-                        <input type="radio" name="radio_after_service" value="lg" >
+                        <input class="radio_calc" type="radio" name="radio_after_service" value="lg" >
                         LG
                     </label>
                     </div>
@@ -289,11 +307,11 @@
                     </div>
                     <div id="contract" class="center_value" >
                         <label>
-                            <input type="radio" name="radio_contract" value="get_money" checked>
+                            <input class="radio_calc" type="radio" name="radio_contract" value="get_money" checked>
                             공시지원금(선택약정)
                         </label>
                         <label>
-                            <input type="radio" name="radio_contract" value="discount_plan" >
+                            <input class="radio_calc" type="radio" name="radio_contract" value="discount_plan" >
                             요금제할인
                         </label>
                     </div>
@@ -304,15 +322,15 @@
                     </div>
                     <div id="info" class="center_value"  >
                         <label>
-                            <input type="radio" name="radio_info" value="24" checked>
+                            <input class="radio_calc" type="radio" name="radio_info" value="24" checked>
                             24개월
                         </label>
                         <label>
-                            <input type="radio" name="radio_info" value="30" >
+                            <input class="radio_calc" type="radio" name="radio_info" value="30" >
                             36개월
                         </label>
                         <label>
-                            <input type="radio" name="radio_info" value="36" >
+                            <input class="radio_calc" type="radio" name="radio_info" value="36" >
                             48개월
                         </label>
                     </div>
