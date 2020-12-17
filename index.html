@@ -24,6 +24,9 @@
                 -webkit-align-items: center;
                 align-items: center;
             }
+            #phoneName{
+                width:100%;
+            }
 
             /*왼쪽 div*/
             #containner_left{
@@ -32,16 +35,29 @@
                 margin-left: 20px;
                 margin-right: 20px;
             }
-            #phoneName{
-                width:100%;
-            }
             #color_pick{
+                height:61px;
                 margin-top: 20px;
                 display: inline-block;
             }
             .color_pick_sub{
                 float:left;
                 margin:0px 15px;
+            }
+            .color_pick_sub img{
+                transform:scale(1); 
+                transition:transform 0.3s linear;
+            }
+            .color_pick_sub:hover img{
+                transform: scale(1.3);
+                -webkit-transform: scale(1.3);
+                -moz-transform: scale(1.3);
+                -ms-transform: scale(1.3);
+                -o-transform: scale(1.3);
+                
+            }
+            .color_text{
+                margin-top: 5px;
             }
 
             /*가운데 div*/
@@ -156,12 +172,21 @@
                         }
 
                     });
-                    //console.log(PLAN_DATA);
-                    console.log(PRICE_DATA[0] );
                 }
                 oReq.send();
             }
             xml2json();
+            window.onload = function(){
+                $('#phone_price_value').text("1원");
+
+                var plan = new Object();
+
+                // 요금제 갯수!
+                var plan_number = Object.keys(PRICE_DATA[1]).length-4;
+                for(i=0; i<plan_number; i++){
+                    console.log(PLAN_DATA[1]['이름']);
+                }
+            };
         </script>
         <script type="text/javascript" language="javascript">
             //현재 통신사 선택
@@ -233,6 +258,9 @@
                 //48개월
                 var month48 = 0;
 
+                function numberWithCommas(x) {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
             }
         </script>
         <div id="Parse_Area"gt;lt;/div>
@@ -245,16 +273,16 @@
             <!--왼쪽 이미지-->
             <div id="containner_left">
                 <!--핸드폰 이미지 나오는 div-->
-                <div>
+                <div id = "main_image_div">
                     <img id="main_image" src="images/phone1.png" style="width:300px; height:300px;">
                 </div>
                 <!--색상 고르는 div 시작-->
                 <div id="color_pick">
                     <div id="image_1" class="color_pick_sub" >
                         <div>
-                            <img id="image1" src="images/phone1.png" style="width:40px; height:40px;" onclick="onClick_changeColor('1')">
+                            <img id="image1" src="images/phone1.png" style="width:40px; height:40px;" onclick="onClick_changeColor('1')" >
                         </div>
-                        <div >
+                        <div class="color_text">
                             블루
                         </div>
                     </div>
@@ -262,7 +290,7 @@
                         <div>
                             <img id="image2"  src="images/phone2.png" style="width:40px; height:40px;"onclick="onClick_changeColor('2')">
                         </div>
-                        <div >
+                        <div class="color_text">
                             화이트
                         </div>
                     </div>
@@ -270,7 +298,7 @@
                         <div>
                             <img id="image3"  src="images/phone3.png" style="width:40px; height:40px;"onclick="onClick_changeColor('3')">
                         </div>
-                        <div >
+                        <div class="color_text">
                             핑크
                         </div>
                     </div>
@@ -329,14 +357,14 @@
                         <input class="radio_calc" type="radio" name="radio_after_service" value="sk" checked>
                         SK
                     </label>
-                        <label>
+                        <!-- <label>
                         <input class="radio_calc" type="radio" name="radio_after_service" value="kt" >
                         KT
                     </label>
                         <label>
                         <input class="radio_calc" type="radio" name="radio_after_service" value="lg" >
                         LG
-                    </label>
+                    </label> -->
                     </div>
                 </div>
                 <div id="select_contract" class="center_item">
@@ -396,7 +424,7 @@
                         출고가
                     </div>
                     <div id="phone_price_value" class="right_value">
-                        799,700원
+                        12312
                     </div>
                 </div>
                 <!--사용자가 입력 가능한 값-->
@@ -405,7 +433,7 @@
                         특별할인
                     </div>
                     <div id="special_discount_value" class="right_value">
-                        - 400,000원
+                        loading...
                     </div>
                 </div>
                 <!--공시지원금 버튼 선택시 보임, 요금제 할인 누를시 숨김-->
@@ -414,7 +442,7 @@
                         공시지원금
                     </div>
                     <div id="get_money_value" class="right_value">
-                        - 340,000원
+                        loading...
                     </div>
                 </div>
                 <div id="last_price_phone" class="right_item">
@@ -422,7 +450,7 @@
                         할부원금
                     </div>
                     <div id="last_price_phone_value" class="right_value">
-                        399,700원
+                        loading...
                     </div>
                 </div>
                 <!--요금제할인 버튼 선택시 보임, 공시지원금 누를시 숨김-->
@@ -431,7 +459,7 @@
                         요금제할인 총금액
                     </div>
                     <div id="total_sale_contract_value"  class="right_value">
-                        - 414,000원
+                        loading...
                     </div>
                 </div>
                 <div id="installment_month" class="right_item">
@@ -447,7 +475,7 @@
                         요금제
                     </div>
                     <div id="plan_value"  class="right_value">
-                        T플랜 에센스
+                        loading...
                     </div>
                 </div>
                 <div id="month_price_ui" class="right_item">
@@ -472,19 +500,19 @@
                 <div id="month_price_calc" class="right_item">
                     <div class="calc_ui">
                         <div class="calc_tap1">
-                            100,000원
+                            loading...
                         </div>
                         <div class="calc_tap2">
                             +
                         </div>
                         <div class="calc_tap3">
-                            100,000원
+                            loading...
                         </div>
                         <div class="calc_tap4">
                             =
                         </div>
                         <div class="calc_tap5">
-                            100,000원
+                            loading...
                         </div>
                     </div>
                 </div>
