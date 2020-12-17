@@ -166,21 +166,8 @@
         <script type="text/javascript" language="javascript">
             // 이미지 바꾸는 함수
             function onClick_changeColor(number){
-
                 $("#main_image").attr("src", "./images/phone"+number+".png");
-                
-                if(name == '1'){
-                    $('input[name="radio_color"]:radio[value="image1"]').prop('checked',true);
-                }
-                else if(name == '2'){
-                    $("#main_image").attr("src", "./images/phone2.png");
-                    $('input[name="radio_color"]:radio[value="image2"]').prop('checked',true);
-                }
-                else if(name == '3'){
-                    document.getElementById("main_image").src = "./images/phone3.png";   
-                    $("#main_image").attr("src", "./images/phone3.png");
-                    $('input[name="radio_color"]:radio[value="image3"]').prop('checked',true);
-                }
+                $('input[name="radio_color"]:radio[value='+number+']').prop('checked',true);
             }
 
             function onClick_now_service(){
@@ -241,15 +228,15 @@
                     </div>
                     <div id="radio_color" class="center_value"  >
                         <label>
-                            <input type="radio" name="radio_color" value="1" onclick="onClick_changeColor(this.value)" checked>
+                            <input type="radio" name="radio_color" value='1' onclick="onClick_changeColor(this.value)" checked>
                             블루
                         </label>
                         <label>
-                            <input type="radio" name="radio_color" value="2" onclick="onClick_changeColor(this.value)">
+                            <input type="radio" name="radio_color" value='2' onclick="onClick_changeColor(this.value)">
                             화이트
                         </label>
                         <label>
-                            <input type="radio" name="radio_color" value="3" onclick="onClick_changeColor(this.value)">
+                            <input type="radio" name="radio_color" value='3' onclick="onClick_changeColor(this.value)">
                             핑크
                         </label>
                     </div>
