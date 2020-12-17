@@ -156,8 +156,8 @@
                         }
 
                     });
-                    console.log(PLAN_DATA);
-                    console.log(PRICE_DATA);
+                    //console.log(PLAN_DATA);
+                    console.log(PRICE_DATA[0] );
                 }
                 oReq.send();
             }
@@ -165,19 +165,22 @@
         </script>
         <script type="text/javascript" language="javascript">
             //현재 통신사 선택
-            var radio_now_service = 'sk'
+            let radio_now_service = 'sk'
             //옮길 통신사 선택
-            var radio_after_service = 'sk';
+            let radio_after_service = 'sk';
             //약정선택
-            var radio_contract = 'get_money'
+            let radio_contract = 'get_money'
             //할부개월
-            var radio_info='24';
+            let radio_info='24';
+            //요금제 선택
+            let select_plan = '1';
 
             // 이미지 바꾸는 함수
             function onClick_changeColor(number){
                 $("#main_image").attr("src", "./images/phone"+number+".png");
                 $('input[name="radio_color"]:radio[value='+number+']').prop('checked',true);
             }
+            // 계산 관련 radio 버튼 눌렀을 때
             $(function(){
                 $('.radio_calc').click(function(e){
                     var name = $(this).attr('name');
@@ -192,15 +195,44 @@
                         radio_contract = $(this).val();
                     }
                     //radio_info
-                    else{
+                    else if(name == 'radio_info'){
                         radio_info = $(this).val();
                     }
+                    //select_plan
+                    else{
+                        select_plan = $(this).val();
+                    }
+                    calc_price();
                 });
             });
         </script>
         <script type="text/javascript" language="javascript">
+            // 각종 수식 계산
             function calc_price(){
-                return 0;
+                // 공시지원금 전용
+                // 추가보조금
+                var subsidy = 0;
+
+                // 선택약정 전용
+                //매월할인
+                var discount_month = 0;
+                //24개월간 총 할인액
+                var total_price_24month = 0;
+
+                //공통
+                //할부원금
+                var final_phone_price = 0;
+                //이자
+                var interest = 0;
+                //최종이자
+                var final_interest = 0;
+                //24개월
+                var month24 = 0;
+                //36개월
+                var month36 = 0;
+                //48개월
+                var month48 = 0;
+
             }
         </script>
         <div id="Parse_Area"gt;lt;/div>
@@ -346,12 +378,12 @@
                         요금제
                     </div>
                     <div id="plans" class="center_value"  >
-                        <select id="centerSelect">
-                            <option value="">요금1</option>
-                            <option value="">요금2</option>
-                            <option value="">요금3</option>
-                            <option value="">요금4</option>
-                            <option value="">요금5</option>
+                        <select id="select_plan" class="radio_calc">
+                            <option value="1">요금1</option>
+                            <option value="2">요금2</option>
+                            <option value="3">요금3</option>
+                            <option value="4">요금4</option>
+                            <option value="5">요금5</option>
                           </select>
                     </div>
 
