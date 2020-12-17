@@ -112,10 +112,13 @@
         </style>
     </head>
         <body>
-        <!--처음 시작시 엑셀을 불러와 json으로 변환해주는 스크립트-->
         <script type="text/javascript" language="javascript">
+            // 핸드폰 출고가, 보조금 정보
             let PRICE_DATA;
+            // 요금제 정보
+            let PLAN_DATA;
 
+            // 처음 시작시 엑셀을 불러와 json으로 변환해주는 스크립트
             function xml2json(){
                         /* set up XMLHttpRequest */
                 var url = "price.xlsx";
@@ -141,16 +144,20 @@
                     //var first_sheet_name = workbook.SheetNames[0];
                     workbook.SheetNames.forEach( function(data, idx){   //시트 여러개하려면 이곳에서 반복문
                         let sheetName = data;
-                        console.log(sheetName);
+                        //console.log(sheetName);
                         var worksheet = workbook.Sheets[data];
                         let datas = XLSX.utils.sheet_to_json(worksheet, {raw: true});
-                        console.log(datas);
-                        if(sheetName == '가격표'){
-                            PRICE_DATA = datas[0];
-                            //console.log((datas[0]['기기명']));
+                        //console.log(datas);
+                        if(sheetName=='요금제'){
+                            PLAN_DATA = datas;
+                        }
+                        else if(sheetName == '가격표'){
+                            PRICE_DATA = datas;
                         }
 
                     });
+                    console.log(PLAN_DATA);
+                    console.log(PRICE_DATA);
                 }
                 oReq.send();
             }
@@ -158,19 +165,31 @@
         </script>
         <script type="text/javascript" language="javascript">
             // 이미지 바꾸는 함수
-            function onClick_changeColor(name){
-                if(name == 'image1'){
-                    document.getElementById("main_image").src = "./images/phone1.png";
+            function onClick_changeColor(number){
+
+                $("#main_image").attr("src", "./images/phone"+number+".png");
+                
+                if(name == '1'){
                     $('input[name="radio_color"]:radio[value="image1"]').prop('checked',true);
                 }
-                else if(name == 'image2'){
-                    document.getElementById("main_image").src = "./images/phone2.png";
+                else if(name == '2'){
+                    $("#main_image").attr("src", "./images/phone2.png");
                     $('input[name="radio_color"]:radio[value="image2"]').prop('checked',true);
                 }
-                else if(name == 'image3'){
+                else if(name == '3'){
                     document.getElementById("main_image").src = "./images/phone3.png";   
+                    $("#main_image").attr("src", "./images/phone3.png");
                     $('input[name="radio_color"]:radio[value="image3"]').prop('checked',true);
                 }
+            }
+
+            function onClick_now_service(){
+
+            }
+        </script>
+        <script type="text/javascript" language="javascript">
+            function calc_price(){
+                return 0;
             }
         </script>
         <div id="Parse_Area"gt;lt;/div>
@@ -190,7 +209,7 @@
                 <div id="color_pick">
                     <div id="image_1" class="color_pick_sub" >
                         <div>
-                            <img id="image1" src="images/phone1.png" style="width:40px; height:40px;" onclick="onClick_changeColor('image1')">
+                            <img id="image1" src="images/phone1.png" style="width:40px; height:40px;" onclick="onClick_changeColor('1')">
                         </div>
                         <div >
                             블루
@@ -198,7 +217,7 @@
                     </div>
                     <div id="image_2" class="color_pick_sub">
                         <div>
-                            <img id="image2"  src="images/phone2.png" style="width:40px; height:40px;"onclick="onClick_changeColor('image2')">
+                            <img id="image2"  src="images/phone2.png" style="width:40px; height:40px;"onclick="onClick_changeColor('2')">
                         </div>
                         <div >
                             화이트
@@ -206,7 +225,7 @@
                     </div>
                     <div id="image_3" class="color_pick_sub">
                         <div>
-                            <img id="image3"  src="images/phone3.png" style="width:40px; height:40px;"onclick="onClick_changeColor('image3')">
+                            <img id="image3"  src="images/phone3.png" style="width:40px; height:40px;"onclick="onClick_changeColor('3')">
                         </div>
                         <div >
                             핑크
@@ -222,15 +241,15 @@
                     </div>
                     <div id="radio_color" class="center_value"  >
                         <label>
-                            <input type="radio" name="radio_color" value="image1" onclick="onClick_changeColor(this.value)" checked>
+                            <input type="radio" name="radio_color" value="1" onclick="onClick_changeColor(this.value)" checked>
                             블루
                         </label>
                         <label>
-                            <input type="radio" name="radio_color" value="image2" onclick="onClick_changeColor(this.value)">
+                            <input type="radio" name="radio_color" value="2" onclick="onClick_changeColor(this.value)">
                             화이트
                         </label>
                         <label>
-                            <input type="radio" name="radio_color" value="image3" onclick="onClick_changeColor(this.value)">
+                            <input type="radio" name="radio_color" value="3" onclick="onClick_changeColor(this.value)">
                             핑크
                         </label>
                     </div>
