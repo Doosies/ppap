@@ -164,6 +164,15 @@
             xml2json();
         </script>
         <script type="text/javascript" language="javascript">
+            //현재 통신사 선택
+            var radio_now_service = 'sk'
+            //옮길 통신사 선택
+            var radio_after_service = 'sk';
+            //약정선택
+            var radio_contract = 'get_money'
+            //할부개월
+            var radio_info='24';
+
             // 이미지 바꾸는 함수
             function onClick_changeColor(number){
                 $("#main_image").attr("src", "./images/phone"+number+".png");
@@ -172,22 +181,19 @@
             $(function(){
                 $('.radio_calc').click(function(e){
                     var name = $(this).attr('name');
-                    //현재 통신사 선택
-                    if(name == 'radio_now_service'){
 
+                    if(name == 'radio_now_service'){
+                        radio_now_service = $(this).val();
                     }
-                    //옮길 통신사 선택
                     else if(name == 'radio_after_service'){
-                        
+                        radio_after_service = $(this).val();
                     }
-                    //약정선택
                     else if(name == 'radio_contract'){
-                        
+                        radio_contract = $(this).val();
                     }
                     //radio_info
-                    //할부개월
                     else{
-                        
+                        radio_info = $(this).val();
                     }
                 });
             });
