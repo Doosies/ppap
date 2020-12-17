@@ -179,12 +179,18 @@
             window.onload = function(){
                 $('#phone_price_value').text("1원");
 
-                var plan = new Object();
+                // 요금제와 가격이 들어있는 json
+                var plans = new Object();
 
                 // 요금제 갯수!
                 var plan_number = Object.keys(PRICE_DATA[1]).length-4;
                 for(i=0; i<plan_number; i++){
-                    console.log(PLAN_DATA[1]['이름']);
+                    var key = PLAN_DATA[i]['이름'];
+                    var val = PLAN_DATA[i]['요금'];
+                    plans[key]=val;
+                    // option을 추가해줌
+                    $('#select_plan').append('<option value="'+val+'">'+key+'</option>');
+                    //$('#select_plan').append('<option value="1">1번째 옵션</option>');
                 }
             };
         </script>
@@ -205,8 +211,8 @@
                 $("#main_image").attr("src", "./images/phone"+number+".png");
                 $('input[name="radio_color"]:radio[value='+number+']').prop('checked',true);
             }
-            // 계산 관련 radio 버튼 눌렀을 때
             $(function(){
+                // 계산 관련 radio 버튼 눌렀을 때
                 $('.radio_calc').click(function(e){
                     var name = $(this).attr('name');
 
@@ -229,6 +235,13 @@
                     }
                     calc_price();
                 });
+                // 할부 radio 골랐을 때
+                $('input[name=radio_info]').change(function(e){
+                    //지금 선택된 radio의 할부개월수
+                    var month = $(this).val();
+                    $('#installment_month_value').text(month+"개월");
+                    
+                })
             });
         </script>
         <script type="text/javascript" language="javascript">
@@ -392,26 +405,21 @@
                             24개월
                         </label>
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_info" value="30" >
+                            <input class="radio_calc" type="radio" name="radio_info" value="36" >
                             36개월
                         </label>
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_info" value="36" >
+                            <input class="radio_calc" type="radio" name="radio_info" value="48" >
                             48개월
                         </label>
                     </div>
                 </div>
-                <div id="select_plan" class="center_item">
+                <div class="center_item">
                     <div class="center_sub">
                         요금제
                     </div>
                     <div id="plans" class="center_value"  >
                         <select id="select_plan" class="radio_calc">
-                            <option value="1">요금1</option>
-                            <option value="2">요금2</option>
-                            <option value="3">요금3</option>
-                            <option value="4">요금4</option>
-                            <option value="5">요금5</option>
                           </select>
                     </div>
 
