@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
+
         <style type="text/css">
             html, body{
                 margin:0;
@@ -13,19 +15,19 @@
                 display: -webkit-flex;
                 display: flex;
                 flex-direction: row;
-                margin:auto; 
+                margin:auto;
                 flex-wrap : wrap;
                 width: 100%;
                 text-align: center;
                 -webkit-justify-content: center;
                 justify-content: center;
                 -webkit-align-items: center;
-                align-items: center; 
+                align-items: center;
             }
 
             /*왼쪽 div*/
             #containner_left{
-                width:400px;
+                width:450px;
                 margin-top: 2px;
                 margin-left: 20px;
                 margin-right: 20px;
@@ -41,10 +43,10 @@
                 float:left;
                 margin:0px 15px;
             }
-            
+
             /*가운데 div*/
             #containner_center{
-                width:400px;
+                width:450px;
                 margin-left: 20px;
                 margin-right: 20px;
             }
@@ -60,13 +62,11 @@
                 float: left;
             }
             .center_value{
-                width: 295px;
-                float: right;
             }
 
             /*오른쪽 div*/
             #containner_right{
-                width:400px;
+                width:450px;
                 margin-left: 20px;
                 margin-right: 20px;
             }
@@ -89,30 +89,91 @@
             }
                 /* 오른쪽 최종계산 UI*/
                 .calc_tap1{
-                    width:80px;
+                    width:90px;
                     float:left;
                 }
                 .calc_tap2{
-                    width:80px;
+                    width:45px;
                     float:left;
                 }
                 .calc_tap3{
-                    width:80px;
+                    width:90px;
                     float:left;
                 }
                 .calc_tap4{
-                    width:80px;
+                    width:45px;
                     float:left;
                 }
                 .calc_tap5{
-                    width:80px;
+                    width:90px;
                     float:left;
                 }
-            
+
         </style>
     </head>
-        <body> 
-            <div id="Parse_Area"gt;lt;/div>
+        <body>
+        <!--처음 시작시 엑셀을 불러와 json으로 변환해주는 스크립트-->
+        <script type="text/javascript" language="javascript">
+            let PRICE_DATA;
+
+            function xml2json(){
+                        /* set up XMLHttpRequest */
+                var url = "price.xlsx";
+                var oReq = new XMLHttpRequest();
+                oReq.open("GET", url, true);
+                oReq.responseType = "arraybuffer";
+
+                oReq.onload = function(e) {
+                    var arraybuffer = oReq.response;
+
+                    /* convert data to binary string */
+                    var data = new Uint8Array(arraybuffer);
+                    var arr = new Array();
+                    for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+                    var bstr = arr.join("");
+
+                    /* Call XLSX */
+                    var workbook = XLSX.read(bstr, {
+                        type: "binary"
+                    });
+
+                    /* DO SOMETHING WITH workbook HERE */
+                    //var first_sheet_name = workbook.SheetNames[0];
+                    workbook.SheetNames.forEach( function(data, idx){   //시트 여러개하려면 이곳에서 반복문
+                        let sheetName = data;
+                        console.log(sheetName);
+                        var worksheet = workbook.Sheets[data];
+                        let datas = XLSX.utils.sheet_to_json(worksheet, {raw: true});
+                        console.log(datas);
+                        if(sheetName == '가격표'){
+                            PRICE_DATA = datas[0];
+                            //console.log((datas[0]['기기명']));
+                        }
+
+                    });
+                }
+                oReq.send();
+            }
+            xml2json();
+        </script>
+        <script type="text/javascript" language="javascript">
+            // 이미지 바꾸는 함수
+            function onClick_changeColor(name){
+                if(name == 'image1'){
+                    document.getElementById("main_image").src = "./images/phone1.png";
+                    $('input[name="radio_color"]:radio[value="image1"]').prop('checked',true);
+                }
+                else if(name == 'image2'){
+                    document.getElementById("main_image").src = "./images/phone2.png";
+                    $('input[name="radio_color"]:radio[value="image2"]').prop('checked',true);
+                }
+                else if(name == 'image3'){
+                    document.getElementById("main_image").src = "./images/phone3.png";   
+                    $('input[name="radio_color"]:radio[value="image3"]').prop('checked',true);
+                }
+            }
+        </script>
+        <div id="Parse_Area"gt;lt;/div>
         <!--전체 랩-->
         <div id = "containner">
             <!--상단 핸드폰 이름 -->
@@ -122,14 +183,14 @@
             <!--왼쪽 이미지-->
             <div id="containner_left">
                 <!--핸드폰 이미지 나오는 div-->
-                <div id="image1">
-                    <img src="images/phone.png" alt="My Image" style="width:300px; height:300px;">
+                <div>
+                    <img id="main_image" src="images/phone1.png" style="width:300px; height:300px;">
                 </div>
                 <!--색상 고르는 div 시작-->
                 <div id="color_pick">
                     <div id="image_1" class="color_pick_sub" >
                         <div>
-                            <img id="image1" src="images/phone.png" alt="My Image" style="width:40px; height:40px;">
+                            <img id="image1" src="images/phone1.png" style="width:40px; height:40px;" onclick="onClick_changeColor('image1')">
                         </div>
                         <div >
                             블루
@@ -137,7 +198,7 @@
                     </div>
                     <div id="image_2" class="color_pick_sub">
                         <div>
-                            <img id="image2"  src="images/phone2.png" alt="My Image" style="width:40px; height:40px;">
+                            <img id="image2"  src="images/phone2.png" style="width:40px; height:40px;"onclick="onClick_changeColor('image2')">
                         </div>
                         <div >
                             화이트
@@ -145,7 +206,7 @@
                     </div>
                     <div id="image_3" class="color_pick_sub">
                         <div>
-                            <img id="image3"  src="images/phone3.png" alt="My Image" style="width:40px; height:40px;">
+                            <img id="image3"  src="images/phone3.png" style="width:40px; height:40px;"onclick="onClick_changeColor('image3')">
                         </div>
                         <div >
                             핑크
@@ -157,15 +218,21 @@
             <div id="containner_center">
                 <div id="select_color" class="center_item_head">
                     <div class="center_sub">
-                        색상   
+                        색상
                     </div>
                     <div id="radio_color" class="center_value"  >
-                        <input type="radio" name="radio_color" value="1" checked>
-                        색상1
-                        <input type="radio" name="radio_color" value="2" >
-                        색상2
-                        <input type="radio" name="radio_color" value="3" >
-                        색상3
+                        <label>
+                            <input type="radio" name="radio_color" value="image1" onclick="onClick_changeColor(this.value)" checked>
+                            블루
+                        </label>
+                        <label>
+                            <input type="radio" name="radio_color" value="image2" onclick="onClick_changeColor(this.value)">
+                            화이트
+                        </label>
+                        <label>
+                            <input type="radio" name="radio_color" value="image3" onclick="onClick_changeColor(this.value)">
+                            핑크
+                        </label>
                     </div>
                 </div>
                 <div id="select_now_service" class="center_item">
@@ -173,27 +240,41 @@
                         사용중인 통신사
                     </div>
                     <div id="now_service" class="center_value"  >
-                        <input type="radio" name="radio_now_service" value="sk" checked>
-                        SK
-                        <input type="radio" name="radio_now_service" value="kt" >
-                        KT
-                        <input type="radio" name="radio_now_service" value="lg" >
-                        LG
-                        <input type="radio" name="radio_now_service" value="etc" >
-                        알뜰폰
+                        <label>
+                            <input type="radio" name="radio_now_service" value="sk" checked>
+                            SK
+                        </label>
+                        <label>
+                            <input type="radio" name="radio_now_service" value="kt" >
+                            KT
+                        </label>
+                        <label>
+                            <input type="radio" name="radio_now_service" value="lg" >
+                            LG
+                        </label>
+                        <label>
+                            <input type="radio" name="radio_now_service" value="etc" >
+                            알뜰폰
+                        </label>
                     </div>
                 </div>
-                <div id="select_after_service" class="center_item">                    
+                <div id="select_after_service" class="center_item">
                     <div class="center_sub">
                         사용하실 통신사
                     </div>
                     <div id="after_service" class="center_value"  >
+                        <label>
                         <input type="radio" name="radio_after_service" value="sk" checked>
                         SK
+                    </label>
+                        <label>
                         <input type="radio" name="radio_after_service" value="kt" >
                         KT
+                    </label>
+                        <label>
                         <input type="radio" name="radio_after_service" value="lg" >
                         LG
+                    </label>
                     </div>
                 </div>
                 <div id="select_contract" class="center_item">
@@ -201,23 +282,33 @@
                         약정 선택
                     </div>
                     <div id="contract" class="center_value" >
-                        <input type="radio" name="radio_contract" value="get_money" checked>
-                        공시지원금(선택약정)
-                        <input type="radio" name="radio_contract" value="discount_plan" >
-                        요금제할인
+                        <label>
+                            <input type="radio" name="radio_contract" value="get_money" checked>
+                            공시지원금(선택약정)
+                        </label>
+                        <label>
+                            <input type="radio" name="radio_contract" value="discount_plan" >
+                            요금제할인
+                        </label>
                     </div>
                 </div>
                 <div id="select_info" class="center_item">
                     <div class="center_sub">
-                        할부개월    
+                        할부개월
                     </div>
                     <div id="info" class="center_value"  >
-                        <input type="radio" name="radio_info" value="24" checked>
-                        24개월
-                        <input type="radio" name="radio_info" value="30" >
-                        30개월
-                        <input type="radio" name="radio_info" value="36" >
-                        36개월
+                        <label>
+                            <input type="radio" name="radio_info" value="24" checked>
+                            24개월
+                        </label>
+                        <label>
+                            <input type="radio" name="radio_info" value="30" >
+                            36개월
+                        </label>
+                        <label>
+                            <input type="radio" name="radio_info" value="36" >
+                            48개월
+                        </label>
                     </div>
                 </div>
                 <div id="select_plan" class="center_item">
@@ -226,14 +317,14 @@
                     </div>
                     <div id="plans" class="center_value"  >
                         <select id="centerSelect">
-                            <option>요금1</option>
-                            <option>요금2</option>
-                            <option>요금3</option>
-                            <option>요금4</option>
-                            <option>요금5</option>
+                            <option value="">요금1</option>
+                            <option value="">요금2</option>
+                            <option value="">요금3</option>
+                            <option value="">요금4</option>
+                            <option value="">요금5</option>
                           </select>
                     </div>
-                    
+
                 </div>
             </div><!--가운데 끝-->
             <!--오른쪽 표-->
@@ -336,56 +427,16 @@
                     </div>
                 </div>
                 <div id="notice" class="right_item">
-                    <div id="notice_value" class="right_sub">
+                    <div id="notice_value" class="">
                         (최종 월 납부액은 부가세 10% 와 분할상환 수수료 5.9% 포함됨)
                     </div>
                 </div>
                 <div id="button" class="right_item">
                     <div class="right_sub" style="background-color: aquamarine;">
                         신청하기 버튼
-                        <input type="file" onchange="readExcel()">
-                        <script>
-
-                            var test1 = null, test2 = null;
-                            function gridExcelToWeb(file, target){
-                                var reader = new FileReader();
-                            
-                                reader.onload = function (evt) {
-                                    if (evt.target.readyState == FileReader.DONE) {
-                                        var data = evt.target.result;  //해당 데이터, 웹 서버에서 ajax같은거로 가져온 blob 형태의 데이터를 넣어주어도 동작 한다.
-                                        data = new Uint8Array(data);
-                                        var workbook = XLSX.read(data, { type: 'array' });
-                                        var sheetName = '';
-                                        workbook.SheetNames.forEach( function(data, idx){   //시트 여러개라면 이 안에서 반복문을 통해 돌리면 된다.
-                                            if(idx == 0){
-                                                sheetName = data;
-                                            }
-                                        });
-                                        test1 = workbook;
-                            
-                                        var toHtml = XLSX.utils.sheet_to_html(workbook.Sheets[sheetName], { header: '' });
-                            
-                                        target.html(toHtml);
-                                        target.find('table').attr({class:'table table-bordered',id:'excelResult'});  //id나 class같은거를 줄 수 있다.
-                                        test2 = toHtml;
-                                        $('#excelResult').find('tr').each(function(idx){
-                                            if(idx <=1 ){ 
-                                                $(this).css({'background-color':'#969da5a3'});
-                                            }
-                                        });
-                                    }
-                                };
-                                reader.readAsArrayBuffer(file);
-                            }    
-                            
-                            $('#file').change( function(){
-                                const selectedFile = $(this)[0].files[0];
-                                gridExcelToWeb(selectedFile,  $('#grid'))
-                            });
-                            </script>
                     </div>
                 </div>
             </div><!--오른쪽 끝-->
-        </div> 
+        </div>
     </body>
-</html> 
+</html>
