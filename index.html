@@ -125,6 +125,9 @@
                     width:90px;
                     float:left;
                 }
+            #total_sale_contract{
+                display: none;
+            }
 
         </style>
     </head>
@@ -158,7 +161,6 @@
                     });
 
                     /* DO SOMETHING WITH workbook HERE */
-                    //var first_sheet_name = workbook.SheetNames[0];
                     workbook.SheetNames.forEach( function(data, idx){   //시트 여러개하려면 이곳에서 반복문
                         let sheetName = data;
                         //console.log(sheetName);
@@ -181,99 +183,149 @@
 
                 // 요금제와 가격이 들어있는 json
                 var plans = new Object();
+                // 기기의 출고가
+                var phone_price;
+                // 기기의 
 
                 // 요금제 갯수!
-                var plan_number = Object.keys(PRICE_DATA[1]).length-4;
+                var plan_number = Object.keys(PRICE_DATA[1]).length-5;
+                //요금제 이름과 비용을 json으로 만들어줌.
                 for(i=0; i<plan_number; i++){
                     var key = PLAN_DATA[i]['이름'];
                     var val = PLAN_DATA[i]['요금'];
                     plans[key]=val;
                     // option을 추가해줌
-                    $('#select_plan').append('<option value="'+val+'">'+key+'</option>');
-                    //$('#select_plan').append('<option value="1">1번째 옵션</option>');
+                    $('#select_plan').append('<option value="'+i+'">'+key+'</option>');
                 }
-            };
+                // 출고가를 액셀에서 받아와넣어줌
+                phone_price = PRICE_DATA[1]['출고가'];
+                $('#phone_price_value').text(numberWithCommas( phone_price+"원"));
+
+                //공시지원금 넣어줌, 액셀에서 불러옴. 가격마다 다름
+                //현재 선택한 요금제를 불러옴
+                var now_plan = $('#select_plan option:selected').val();
+                //선택한 요금제의 보조금을 액셀에세 불러옴
+                var spt_price = PRICE_DATA[1][now_plan+" "];
+                $('#get_money_value').text(numberWithCommas( spt_price+"원"));
+
+                //특별 할인가격 넣어줌 = 공시지원금 *0.15
+                special_discount = spt_price * 0.15;
+                $('#special_discount_value').text(numberWithCommas(special_discount+"원"));
+                
+                // 할부원금 = 출고가 - 보조금 - 특별할인가
+                final_phone_price = phone_price - spt_price - special_discount;
+                $('#last_price_phone_value').text(numberWithCommas(final_phone_price+"원"));
+                
+                //할부개월 현재 선택한거에서 불러옴
+                month = $('input:radio[name="radio_month"]:checked').val() ;
+                //요금제 = 현재 선택된 요금제
+                $('#installment_month_value').text(month+"개월");
+
+                //현재 선택한 요금제 plan_value
+                var now_plan_char = PRICE_DATA[0][now_plan+" "]
+                $('#plan_value').text(now_plan_char);
+
+                //월 할부원금 = 할부원금 / 할부개월
+                var month_price = parseInt(final_phone_price / month);
+                $('#calc_result1').text(numberWithCommas(month_price)+"원");
+
+                //통신요금 = 공시일경우 그대로, 아니면 할인요금 빼고
+                var plan_price = plans[now_plan_char];
+                $('#calc_result2').text(numberWithCommas(plan_price)+"원");
+
+                //월 납부금액 = 월 할부원금 + 통신요금
+                var pricep = month_price + plan_price;
+                $('#calc_result3').text(numberWithCommas(pricep)+"원");
+
+
+            }
+            // 숫자에 콤바 붙여주는 정규식
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
         </script>
         <script type="text/javascript" language="javascript">
+            // 공시지원금 전용
+            // 추가보조금
+            var special_discount = 0;
+            //공시지원금
+            var discount = 0;
+
+            // 선택약정 전용
+            //매월할인
+            var discount_month = 0;
+            //24개월간 총 할인액
+            var total_price_24month = 0;
+
+            //공통
+            //할부원금
+            var final_phone_price = 0;
+            //이자
+            var interest = 0;
+            //최종이자
+            var final_interest = 0;
+            //24개월
+            var month24 = 0;
+            //36개월
+            var month36 = 0;
+            //48개월
+            var month48 = 0;
+            ////////////////////////////////////////////////////////////
+            let phone_price=0;
+            let select_color=1;
             //현재 통신사 선택
-            let radio_now_service ;
-            let radio_after_service ;
+            let radio_now_service ="sk";
+            let radio_after_service  ="sk";
             //약정선택
-            let radio_contract ;
+            let radio_contract ="get_money";
             //할부개월
-            let radio_info;
+            let radio_month=24;
             //요금제 선택
-            let select_plan ;
+            let select_plan =0;
 
             // 이미지 바꾸는 함수
             function onClick_changeColor(number){
                 $("#main_image").attr("src", "./images/phone"+number+".png");
                 $('input[name="radio_color"]:radio[value='+number+']').prop('checked',true);
+                select_color = number;
             }
+            // 이벤트 연결
             $(function(){
-                // 계산 관련 radio 버튼 눌렀을 때
-                $('.radio_calc').click(function(e){
-                    var name = $(this).attr('name');
+                //현재 통신사 선택 radio
+                $('input[name=radio_now_service]').change(function(e){
+                    radio_now_service=$(this).val();
+                })
 
-                    if(name == 'radio_now_service'){
-                        radio_now_service = $(this).val();
-                    }
-                    else if(name == 'radio_after_service'){
-                        radio_after_service = $(this).val();
-                    }
-                    else if(name == 'radio_contract'){
-                        radio_contract = $(this).val();
-                    }
-                    //radio_info
-                    else if(name == 'radio_info'){
-                        radio_info = $(this).val();
-                    }
-                    //select_plan
-                    else{
-                        select_plan = $(this).val();
-                    }
-                    calc_price();
-                });
+                //사용할 통신사 선택 radio
+                $('input[name=radio_after_service]').change(function(e){
+                    radio_after_service=$(this).val();
+
+                })
+
+                //약정선택 radio
+                $('input[name=radio_contract]').change(function(e){
+                    radio_contract=$(this).val();
+                })
+
                 // 할부 radio 골랐을 때
-                $('input[name=radio_info]').change(function(e){
+                $('input[name=radio_month]').change(function(e){
                     //지금 선택된 radio의 할부개월수
                     var month = $(this).val();
-                    radio_info = month;
+                    radio_month = month;
                     $('#installment_month_value').text(month+"개월");
                     
                 })
+                //요금제 select
+                $('#select_plan').change(function(e){
+                    select_plan=$(this).val();
+                })
+
             });
         </script>
         <script type="text/javascript" language="javascript">
             // 각종 수식 계산
             function calc_price(){
-                // 공시지원금 전용
-                // 추가보조금
-                var subsidy = 0;
 
-                // 선택약정 전용
-                //매월할인
-                var discount_month = 0;
-                //24개월간 총 할인액
-                var total_price_24month = 0;
-
-                //공통
-                //할부원금
-                var final_phone_price = 0;
-                //이자
-                var interest = 0;
-                //최종이자
-                var final_interest = 0;
-                //24개월
-                var month24 = 0;
-                //36개월
-                var month36 = 0;
-                //48개월
-                var month48 = 0;
-
-                function numberWithCommas(x) {
-                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                }
             }
         </script>
         <div id="Parse_Area"gt;lt;/div>
@@ -401,15 +453,15 @@
                     </div>
                     <div id="info" class="center_value"  >
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_info" value="24" checked>
+                            <input class="radio_calc" type="radio" name="radio_month" value="24" checked>
                             24개월
                         </label>
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_info" value="36" >
+                            <input class="radio_calc" type="radio" name="radio_month" value="36" >
                             36개월
                         </label>
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_info" value="48" >
+                            <input class="radio_calc" type="radio" name="radio_month" value="48" >
                             48개월
                         </label>
                     </div>
