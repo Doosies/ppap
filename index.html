@@ -25,6 +25,7 @@
                 align-items: center;
             }
             #phoneName{
+                margin-top:20px;
                 width:100%;
             }
 
@@ -177,7 +178,6 @@
             }
             xml2json();
             window.onload = function(){
-                $('#phone_price_value').text("1원");
 
                 // 요금제와 가격이 들어있는 json
                 var plans = new Object();
@@ -196,15 +196,14 @@
         </script>
         <script type="text/javascript" language="javascript">
             //현재 통신사 선택
-            let radio_now_service = 'sk'
-            //옮길 통신사 선택
-            let radio_after_service = 'sk';
+            let radio_now_service ;
+            let radio_after_service ;
             //약정선택
-            let radio_contract = 'get_money'
+            let radio_contract ;
             //할부개월
-            let radio_info='24';
+            let radio_info;
             //요금제 선택
-            let select_plan = '1';
+            let select_plan ;
 
             // 이미지 바꾸는 함수
             function onClick_changeColor(number){
@@ -239,6 +238,7 @@
                 $('input[name=radio_info]').change(function(e){
                     //지금 선택된 radio의 할부개월수
                     var month = $(this).val();
+                    radio_info = month;
                     $('#installment_month_value').text(month+"개월");
                     
                 })
@@ -432,7 +432,6 @@
                         출고가
                     </div>
                     <div id="phone_price_value" class="right_value">
-                        12312
                     </div>
                 </div>
                 <!--사용자가 입력 가능한 값-->
@@ -441,7 +440,6 @@
                         특별할인
                     </div>
                     <div id="special_discount_value" class="right_value">
-                        loading...
                     </div>
                 </div>
                 <!--공시지원금 버튼 선택시 보임, 요금제 할인 누를시 숨김-->
@@ -450,7 +448,6 @@
                         공시지원금
                     </div>
                     <div id="get_money_value" class="right_value">
-                        loading...
                     </div>
                 </div>
                 <div id="last_price_phone" class="right_item">
@@ -458,7 +455,6 @@
                         할부원금
                     </div>
                     <div id="last_price_phone_value" class="right_value">
-                        loading...
                     </div>
                 </div>
                 <!--요금제할인 버튼 선택시 보임, 공시지원금 누를시 숨김-->
@@ -467,7 +463,6 @@
                         요금제할인 총금액
                     </div>
                     <div id="total_sale_contract_value"  class="right_value">
-                        loading...
                     </div>
                 </div>
                 <div id="installment_month" class="right_item">
@@ -475,7 +470,6 @@
                         할부개월
                     </div>
                     <div id="installment_month_value" class="right_value">
-                        24 개월
                     </div>
                 </div>
                 <div id="plan" class="right_item">
@@ -483,7 +477,6 @@
                         요금제
                     </div>
                     <div id="plan_value"  class="right_value">
-                        loading...
                     </div>
                 </div>
                 <div id="month_price_ui" class="right_item">
@@ -507,19 +500,19 @@
                 </div>
                 <div id="month_price_calc" class="right_item">
                     <div class="calc_ui">
-                        <div class="calc_tap1">
+                        <div id="calc_result1" class="calc_tap1">
                             loading...
                         </div>
                         <div class="calc_tap2">
                             +
                         </div>
-                        <div class="calc_tap3">
+                        <div id="calc_result2" class="calc_tap3">
                             loading...
                         </div>
                         <div class="calc_tap4">
                             =
                         </div>
-                        <div class="calc_tap5">
+                        <div id="calc_result3" class="calc_tap5">
                             loading...
                         </div>
                     </div>
