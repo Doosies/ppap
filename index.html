@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <title>제목이다</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <head>
-        <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.2.min.js">
+        </script><script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
         <style type="text/css">
@@ -151,253 +152,53 @@
         </style>
     </head>
         <body>
-         <!--페이지 초기 로딩시 불러오는 스크립트-->
-         <script type="text/javascript" language="javascript">
-            // 핸드폰 출고가, 보조금 정보
-            let PRICE_DATA;
+        <script type="text/javascript" language="javascript">
             // 요금제 정보
-            let PLAN_DATA;
-
+            var PLAN_DATA;
+            // 핸드폰 출고가, 보조금 정보
+            var PRICE_DATA;
             // 처음 시작시 엑셀을 불러와 json으로 변환해주는 스크립트
-            function xml2json(){
+            //function xml2json(){
+                //alert("!!");
                         /* set up XMLHttpRequest */
-                var url = "price.xlsx";
-                var oReq = new XMLHttpRequest();
-                oReq.open("GET", url, true);
-                oReq.responseType = "arraybuffer";
+            var url = "planPrice.xlsx";
+            var oReq = new XMLHttpRequest();
+            oReq.open("POST", url, true);
+            oReq.responseType = "arraybuffer";
 
-                oReq.onload = function(e) {
-                    var arraybuffer = oReq.response;
+            oReq.onload = function(e) {
+                var arraybuffer = oReq.response;
 
-                    /* convert data to binary string */
-                    var data = new Uint8Array(arraybuffer);
-                    var arr = new Array();
-                    for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-                    var bstr = arr.join("");
+                /* convert data to binary string */
+                var data = new Uint8Array(arraybuffer);
+                var arr = new Array();
+                for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+                var bstr = arr.join("");
 
-                    /* Call XLSX */
-                    var workbook = XLSX.read(bstr, {
-                        type: "binary"
-                    });
+                /* Call XLSX */
+                var workbook = XLSX.read(bstr, {
+                    type: "binary"
+                });
 
-                    /* DO SOMETHING WITH workbook HERE */
-                    workbook.SheetNames.forEach( function(data, idx){   //시트 여러개하려면 이곳에서 반복문
-                        let sheetName = data;
-                        //console.log(sheetName);
-                        var worksheet = workbook.Sheets[data];
-                        let datas = XLSX.utils.sheet_to_json(worksheet, {raw: true});
+                /* DO SOMETHING WITH workbook HERE */
+                workbook.SheetNames.forEach( function(__data, idx){   //시트 여러개하려면 이곳에서 반복문
+                    let sheetName = __data;
+                    //console.log(sheetName);
+                    var worksheet = workbook.Sheets[sheetName];
+                    let datas = XLSX.utils.sheet_to_json(worksheet, {raw: true});
+                    if(sheetName=='plan'){
+                        PLAN_DATA = datas;
                         //console.log(datas);
-                        if(sheetName=='요금제'){
-                            PLAN_DATA = datas;
-                        }
-                        else if(sheetName == '가격표'){
-                            PRICE_DATA = datas;
-                        }
-
-                    });
-                }
-                oReq.send();
-            }
-            xml2json();
-            window.onload = function(){
-                
-            var plan_number = 5;//(Object.keys(PRICE_DATA[1]).length)-6;
-            //요금제 이름과 비용을 json으로 만들어줌.
-            for(i=0; i<plan_number; i++){
-                var key = PLAN_DATA[i]['이름'];
-                var val = PLAN_DATA[i]['요금'];
-                plans[key]=val;
-                // option을 추가해줌
-                $('#select_plan').append('<option value="'+i+'">'+key+'</option>');
-            }
-            //출고가 변경
-            change_phone_price();
-            //공시지원 변경
-            //change_get_money();
-            //추가할인 변경
-            //change_additional_discount();
-            //특별할인(특가)변경
-            //change_special_discount('추가-sk');
-            //할부원금 변경
-            //change_last_price_phone();
-            //할부개월 변경
-            //change_installment_month();
-            //공통변경
-            //common_calculation();
-            }
-        </script>
-        <!--이벤트 연결 스크립트-->
-        <script type="text/javascript" language="javascript">
-
-            // 이미지 바꾸는 함수
-            function onClick_changeColor(number){
-                $("#main_image").attr("src", "./images/phone"+number+".png");
-                $('input[name="radio_color"]:radio[value='+number+']').prop('checked',true);
-                select_color = number;
-            }
-            // 이벤트 연결
-            $(function(){
-                //현재 통신사 선택 radio
-                //특별 할인값을 바꿔준 후 재계산.
-                 $('input[name=radio_now_service]').change(function(e){
-                    var seleted_radio_val = $(this).val();
-                    var service;
-                    if(seleted_radio_val == "sk"){
-                        service = "추가-sk"
                     }
-                    else if(seleted_radio_val == "kt"){
-                        service = "추가-kt"
+                    else if(sheetName == 'price'){
+                        PRICE_DATA = datas;
                     }
-                    else if(seleted_radio_val == "lg"){
-                        service = "추가-lg"
-                    }
-                    else if(seleted_radio_val == "etc"){
-                        service = "추가-알뜰"
-                    }
-                    change_special_discount(service);
-                    common_calculation();
-                 })
+                    //console.log(datas);
 
-                 //사용할 통신사 선택 radio
-                 //$('input[name=radio_after_service]').change(function(e){
-                 //    radio_after_service=$(this).val();
-                 //})
-
-                //약정선택 radio
-                $('input[name=radio_contract]').change(function(e){
-                    var seleted_radio_val = $(this).val();
-                    // 공시일 때
-                    if(seleted_radio_val == 0){
-                        $('#get_money').css("display", "block");   
-                        $('#additional_discount').css("display", "block");   
-                        $('#total_sale_contract').css("display", "none");
-                    }
-                    //선택약정 일 때
-                    else if(seleted_radio_val == 1){
-                        $('#get_money').css("display", "none");   
-                        $('#additional_discount').css("display", "none");   
-                        $('#total_sale_contract').css("display", "block");   
-                    }
-                    common_calculation();
-                })
-
-                // 할부 radio 골랐을 때
-                $('input[name=radio_month]').change(function(e){
-                    change_installment_month();
-                    common_calculation();
-                })
-                //요금제 select
-                $('#select_plan').change(function(e){
-                })
-
-            });
-        </script>
-        <!--수식 계산 스크립트-->
-        <script type="text/javascript" language="javascript">
-            // 요금제와 가격이 들어있는 json
-            var plans = new Object();
-            // ���Ŀ� �ʿ��� ����
-            var phone_price;        //출고가
-            var now_plan;           //현재 요금제를 불러옴(0, 1 형식)
-            var spt_price;          //공시지원금
-            var additional_discount;//추가지원금
-            var special_discount;   //특별지원금(특가)
-            var month;              //할부개월
-            var now_plan_char;      //현재 요금제를 불러옴(5GX 슬림 형식)
-            
-            ////////////////////초기 페이지 로딩시에만 불러옴////////////////////
-            //출고가
-            function change_phone_price(){
-                phone_price = PRICE_DATA[1]['출고가'];
-                $('#phone_price_value').text(numberWithCommas( phone_price+"원"));
+                });
             }
-            ////////////////////공시지원금 radio를 선택했을 때에만////////////////////
-            //공시지원
-            function change_get_money(){
-                //현재 요금제를 불러옴(0, 1 형식)
-                now_plan = $('#select_plan option:selected').val();
-                // 공시지원금을 불러옴
-                spt_price = PRICE_DATA[1][now_plan+" "];
-                $('#get_money_value').text(numberWithCommas( spt_price+"원"));
-            }
-            //추가할인
-            function change_additional_discount(){
-                // 추가할인 = 공시지원 * 0.15
-                additional_discount = spt_price * 0.15;
-                $('#additional_discount_value').text(numberWithCommas(additional_discount+"원"));
-            }
-            ///////////////////할부개월 radio를 선택했을 때에만////////////////////
-            //할부개월
-            function change_installment_month(){
-                month = $('input:radio[name="radio_month"]:checked').val() ;
-                $('#installment_month_value').text(month+"개월");
-            }
-            ///////////////////요금제 select를 선택했을 때에만////////////////////
-            //요금제
-            function change_plan(){
-                now_plan_char = PRICE_DATA[0][now_plan+" "]
-                $('#plan_value').text(now_plan_char);
-            }
-            //할인방법이 공시지원일 경우에만 바뀌는 값
-            //특별할인(특가)
-            function change_special_discount(service){
-                special_discount = PRICE_DATA[1][service];
-                $('#special_discount_value').text(numberWithCommas(special_discount+"원"));
-            }
-            //할인 방법이 선택약정일 경우에만 바뀌는 값
-            //요금제 할인총액
-            function change_total_sale_contract(){
-
-            }
-            ///////////////////공통////////////////////
-            function common_calculation(){
-                change_plan();
-
-                // 요금
-                var plan_price = plans[now_plan_char];
-                var plan_price_final;
-                // 할부원금
-                var final_phone_price ;
-
-                // 0 : 공시지원금
-                // 1 : 선택약정
-                var contract = $("input[name=radio_contract]:checked").val();
-                console.log(contract);
-                // 공시지원금일 때
-                if(contract == 0){
-                    plan_price_final = plan_price;
-                    final_phone_price = (phone_price - spt_price - additional_discount - special_discount) ;
-                }
-                //선택약정 일 때
-                else if(contract == 1){
-                    plan_price_final = plan_price - (plan_price * 0.25 * contract);
-                    final_phone_price = phone_price - special_discount;
-                }
-
-                var month_price = parseInt(final_phone_price / month);
-
-
-                //총 세금
-                var total_month_interest = final_phone_price * 0.0627;
-                // 24개월 세금
-                var month_interest = (total_month_interest /24)-3;
-                //최종 가격
-                var pricep = parseInt(month_price + plan_price_final + month_interest);
-
-
-                // 할부원금
-                $('#last_price_phone_value').text(numberWithCommas(final_phone_price)+"원");
-                // 월 할부원금
-                $('#calc_result1').text(numberWithCommas(month_price)+"원");
-                // 월 요금 가격
-                $('#calc_result2').text(numberWithCommas(plan_price_final)+"원");
-                // 최종 가격
-                $('#calc_result3').text(numberWithCommas(pricep)+"원");
-            }
-            // 콤마 붙여주는 함수
-            function numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
+            oReq.send();
+        //}
         </script>
         <div id="Parse_Area"gt;lt;/div>
         <!--전체 랩-->
@@ -660,5 +461,213 @@
                 </div>
             </div><!--오른쪽 끝-->
         </div>
+         <!--페이지 초기 로딩시 불러오는 스크립트-->
+         <script type="text/javascript" language="javascript">
+            alert("start plan");
+
+            
+            //function after_load_xml(){
+            //}
+            //$.when(xml2json()).done(function(){
+
+            window.onload = function(){
+                //alert("로딩 완료"); 
+                //console.log(PLAN_DATA);
+                var plan_number = (Object.keys(PRICE_DATA[1]).length)-6;
+                //요금제 이름과 비용을 json으로 만들어줌.
+                for(i=0; i<plan_number; i++){
+                    var key = PLAN_DATA[i]['name'];
+                    var val = PLAN_DATA[i]['price'];
+                    plans[key]=val;
+                    // option을 추가해줌
+                    $('#select_plan').append('<option value="'+i+'">'+key+'</option>');
+                }
+                //출고가 변경
+                change_phone_price();
+                //공시지원 변경
+                change_get_money();
+                //추가할인 변경
+                change_additional_discount();
+                //특별할인(특가)변경
+                change_special_discount('추가-sk');
+                //할부개월 변경
+                change_installment_month();
+                //공통변경
+                common_calculation();
+            }
+        </script>
+        <!--이벤트 연결 스크립트-->
+        <script type="text/javascript" language="javascript">
+
+            // 이미지 바꾸는 함수
+            function onClick_changeColor(number){
+                $("#main_image").attr("src", "./images/phone"+number+".png");
+                $('input[name="radio_color"]:radio[value='+number+']').prop('checked',true);
+                select_color = number;
+            }
+            // 이벤트 연결
+            $(function(){
+                //현재 통신사 선택 radio
+                //특별 할인값을 바꿔준 후 재계산.
+                 $('input[name=radio_now_service]').change(function(e){
+                    var seleted_radio_val = $(this).val();
+                    var service;
+                    if(seleted_radio_val == "sk"){
+                        service = "추가-sk"
+                    }
+                    else if(seleted_radio_val == "kt"){
+                        service = "추가-kt"
+                    }
+                    else if(seleted_radio_val == "lg"){
+                        service = "추가-lg"
+                    }
+                    else if(seleted_radio_val == "etc"){
+                        service = "추가-알뜰"
+                    }
+                    change_special_discount(service);
+                    common_calculation();
+                 })
+
+                 //사용할 통신사 선택 radio
+                 //$('input[name=radio_after_service]').change(function(e){
+                 //    radio_after_service=$(this).val();
+                 //})
+
+                //약정선택 radio
+                $('input[name=radio_contract]').change(function(e){
+                    var seleted_radio_val = $(this).val();
+                    // 공시일 때
+                    if(seleted_radio_val == 0){
+                        $('#get_money').css("display", "block");   
+                        $('#additional_discount').css("display", "block");   
+                        $('#total_sale_contract').css("display", "none");
+                    }
+                    //선택약정 일 때
+                    else if(seleted_radio_val == 1){
+                        $('#get_money').css("display", "none");   
+                        $('#additional_discount').css("display", "none");   
+                        $('#total_sale_contract').css("display", "block");   
+                    }
+                    common_calculation();
+                })
+
+                // 할부 radio 골랐을 때
+                $('input[name=radio_month]').change(function(e){
+                    change_installment_month();
+                    common_calculation();
+                })
+                //요금제 select
+                $('#select_plan').change(function(e){
+                })
+
+            });
+        </script>
+        <!--수식 계산 스크립트-->
+        <script type="text/javascript" language="javascript">
+            // 요금제와 가격이 들어있는 json
+            var plans = new Object();
+            // ���Ŀ� �ʿ��� ����
+            var phone_price;        //출고가
+            var now_plan;           //현재 요금제를 불러옴(0, 1 형식)
+            var spt_price;          //공시지원금
+            var additional_discount;//추가지원금
+            var special_discount;   //특별지원금(특가)
+            var month;              //할부개월
+            var now_plan_char;      //현재 요금제를 불러옴(5GX 슬림 형식)
+            
+            ////////////////////초기 페이지 로딩시에만 불러옴////////////////////
+            //출고가
+            function change_phone_price(){
+                phone_price = PRICE_DATA[1]['출고가'];
+                $('#phone_price_value').text(numberWithCommas( phone_price+"원"));
+            }
+            ////////////////////공시지원금 radio를 선택했을 때에만////////////////////
+            //공시지원
+            function change_get_money(){
+                //현재 요금제를 불러옴(0, 1 형식)
+                now_plan = $('#select_plan option:selected').val();
+                // 공시지원금을 불러옴
+                spt_price = PRICE_DATA[1][now_plan+" "];
+                $('#get_money_value').text(numberWithCommas( spt_price+"원"));
+            }
+            //추가할인
+            function change_additional_discount(){
+                // 추가할인 = 공시지원 * 0.15
+                additional_discount = spt_price * 0.15;
+                $('#additional_discount_value').text(numberWithCommas(additional_discount+"원"));
+            }
+            ///////////////////할부개월 radio를 선택했을 때에만////////////////////
+            //할부개월
+            function change_installment_month(){
+                month = $('input:radio[name="radio_month"]:checked').val() ;
+                $('#installment_month_value').text(month+"개월");
+            }
+            ///////////////////요금제 select를 선택했을 때에만////////////////////
+            //요금제
+            function change_plan(){
+                now_plan_char = PRICE_DATA[0][now_plan+" "]
+                $('#plan_value').text(now_plan_char);
+            }
+            //할인방법이 공시지원일 경우에만 바뀌는 값
+            //특별할인(특가)
+            function change_special_discount(service){
+                special_discount = PRICE_DATA[1][service];
+                $('#special_discount_value').text(numberWithCommas(special_discount+"원"));
+            }
+            //할인 방법이 선택약정일 경우에만 바뀌는 값
+            //요금제 할인총액
+            function change_total_sale_contract(){
+
+            }
+            ///////////////////공통////////////////////
+            function common_calculation(){
+                change_plan();
+
+                // 요금
+                var plan_price = plans[now_plan_char];
+                var plan_price_final;
+                // 할부원금
+                var final_phone_price ;
+
+                // 0 : 공시지원금
+                // 1 : 선택약정
+                var contract = $("input[name=radio_contract]:checked").val();
+                console.log(contract);
+                // 공시지원금일 때
+                if(contract == 0){
+                    plan_price_final = plan_price;
+                    final_phone_price = (phone_price - spt_price - additional_discount - special_discount) ;
+                }
+                //선택약정 일 때
+                else if(contract == 1){
+                    plan_price_final = plan_price - (plan_price * 0.25 * contract);
+                    final_phone_price = phone_price - special_discount;
+                }
+
+                var month_price = parseInt(final_phone_price / month);
+
+
+                //총 세금
+                var total_month_interest = final_phone_price * 0.0627;
+                // 24개월 세금
+                var month_interest = (total_month_interest /24)-3;
+                //최종 가격
+                var pricep = parseInt(month_price + plan_price_final + month_interest);
+
+
+                // 할부원금
+                $('#last_price_phone_value').text(numberWithCommas(final_phone_price)+"원");
+                // 월 할부원금
+                $('#calc_result1').text(numberWithCommas(month_price)+"원");
+                // 월 요금 가격
+                $('#calc_result2').text(numberWithCommas(plan_price_final)+"원");
+                // 최종 가격
+                $('#calc_result3').text(numberWithCommas(pricep)+"원");
+            }
+            // 콤마 붙여주는 함수
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+        </script>
     </body>
 </html>
