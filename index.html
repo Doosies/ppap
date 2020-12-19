@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <title>??????????</title>
+    <title>ì œëª©ì´ë‹¤</title>
     <meta charset="utf-8">
     <head>
         <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
@@ -11,7 +11,7 @@
                 margin:0;
                 height: 100%;
             }
-            /*ÀüÃ¼UI*/
+            /*ì „ì²´UI*/
             #containner{
                 position:relative;
                 display: -webkit-flex;
@@ -31,7 +31,7 @@
                 width:100%;
             }
 
-            /*¿ŞÂÊ div*/
+            /*ì™¼ìª½ div*/
             #containner_left{
                 width:450px;
                 height: 400px;
@@ -65,7 +65,7 @@
                 margin-top: 5px;
             }
 
-            /*°¡¿îµ¥ div*/
+            /*ê°€ìš´ë° div*/
             #containner_center{
                 width:450px;
                 height: 400px;
@@ -87,7 +87,7 @@
             .center_value{
             }
 
-            /*¿À¸¥ÂÊ div*/
+            /*ì˜¤ë¥¸ìª½ div*/
             #containner_right{
                 display: table-cell;
                 vertical-align: middle;
@@ -116,7 +116,7 @@
             .calc_ui{
                 display:inline-block;
             }
-                /* ¿À¸¥ÂÊ ÃÖÁ¾°è»ê UI*/
+                /* ì˜¤ë¥¸ìª½ ìµœì¢…ê³„ì‚° UI*/
                 .calc_tap1{
                     width:90px;
                     float:left;
@@ -140,7 +140,7 @@
             #special_discount, #calc_result3{
                 color:red;
             }
-            /*¾àÁ¤ÇÒÀÎÀÏ ¶§¿¡¸¸ display:block*/
+            /*ì•½ì •í• ì¸ì¼ ë•Œì—ë§Œ display:block*/
             #total_sale_contract{
                 display: none;
             }
@@ -151,14 +151,14 @@
         </style>
     </head>
         <body>
-         <!--ÆäÀÌÁö ÃÊ±â ·Îµù½Ã ºÒ·¯¿À´Â ½ºÅ©¸³Æ®-->
+         <!--í˜ì´ì§€ ì´ˆê¸° ë¡œë”©ì‹œ ë¶ˆëŸ¬ì˜¤ëŠ” ìŠ¤í¬ë¦½íŠ¸-->
          <script type="text/javascript" language="javascript">
-            // ÇÚµåÆù Ãâ°í°¡, º¸Á¶±İ Á¤º¸
+            // í•¸ë“œí° ì¶œê³ ê°€, ë³´ì¡°ê¸ˆ ì •ë³´
             let PRICE_DATA;
-            // ¿ä±İÁ¦ Á¤º¸
+            // ìš”ê¸ˆì œ ì •ë³´
             let PLAN_DATA;
 
-            // Ã³À½ ½ÃÀÛ½Ã ¿¢¼¿À» ºÒ·¯¿Í jsonÀ¸·Î º¯È¯ÇØÁÖ´Â ½ºÅ©¸³Æ®
+            // ì²˜ìŒ ì‹œì‘ì‹œ ì—‘ì…€ì„ ë¶ˆëŸ¬ì™€ jsonìœ¼ë¡œ ë³€í™˜í•´ì£¼ëŠ” ìŠ¤í¬ë¦½íŠ¸
             function xml2json(){
                         /* set up XMLHttpRequest */
                 var url = "price.xlsx";
@@ -181,16 +181,16 @@
                     });
 
                     /* DO SOMETHING WITH workbook HERE */
-                    workbook.SheetNames.forEach( function(data, idx){   //½ÃÆ® ¿©·¯°³ÇÏ·Á¸é ÀÌ°÷¿¡¼­ ¹İº¹¹®
+                    workbook.SheetNames.forEach( function(data, idx){   //ì‹œíŠ¸ ì—¬ëŸ¬ê°œí•˜ë ¤ë©´ ì´ê³³ì—ì„œ ë°˜ë³µë¬¸
                         let sheetName = data;
                         //console.log(sheetName);
                         var worksheet = workbook.Sheets[data];
                         let datas = XLSX.utils.sheet_to_json(worksheet, {raw: true});
                         //console.log(datas);
-                        if(sheetName=='¿ä±İÁ¦'){
+                        if(sheetName=='ìš”ê¸ˆì œ'){
                             PLAN_DATA = datas;
                         }
-                        else if(sheetName == '°¡°İÇ¥'){
+                        else if(sheetName == 'ê°€ê²©í‘œ'){
                             PRICE_DATA = datas;
                         }
 
@@ -202,77 +202,77 @@
             window.onload = function(){
                 
             var plan_number = 5;//(Object.keys(PRICE_DATA[1]).length)-6;
-            //¿ä±İÁ¦ ÀÌ¸§°ú ºñ¿ëÀ» jsonÀ¸·Î ¸¸µé¾îÁÜ.
+            //ìš”ê¸ˆì œ ì´ë¦„ê³¼ ë¹„ìš©ì„ jsonìœ¼ë¡œ ë§Œë“¤ì–´ì¤Œ.
             for(i=0; i<plan_number; i++){
-                var key = PLAN_DATA[i]['ÀÌ¸§'];
-                var val = PLAN_DATA[i]['¿ä±İ'];
+                var key = PLAN_DATA[i]['ì´ë¦„'];
+                var val = PLAN_DATA[i]['ìš”ê¸ˆ'];
                 plans[key]=val;
-                // optionÀ» Ãß°¡ÇØÁÜ
+                // optionì„ ì¶”ê°€í•´ì¤Œ
                 $('#select_plan').append('<option value="'+i+'">'+key+'</option>');
             }
-            //Ãâ°í°¡ º¯°æ
+            //ì¶œê³ ê°€ ë³€ê²½
             change_phone_price();
-            //°ø½ÃÁö¿ø º¯°æ
-            change_get_money();
-            //Ãß°¡ÇÒÀÎ º¯°æ
-            change_additional_discount();
-            //Æ¯º°ÇÒÀÎ(Æ¯°¡)º¯°æ
-            change_special_discount('Ãß°¡-sk');
-            //ÇÒºÎ¿ø±İ º¯°æ
+            //ê³µì‹œì§€ì› ë³€ê²½
+            //change_get_money();
+            //ì¶”ê°€í• ì¸ ë³€ê²½
+            //change_additional_discount();
+            //íŠ¹ë³„í• ì¸(íŠ¹ê°€)ë³€ê²½
+            //change_special_discount('ì¶”ê°€-sk');
+            //í• ë¶€ì›ê¸ˆ ë³€ê²½
             //change_last_price_phone();
-            //ÇÒºÎ°³¿ù º¯°æ
-            change_installment_month();
-            //°øÅëº¯°æ
-            common_calculation();
-            });
+            //í• ë¶€ê°œì›” ë³€ê²½
+            //change_installment_month();
+            //ê³µí†µë³€ê²½
+            //common_calculation();
+            }
         </script>
-        <!--ÀÌº¥Æ® ¿¬°á ½ºÅ©¸³Æ®-->
+        <!--ì´ë²¤íŠ¸ ì—°ê²° ìŠ¤í¬ë¦½íŠ¸-->
         <script type="text/javascript" language="javascript">
 
-            // ÀÌ¹ÌÁö ¹Ù²Ù´Â ÇÔ¼ö
+            // ì´ë¯¸ì§€ ë°”ê¾¸ëŠ” í•¨ìˆ˜
             function onClick_changeColor(number){
                 $("#main_image").attr("src", "./images/phone"+number+".png");
                 $('input[name="radio_color"]:radio[value='+number+']').prop('checked',true);
                 select_color = number;
             }
-            // ÀÌº¥Æ® ¿¬°á
+            // ì´ë²¤íŠ¸ ì—°ê²°
             $(function(){
-                //ÇöÀç Åë½Å»ç ¼±ÅÃ radio
-                //Æ¯º° ÇÒÀÎ°ªÀ» ¹Ù²ãÁØ ÈÄ Àç°è»ê.
+                //í˜„ì¬ í†µì‹ ì‚¬ ì„ íƒ radio
+                //íŠ¹ë³„ í• ì¸ê°’ì„ ë°”ê¿”ì¤€ í›„ ì¬ê³„ì‚°.
                  $('input[name=radio_now_service]').change(function(e){
                     var seleted_radio_val = $(this).val();
                     var service;
                     if(seleted_radio_val == "sk"){
-                        service = "Ãß°¡-sk"
+                        service = "ì¶”ê°€-sk"
                     }
                     else if(seleted_radio_val == "kt"){
-                        service = "Ãß°¡-kt"
+                        service = "ì¶”ê°€-kt"
                     }
                     else if(seleted_radio_val == "lg"){
-                        service = "Ãß°¡-lg"
+                        service = "ì¶”ê°€-lg"
                     }
                     else if(seleted_radio_val == "etc"){
-                        service = "Ãß°¡-¾Ë¶ã"
+                        service = "ì¶”ê°€-ì•Œëœ°"
                     }
                     change_special_discount(service);
                     common_calculation();
                  })
 
-                 //»ç¿ëÇÒ Åë½Å»ç ¼±ÅÃ radio
+                 //ì‚¬ìš©í•  í†µì‹ ì‚¬ ì„ íƒ radio
                  //$('input[name=radio_after_service]').change(function(e){
                  //    radio_after_service=$(this).val();
                  //})
 
-                //¾àÁ¤¼±ÅÃ radio
+                //ì•½ì •ì„ íƒ radio
                 $('input[name=radio_contract]').change(function(e){
                     var seleted_radio_val = $(this).val();
-                    // °ø½ÃÀÏ ¶§
+                    // ê³µì‹œì¼ ë•Œ
                     if(seleted_radio_val == 0){
                         $('#get_money').css("display", "block");   
                         $('#additional_discount').css("display", "block");   
                         $('#total_sale_contract').css("display", "none");
                     }
-                    //¼±ÅÃ¾àÁ¤ ÀÏ ¶§
+                    //ì„ íƒì•½ì • ì¼ ë•Œ
                     else if(seleted_radio_val == 1){
                         $('#get_money').css("display", "none");   
                         $('#additional_discount').css("display", "none");   
@@ -281,101 +281,94 @@
                     common_calculation();
                 })
 
-                // ÇÒºÎ radio °ñ¶úÀ» ¶§
+                // í• ë¶€ radio ê³¨ëì„ ë•Œ
                 $('input[name=radio_month]').change(function(e){
                     change_installment_month();
                     common_calculation();
                 })
-                //¿ä±İÁ¦ select
+                //ìš”ê¸ˆì œ select
                 $('#select_plan').change(function(e){
                 })
 
             });
         </script>
-        <!--¼ö½Ä °è»ê ½ºÅ©¸³Æ®-->
+        <!--ìˆ˜ì‹ ê³„ì‚° ìŠ¤í¬ë¦½íŠ¸-->
         <script type="text/javascript" language="javascript">
-            // ¿ä±İÁ¦¿Í °¡°İÀÌ µé¾îÀÖ´Â json
+            // ìš”ê¸ˆì œì™€ ê°€ê²©ì´ ë“¤ì–´ìˆëŠ” json
             var plans = new Object();
-            // ???¨¨? ????? ????
-            var phone_price;        //?????
-            var now_plan;           //???? ?????? ?????(0,1,2,3 ... ????)
-            var spt_price;          //??????????
-            var additional_discount;//?????????
-            var special_discount;   //?????????(???)
-            //var final_phone_price;  //??¥ï???
-            var month;              //??????
-            var now_plan_char;      //???? ?????? ?????(5GX ???? ... ????)
-            // ???? ???? ???
-            ////////////////////ÃÊ±â ÆäÀÌÁö ·Îµù½Ã¿¡¸¸ ºÒ·¯¿È////////////////////
-            //Ãâ°í°¡
+            // ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            var phone_price;        //ì¶œê³ ê°€
+            var now_plan;           //í˜„ì¬ ìš”ê¸ˆì œë¥¼ ë¶ˆëŸ¬ì˜´(0, 1 í˜•ì‹)
+            var spt_price;          //ê³µì‹œì§€ì›ê¸ˆ
+            var additional_discount;//ì¶”ê°€ì§€ì›ê¸ˆ
+            var special_discount;   //íŠ¹ë³„ì§€ì›ê¸ˆ(íŠ¹ê°€)
+            var month;              //í• ë¶€ê°œì›”
+            var now_plan_char;      //í˜„ì¬ ìš”ê¸ˆì œë¥¼ ë¶ˆëŸ¬ì˜´(5GX ìŠ¬ë¦¼ í˜•ì‹)
+            
+            ////////////////////ì´ˆê¸° í˜ì´ì§€ ë¡œë”©ì‹œì—ë§Œ ë¶ˆëŸ¬ì˜´////////////////////
+            //ì¶œê³ ê°€
             function change_phone_price(){
-                // ??????? ??????? ????????
-                phone_price = PRICE_DATA[1]['?????'];
-                $('#phone_price_value').text(numberWithCommas( phone_price+"??"));
+                phone_price = PRICE_DATA[1]['ì¶œê³ ê°€'];
+                $('#phone_price_value').text(numberWithCommas( phone_price+"ì›"));
             }
-            ////////////////////°ø½ÃÁö¿ø±İ radio¸¦ ¼±ÅÃÇßÀ» ¶§¿¡¸¸////////////////////
-            //°ø½ÃÁö¿ø
+            ////////////////////ê³µì‹œì§€ì›ê¸ˆ radioë¥¼ ì„ íƒí–ˆì„ ë•Œì—ë§Œ////////////////////
+            //ê³µì‹œì§€ì›
             function change_get_money(){
-                //?????????? ?????, ??????? ?????. ??????? ???
-                //???? ?????? ??????? ?????
+                //í˜„ì¬ ìš”ê¸ˆì œë¥¼ ë¶ˆëŸ¬ì˜´(0, 1 í˜•ì‹)
                 now_plan = $('#select_plan option:selected').val();
-                //?????? ??????? ?????????? ??????? ?????
+                // ê³µì‹œì§€ì›ê¸ˆì„ ë¶ˆëŸ¬ì˜´
                 spt_price = PRICE_DATA[1][now_plan+" "];
-                $('#get_money_value').text(numberWithCommas( spt_price+"??"));
+                $('#get_money_value').text(numberWithCommas( spt_price+"ì›"));
             }
-            //Ãß°¡ÇÒÀÎ
+            //ì¶”ê°€í• ì¸
             function change_additional_discount(){
-                //??? ??????? ????? = ?????????? *0.15
+                // ì¶”ê°€í• ì¸ = ê³µì‹œì§€ì› * 0.15
                 additional_discount = spt_price * 0.15;
-                $('#additional_discount_value').text(numberWithCommas(additional_discount+"??"));
+                $('#additional_discount_value').text(numberWithCommas(additional_discount+"ì›"));
             }
-            ///////////////////ÇÒºÎ°³¿ù radio¸¦ ¼±ÅÃÇßÀ» ¶§¿¡¸¸////////////////////
-            //ÇÒºÎ°³¿ù
+            ///////////////////í• ë¶€ê°œì›” radioë¥¼ ì„ íƒí–ˆì„ ë•Œì—ë§Œ////////////////////
+            //í• ë¶€ê°œì›”
             function change_installment_month(){
-                //?????? ???? ?????????? ?????
                 month = $('input:radio[name="radio_month"]:checked').val() ;
-                //????? = ???? ????? ?????
-                $('#installment_month_value').text(month+"????");
+                $('#installment_month_value').text(month+"ê°œì›”");
             }
-            ///////////////////¿ä±İÁ¦ select¸¦ ¼±ÅÃÇßÀ» ¶§¿¡¸¸////////////////////
-            //¿ä±İÁ¦
+            ///////////////////ìš”ê¸ˆì œ selectë¥¼ ì„ íƒí–ˆì„ ë•Œì—ë§Œ////////////////////
+            //ìš”ê¸ˆì œ
             function change_plan(){
-                //???? ?????? ????? plan_value
                 now_plan_char = PRICE_DATA[0][now_plan+" "]
                 $('#plan_value').text(now_plan_char);
             }
-            //ÇÒÀÎ¹æ¹ıÀÌ °ø½ÃÁö¿øÀÏ °æ¿ì¿¡¸¸ ¹Ù²î´Â °ª
-            //Æ¯º°ÇÒÀÎ(Æ¯°¡)
+            //í• ì¸ë°©ë²•ì´ ê³µì‹œì§€ì›ì¼ ê²½ìš°ì—ë§Œ ë°”ë€ŒëŠ” ê°’
+            //íŠ¹ë³„í• ì¸(íŠ¹ê°€)
             function change_special_discount(service){
-                //??? ??????? ?????, ??????? ?????
                 special_discount = PRICE_DATA[1][service];
-                $('#special_discount_value').text(numberWithCommas(special_discount+"??"));
+                $('#special_discount_value').text(numberWithCommas(special_discount+"ì›"));
             }
-            //ÇÒÀÎ ¹æ¹ıÀÌ ¼±ÅÃ¾àÁ¤ÀÏ °æ¿ì¿¡¸¸ ¹Ù²î´Â °ª
-            //¿ä±İÁ¦ ÇÒÀÎÃÑ¾×
+            //í• ì¸ ë°©ë²•ì´ ì„ íƒì•½ì •ì¼ ê²½ìš°ì—ë§Œ ë°”ë€ŒëŠ” ê°’
+            //ìš”ê¸ˆì œ í• ì¸ì´ì•¡
             function change_total_sale_contract(){
 
             }
-            ///////////////////°øÅë////////////////////
+            ///////////////////ê³µí†µ////////////////////
             function common_calculation(){
-                //???? ?????? ????? ????
                 change_plan();
 
-                // ¿ä±İ
+                // ìš”ê¸ˆ
                 var plan_price = plans[now_plan_char];
                 var plan_price_final;
-                // ÇÒºÎ¿ø±İ
+                // í• ë¶€ì›ê¸ˆ
                 var final_phone_price ;
 
-                // 0 : °ø½ÃÁö¿ø±İ
-                // 1 : ¼±ÅÃ¾àÁ¤
+                // 0 : ê³µì‹œì§€ì›ê¸ˆ
+                // 1 : ì„ íƒì•½ì •
                 var contract = $("input[name=radio_contract]:checked").val();
-                // °ø½ÃÁö¿ø±İÀÏ ¶§
+                console.log(contract);
+                // ê³µì‹œì§€ì›ê¸ˆì¼ ë•Œ
                 if(contract == 0){
                     plan_price_final = plan_price;
                     final_phone_price = (phone_price - spt_price - additional_discount - special_discount) ;
                 }
-                //¼±ÅÃ¾àÁ¤ ÀÏ ¶§
+                //ì„ íƒì•½ì • ì¼ ë•Œ
                 else if(contract == 1){
                     plan_price_final = plan_price - (plan_price * 0.25 * contract);
                     final_phone_price = phone_price - special_discount;
@@ -384,49 +377,49 @@
                 var month_price = parseInt(final_phone_price / month);
 
 
-                //ÃÑ ¼¼±İ
+                //ì´ ì„¸ê¸ˆ
                 var total_month_interest = final_phone_price * 0.0627;
-                // 24°³¿ù ¼¼±İ
+                // 24ê°œì›” ì„¸ê¸ˆ
                 var month_interest = (total_month_interest /24)-3;
-                //ÃÖÁ¾ °¡°İ
+                //ìµœì¢… ê°€ê²©
                 var pricep = parseInt(month_price + plan_price_final + month_interest);
 
 
-                // ÇÒºÎ¿ø±İ
-                $('#last_price_phone_value').text(numberWithCommas(final_phone_price+"¿ø"));
-                // ¿ù ÇÒºÎ¿ø±İ
-                $('#calc_result1').text(numberWithCommas(month_price)+"¿ø");
-                // ¿ù ¿ä±İ °¡°İ
-                $('#calc_result2').text(numberWithCommas(plan_price_final)+"¿ø");
-                // ÃÖÁ¾ °¡°İ
-                $('#calc_result3').text(numberWithCommas(pricep)+"¿ø");
+                // í• ë¶€ì›ê¸ˆ
+                $('#last_price_phone_value').text(numberWithCommas(final_phone_price)+"ì›");
+                // ì›” í• ë¶€ì›ê¸ˆ
+                $('#calc_result1').text(numberWithCommas(month_price)+"ì›");
+                // ì›” ìš”ê¸ˆ ê°€ê²©
+                $('#calc_result2').text(numberWithCommas(plan_price_final)+"ì›");
+                // ìµœì¢… ê°€ê²©
+                $('#calc_result3').text(numberWithCommas(pricep)+"ì›");
             }
-            // ÄŞ¸¶ ºÙ¿©ÁÖ´Â ÇÔ¼ö
+            // ì½¤ë§ˆ ë¶™ì—¬ì£¼ëŠ” í•¨ìˆ˜
             function numberWithCommas(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
         </script>
         <div id="Parse_Area"gt;lt;/div>
-        <!--ÀüÃ¼ ·¦-->
+        <!--ì „ì²´ ë©-->
         <div id = "containner">
-            <!--»ó´Ü ÇÚµåÆù ÀÌ¸§ -->
+            <!--ìƒë‹¨ í•¸ë“œí° ì´ë¦„ -->
             <div id="phoneName" >
-                °¶·°½Ãs9
+                ê°¤ëŸ­ì‹œs9
             </div>
-            <!--¿ŞÂÊ ÀÌ¹ÌÁö-->
+            <!--ì™¼ìª½ ì´ë¯¸ì§€-->
             <div id="containner_left">
-                <!--ÇÚµåÆù ÀÌ¹ÌÁö ³ª¿À´Â div-->
+                <!--í•¸ë“œí° ì´ë¯¸ì§€ ë‚˜ì˜¤ëŠ” div-->
                 <div id = "main_image_div">
                     <img id="main_image" src="images/phone1.png" style="width:300px; height:300px;">
                 </div>
-                <!--»ö»ó °í¸£´Â div ½ÃÀÛ-->
+                <!--ìƒ‰ìƒ ê³ ë¥´ëŠ” div ì‹œì‘-->
                 <div id="color_pick">
                     <div id="image_1" class="color_pick_sub" >
                         <div>
                             <img id="image1" src="images/phone1.png" style="width:40px; height:40px;" onclick="onClick_changeColor('1')" >
                         </div>
                         <div class="color_text">
-                            ºí·ç
+                            ë¸”ë£¨
                         </div>
                     </div>
                     <div id="image_2" class="color_pick_sub">
@@ -434,7 +427,7 @@
                             <img id="image2"  src="images/phone2.png" style="width:40px; height:40px;"onclick="onClick_changeColor('2')">
                         </div>
                         <div class="color_text">
-                            È­ÀÌÆ®
+                            í™”ì´íŠ¸
                         </div>
                     </div>
                     <div id="image_3" class="color_pick_sub">
@@ -442,35 +435,35 @@
                             <img id="image3"  src="images/phone3.png" style="width:40px; height:40px;"onclick="onClick_changeColor('3')">
                         </div>
                         <div class="color_text">
-                            ÇÎÅ©
+                            í•‘í¬
                         </div>
                     </div>
                 </div>
-            </div><!--¿ŞÂÊ ³¡-->
-            <!--°¡¿îµ¥ Ç¥-->
+            </div><!--ì™¼ìª½ ë-->
+            <!--ê°€ìš´ë° í‘œ-->
             <div id="containner_center">
                 <div id="select_color" class="center_item_head">
                     <div class="center_sub">
-                        »ö»ó
+                        ìƒ‰ìƒ
                     </div>
                     <div id="radio_color" class="center_value"  >
                         <label>
                             <input class="select_color"  type="radio" name="radio_color" value='1' onclick="onClick_changeColor(this.value)" checked>
-                            ºí·ç
+                            ë¸”ë£¨
                         </label>
                         <label>
                             <input class="select_color" type="radio" name="radio_color" value='2' onclick="onClick_changeColor(this.value)">
-                            È­ÀÌÆ®
+                            í™”ì´íŠ¸
                         </label>
                         <label>
                             <input class="select_color" type="radio" name="radio_color" value='3' onclick="onClick_changeColor(this.value)">
-                            ÇÎÅ©
+                            í•‘í¬
                         </label>
                     </div>
                 </div>
                 <div id="select_now_service" class="center_item">
                     <div class="center_sub">
-                        »ç¿ëÁßÀÎ Åë½Å»ç
+                        ì‚¬ìš©ì¤‘ì¸ í†µì‹ ì‚¬
                     </div>
                     <div id="now_service" class="center_value"  >
                         <label>
@@ -487,13 +480,13 @@
                         </label>
                         <label>
                             <input class="radio_service" type="radio" name="radio_now_service" value="etc" >
-                            ¾Ë¶ãÆù
+                            ì•Œëœ°í°
                         </label>
                     </div>
                 </div>
                 <div id="select_after_service" class="center_item">
                     <div class="center_sub">
-                        »ç¿ëÇÏ½Ç Åë½Å»ç
+                        ì‚¬ìš©í•˜ì‹¤ í†µì‹ ì‚¬
                     </div>
                     <div id="after_service" class="center_value"  >
                         <label>
@@ -512,41 +505,41 @@
                 </div>
                 <div id="select_contract" class="center_item">
                     <div class="center_sub">
-                        ¾àÁ¤ ¼±ÅÃ
+                        ì•½ì • ì„ íƒ
                     </div>
                     <div id="contract" class="center_value" >
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_contract" value="get_money" checked>
-                            °ø½ÃÁö¿ø±İ(¼±ÅÃ¾àÁ¤)
+                            <input class="radio_calc" type="radio" name="radio_contract" value="0" checked>
+                            ê³µì‹œì§€ì›ê¸ˆ(ì„ íƒì•½ì •)
                         </label>
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_contract" value="discount_plan" >
-                            ¿ä±İÁ¦ÇÒÀÎ
+                            <input class="radio_calc" type="radio" name="radio_contract" value="1" >
+                            ìš”ê¸ˆì œí• ì¸
                         </label>
                     </div>
                 </div>
                 <div id="select_info" class="center_item">
                     <div class="center_sub">
-                        ÇÒºÎ°³¿ù
+                        í• ë¶€ê°œì›”
                     </div>
                     <div id="info" class="center_value"  >
                         <label>
                             <input class="radio_calc" type="radio" name="radio_month" value="24" checked>
-                            24°³¿ù
+                            24ê°œì›”
                         </label>
                         <label>
                             <input class="radio_calc" type="radio" name="radio_month" value="36" >
-                            36°³¿ù
+                            36ê°œì›”
                         </label>
                         <label>
                             <input class="radio_calc" type="radio" name="radio_month" value="48" >
-                            48°³¿ù
+                            48ê°œì›”
                         </label>
                     </div>
                 </div>
                 <div class="center_item">
                     <div class="center_sub">
-                        ¿ä±İÁ¦
+                        ìš”ê¸ˆì œ
                     </div>
                     <div id="plans" class="center_value"  >
                         <select id="select_plan" class="radio_calc">
@@ -554,33 +547,33 @@
                     </div>
 
                 </div>
-            </div><!--°¡¿îµ¥ ³¡-->
-            <!--¿À¸¥ÂÊ Ç¥-->
+            </div><!--ê°€ìš´ë° ë-->
+            <!--ì˜¤ë¥¸ìª½ í‘œ-->
             <div id="containner_right">
                 <div id="phone_price" class="right_item_head">
                     <div class="right_sub">
-                        Ãâ°í°¡
+                        ì¶œê³ ê°€
                     </div>
                     <div id="phone_price_value" class="right_value">
                     </div>
                 </div>
                 <div id="last_price_phone" class="right_item">
                     <div id="tt" class="right_sub">
-                        ÇÒºÎ¿ø±İ
+                        í• ë¶€ì›ê¸ˆ
                     </div>
                     <div id="last_price_phone_value" class="right_value">
                     </div>
                 </div>
                 <div id="installment_month" class="right_item">
                     <div class="right_sub">
-                        ÇÒºÎ°³¿ù
+                        í• ë¶€ê°œì›”
                     </div>
                     <div id="installment_month_value" class="right_value">
                     </div>
                 </div>
                 <div id="plan" class="right_item">
                     <div class="right_sub">
-                        ¿ä±İÁ¦
+                        ìš”ê¸ˆì œ
                     </div>
                     <div id="plan_value"  class="right_value">
                     </div>
@@ -588,19 +581,19 @@
                 <div id="month_price_ui" class="right_item">
                     <div class="calc_ui">
                         <div class="calc_tap1">
-                            ¿ù ÇÒºÎ¿ø±İ
+                            ì›” í• ë¶€ì›ê¸ˆ
                         </div>
                         <div class="calc_tap2">
                             +
                         </div>
                         <div class="calc_tap3">
-                            Åë½Å¿ä±İ
+                            í†µì‹ ìš”ê¸ˆ
                         </div>
                         <div class="calc_tap4">
                             =
                         </div>
                         <div class="calc_tap5">
-                            ¿ù ³³ºÎ±İ¾×
+                            ì›” ë‚©ë¶€ê¸ˆì•¡
                         </div>
                     </div>
                 </div>
@@ -623,49 +616,49 @@
                         </div>
                     </div>
                 </div>
-                <!--°ø½ÃÁö¿ø±İ ¹öÆ° ¼±ÅÃ½Ã º¸ÀÓ, ¿ä±İÁ¦ ÇÒÀÎ ´©¸¦½Ã ¼û±è-->
+                <!--ê³µì‹œì§€ì›ê¸ˆ ë²„íŠ¼ ì„ íƒì‹œ ë³´ì„, ìš”ê¸ˆì œ í• ì¸ ëˆ„ë¥¼ì‹œ ìˆ¨ê¹€-->
                 <div id="get_money"class="right_item">
                     <div class="right_sub">
-                        °ø½ÃÁö¿ø±İ
+                        ê³µì‹œì§€ì›ê¸ˆ
                     </div>
                     <div id="get_money_value" class="right_value">
                     </div>
                 </div>
-                <!--¿ä±İÁ¦ÇÒÀÎ ¹öÆ° ¼±ÅÃ½Ã º¸ÀÓ, °ø½ÃÁö¿ø±İ ´©¸¦½Ã ¼û±è-->
+                <!--ìš”ê¸ˆì œí• ì¸ ë²„íŠ¼ ì„ íƒì‹œ ë³´ì„, ê³µì‹œì§€ì›ê¸ˆ ëˆ„ë¥¼ì‹œ ìˆ¨ê¹€-->
                 <div id="total_sale_contract" class="right_item">
                     <div class="right_sub">
-                        ¿ä±İÁ¦ÇÒÀÎ ÃÑ±İ¾×
+                        ìš”ê¸ˆì œí• ì¸ ì´ê¸ˆì•¡
                     </div>
                     <div id="total_sale_contract_value"  class="right_value">
                     </div>
                 </div>
-                <!--»ç¿ëÀÚ°¡ ÀÔ·Â °¡´ÉÇÑ °ª-->
+                <!--ì‚¬ìš©ìê°€ ì…ë ¥ ê°€ëŠ¥í•œ ê°’-->
                 <div id="special_discount" class="right_item">
                     <div class="right_sub">
-                        Æ¯º°ÇÒÀÎ
+                        íŠ¹ë³„í• ì¸
                     </div>
                     <div id="special_discount_value" class="right_value">
                     </div>
                 </div>
-                <!--»ç¿ëÀÚ°¡ ÀÔ·Â °¡´ÉÇÑ °ª-->
+                <!--ì‚¬ìš©ìê°€ ì…ë ¥ ê°€ëŠ¥í•œ ê°’-->
                 <div id="additional_discount" class="right_item">
                     <div class="right_sub">
-                        Ãß°¡ÇÒÀÎ
+                        ì¶”ê°€í• ì¸
                     </div>
                     <div id="additional_discount_value" class="right_value">
                     </div>
                 </div>
                 <div id="notice" class="right_item">
                     <div id="notice_value" class="">
-                        (ÃÖÁ¾ ¿ù ³³ºÎ¾×Àº ºÎ°¡¼¼ 10% ¿Í ºĞÇÒ»óÈ¯ ¼ö¼ö·á 5.9% Æ÷ÇÔµÊ)
+                        (ìµœì¢… ì›” ë‚©ë¶€ì•¡ì€ ë¶€ê°€ì„¸ 10% ì™€ ë¶„í• ìƒí™˜ ìˆ˜ìˆ˜ë£Œ 5.9% í¬í•¨ë¨)
                     </div>
                 </div>
                 <div id="button" class="right_item">
                     <div class="right_sub" style="background-color: aquamarine;">
-                        ½ÅÃ»ÇÏ±â ¹öÆ°
+                        ì‹ ì²­í•˜ê¸° ë²„íŠ¼
                     </div>
                 </div>
-            </div><!--¿À¸¥ÂÊ ³¡-->
+            </div><!--ì˜¤ë¥¸ìª½ ë-->
         </div>
     </body>
 </html>
