@@ -35,6 +35,7 @@
                 margin-top: 2px;
                 margin-left: 20px;
                 margin-right: 20px;
+                margin-bottom: 20px;
             }
             #color_pick{
                 height:61px;
@@ -66,13 +67,14 @@
                 width:450px;
                 margin-left: 20px;
                 margin-right: 20px;
+                margin-bottom: 20px;
             }
             .center_item_head{
-                height: 35px;
-                margin-top:20px;
+                height: 20px;
+                margin-top:35px;
             }
             .center_item{
-                height: 35px;
+                height: 20px;
                 margin-top:35px;
             }
             .center_sub{
@@ -83,17 +85,22 @@
 
             /*오른쪽 div*/
             #containner_right{
+                display: table-cell;
+                vertical-align: middle;
                 width:450px;
                 margin-left: 20px;
                 margin-right: 20px;
+                margin-bottom: 20px;
             }
             .right_item_head{
-                height: 35px;
-                margin-top:20px;
+                height: 20px;
+                margin-top:30px;
+
             }
             .right_item{
-                height: 35px;
-                margin-top:10px;
+                height: 20px;
+                margin-top: 10px;
+                padding-top:1%;
             }
             .right_sub{
                 float: left;
@@ -125,13 +132,21 @@
                     width:90px;
                     float:left;
                 }
+            #special_discount, #calc_result3{
+                color:red;
+            }
+            /*약정할인일 때에만 display:block*/
             #total_sale_contract{
                 display: none;
+            }
+            #last_price_phone, #month_price_ui{
+                background-color: #F4F4F4;
             }
 
         </style>
     </head>
         <body>
+        <!--페이지 초기 로딩시 불러오는 스크립트-->
         <script type="text/javascript" language="javascript">
             // 핸드폰 출고가, 보조금 정보
             let PRICE_DATA;
@@ -183,12 +198,10 @@
 
                 // 요금제와 가격이 들어있는 json
                 var plans = new Object();
-                // 기기의 출고가
-                var phone_price;
                 // 기기의 
 
                 // 요금제 갯수!
-                var plan_number = Object.keys(PRICE_DATA[1]).length-5;
+                var plan_number = Object.keys(PRICE_DATA[1]).length-6;
                 //요금제 이름과 비용을 json으로 만들어줌.
                 for(i=0; i<plan_number; i++){
                     var key = PLAN_DATA[i]['이름'];
@@ -198,26 +211,30 @@
                     $('#select_plan').append('<option value="'+i+'">'+key+'</option>');
                 }
                 // 출고가를 액셀에서 받아와넣어줌
-                phone_price = PRICE_DATA[1]['출고가'];
+                var phone_price = PRICE_DATA[1]['출고가'];
                 $('#phone_price_value').text(numberWithCommas( phone_price+"원"));
 
                 //공시지원금 넣어줌, 액셀에서 불러옴. 가격마다 다름
                 //현재 선택한 요금제를 불러옴
                 var now_plan = $('#select_plan option:selected').val();
-                //선택한 요금제의 보조금을 액셀에세 불러옴
+                //선택한 요금제의 공시지원금 액셀에세 불러옴
                 var spt_price = PRICE_DATA[1][now_plan+" "];
                 $('#get_money_value').text(numberWithCommas( spt_price+"원"));
 
-                //특별 할인가격 넣어줌 = 공시지원금 *0.15
-                special_discount = spt_price * 0.15;
+                //추가 할인가격 넣어줌 = 공시지원금 *0.15
+                var additional_discount = spt_price * 0.15;
+                $('#additional_discount_value').text(numberWithCommas(additional_discount+"원"));
+                
+                //특별 할인가격 넣어줌, 액셀에서 불러옴
+                var special_discount = PRICE_DATA[1]['추가-sk'];
                 $('#special_discount_value').text(numberWithCommas(special_discount+"원"));
                 
-                // 할부원금 = 출고가 - 보조금 - 특별할인가
-                final_phone_price = phone_price - spt_price - special_discount;
+                // 할부원금 = 출고가 - 보조금(공시) - 특별할인가
+                var final_phone_price = phone_price - spt_price - additional_discount;
                 $('#last_price_phone_value').text(numberWithCommas(final_phone_price+"원"));
                 
                 //할부개월 현재 선택한거에서 불러옴
-                month = $('input:radio[name="radio_month"]:checked').val() ;
+                var month = $('input:radio[name="radio_month"]:checked').val() ;
                 //요금제 = 현재 선택된 요금제
                 $('#installment_month_value').text(month+"개월");
 
@@ -233,55 +250,21 @@
                 var plan_price = plans[now_plan_char];
                 $('#calc_result2').text(numberWithCommas(plan_price)+"원");
 
-                //월 납부금액 = 월 할부원금 + 통신요금
-                var pricep = month_price + plan_price;
+                // 총 이자 = 할부원금 * 0.0627
+                var total_month_interest = final_phone_price * 0.0627;
+                // 월 이자 = 총 이자 / 할부 개월
+                var month_interest = (total_month_interest /24)-3;
+                //월 납부금액 = 월 할부원금 + 통신요금 + 월 이자
+                var pricep = parseInt(month_price + plan_price + month_interest);
                 $('#calc_result3').text(numberWithCommas(pricep)+"원");
-
-
             }
             // 숫자에 콤바 붙여주는 정규식
             function numberWithCommas(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
         </script>
+        <!--이벤트 연결 스크립트-->
         <script type="text/javascript" language="javascript">
-            // 공시지원금 전용
-            // 추가보조금
-            var special_discount = 0;
-            //공시지원금
-            var discount = 0;
-
-            // 선택약정 전용
-            //매월할인
-            var discount_month = 0;
-            //24개월간 총 할인액
-            var total_price_24month = 0;
-
-            //공통
-            //할부원금
-            var final_phone_price = 0;
-            //이자
-            var interest = 0;
-            //최종이자
-            var final_interest = 0;
-            //24개월
-            var month24 = 0;
-            //36개월
-            var month36 = 0;
-            //48개월
-            var month48 = 0;
-            ////////////////////////////////////////////////////////////
-            let phone_price=0;
-            let select_color=1;
-            //현재 통신사 선택
-            let radio_now_service ="sk";
-            let radio_after_service  ="sk";
-            //약정선택
-            let radio_contract ="get_money";
-            //할부개월
-            let radio_month=24;
-            //요금제 선택
-            let select_plan =0;
 
             // 이미지 바꾸는 함수
             function onClick_changeColor(number){
@@ -292,15 +275,19 @@
             // 이벤트 연결
             $(function(){
                 //현재 통신사 선택 radio
-                $('input[name=radio_now_service]').change(function(e){
-                    radio_now_service=$(this).val();
-                })
+                //특별 할인값을 바꿔준 후 재계산.
+                 $('input[name=radio_now_service]').change(function(e){
+                     //radio_now_service=$(this).val();var now_plan = $('#select_plan option:selected').val();
+                //선택한 요금제의 공시지원금 액셀에세 불러옴
+                    var spt_price = PRICE_DATA[1][now_plan+" "];
+                    $('#get_money_value').text(numberWithCommas( spt_price+"원"));
 
-                //사용할 통신사 선택 radio
-                $('input[name=radio_after_service]').change(function(e){
-                    radio_after_service=$(this).val();
+                 })
 
-                })
+                 //사용할 통신사 선택 radio
+                 //$('input[name=radio_after_service]').change(function(e){
+                 //    radio_after_service=$(this).val();
+                 //})
 
                 //약정선택 radio
                 $('input[name=radio_contract]').change(function(e){
@@ -322,9 +309,58 @@
 
             });
         </script>
+        <!--수식 계산 스크립트-->
         <script type="text/javascript" language="javascript">
             // 각종 수식 계산
-            function calc_price(){
+            ////////////////////초기 페이지 로딩시에만 불러옴////////////////////
+            //출고가
+            function change_phone_price(){
+                
+            }
+            ////////////////////공시지원금 radio를 선택했을 때에만////////////////////
+            //공시지원
+            function change_get_money(){
+
+            }
+            //추가할인
+            function change_additional_discount(){
+
+            }
+            ///////////////////할부개월 radio를 선택했을 때에만////////////////////
+            //할부개월
+            function change_installment_month(){
+
+            }
+            ///////////////////요금제 select를 선택했을 때에만////////////////////
+            //요금제
+            function change_plan(){
+
+            }
+            ///////////////////공통////////////////////
+            //할인 방법이 선택약정일 경우에만 바뀌는 값
+            //요금제 할인총액
+            function change_total_sale_contract(){
+
+            }
+            //할인방법이 공시지원일 경우에만 바뀌는 값
+            //특별할인(특가)
+            function change_special_discount(){
+
+            }
+            //할부원금
+            function change_last_price_phone(){
+
+            }
+            //월 할부원금
+            function change_month_last_price(){
+
+            }
+            //통신요금
+            function change_plan_price(){
+
+            }
+            //월 납부액
+            function change_month_price(){
 
             }
         </script>
@@ -396,19 +432,19 @@
                     </div>
                     <div id="now_service" class="center_value"  >
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_now_service" value="sk" checked>
+                            <input class="radio_service" type="radio" name="radio_now_service" value="sk" checked>
                             SK
                         </label>
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_now_service" value="kt" >
+                            <input class="radio_service" type="radio" name="radio_now_service" value="kt" >
                             KT
                         </label>
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_now_service" value="lg" >
+                            <input class="radio_service" type="radio" name="radio_now_service" value="lg" >
                             LG
                         </label>
                         <label>
-                            <input class="radio_calc" type="radio" name="radio_now_service" value="etc" >
+                            <input class="radio_service" type="radio" name="radio_now_service" value="etc" >
                             알뜰폰
                         </label>
                     </div>
@@ -419,15 +455,15 @@
                     </div>
                     <div id="after_service" class="center_value"  >
                         <label>
-                        <input class="radio_calc" type="radio" name="radio_after_service" value="sk" checked>
+                        <input class="radio_service" type="radio" name="radio_after_service" value="sk" checked>
                         SK
                     </label>
                         <!-- <label>
-                        <input class="radio_calc" type="radio" name="radio_after_service" value="kt" >
+                        <input class="radio_service" type="radio" name="radio_after_service" value="kt" >
                         KT
                     </label>
                         <label>
-                        <input class="radio_calc" type="radio" name="radio_after_service" value="lg" >
+                        <input class="radio_service" type="radio" name="radio_after_service" value="lg" >
                         LG
                     </label> -->
                     </div>
@@ -486,14 +522,6 @@
                     <div id="phone_price_value" class="right_value">
                     </div>
                 </div>
-                <!--사용자가 입력 가능한 값-->
-                <div id="special_discount" class="right_item">
-                    <div class="right_sub">
-                        특별할인
-                    </div>
-                    <div id="special_discount_value" class="right_value">
-                    </div>
-                </div>
                 <!--공시지원금 버튼 선택시 보임, 요금제 할인 누를시 숨김-->
                 <div id="get_money"class="right_item">
                     <div class="right_sub">
@@ -502,8 +530,24 @@
                     <div id="get_money_value" class="right_value">
                     </div>
                 </div>
-                <div id="last_price_phone" class="right_item">
+                <!--사용자가 입력 가능한 값-->
+                <div id="special_discount" class="right_item">
                     <div class="right_sub">
+                        특별할인
+                    </div>
+                    <div id="special_discount_value" class="right_value">
+                    </div>
+                </div>
+                <!--사용자가 입력 가능한 값-->
+                <div id="additional_discount" class="right_item">
+                    <div class="right_sub">
+                        추가할인
+                    </div>
+                    <div id="additional_discount_value" class="right_value">
+                    </div>
+                </div>
+                <div id="last_price_phone" class="right_item">
+                    <div id="tt" class="right_sub">
                         할부원금
                     </div>
                     <div id="last_price_phone_value" class="right_value">
