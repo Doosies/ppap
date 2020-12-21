@@ -173,6 +173,18 @@
                             색상
                         </div>
                         <div id="radio_color" class="center_value"  >
+                            <!-- <label>
+                                <input class="select_color"  type="radio" name="radio_color" value='1' onclick="onClick_changeColor(this.value)" checked>
+                                블루
+                            </label>
+                            <label>
+                                <input class="select_color" type="radio" name="radio_color" value='2' onclick="onClick_changeColor(this.value)">
+                                화이트
+                            </label>
+                            <label>
+                                <input class="select_color" type="radio" name="radio_color" value='3' onclick="onClick_changeColor(this.value)">
+                                핑크
+                            </label> -->
                         </div>
                     </div>
                     <div id="select_now_service" class="center_item">
@@ -207,6 +219,14 @@
                             <input class="radio_service" type="radio" name="radio_after_service" value="sk" checked>
                             SK
                         </label>
+                            <!-- <label>
+                            <input class="radio_service" type="radio" name="radio_after_service" value="kt" >
+                            KT
+                        </label>
+                            <label>
+                            <input class="radio_service" type="radio" name="radio_after_service" value="lg" >
+                            LG
+                        </label> -->
                         </div>
                     </div>
                     <div id="select_contract" class="center_item">
@@ -215,11 +235,11 @@
                         </div>
                         <div id="contract" class="center_value" >
                             <label>
-                                <input class="radio_calc" type="radio" name="radio_contract" value="공시" checked>
+                                <input class="radio_calc" type="radio" name="radio_contract" value="0" checked>
                                 공시지원금(선택약정)
                             </label>
                             <label>
-                                <input class="radio_calc" type="radio" name="radio_contract" value="선약" >
+                                <input class="radio_calc" type="radio" name="radio_contract" value="1" >
                                 요금제할인
                             </label>
                         </div>
@@ -446,7 +466,7 @@
                                             PRICE_DATA = data;
                                     })
                                 }
-                            })//workbook.SheetNames.forEach
+                            })
 
                             // 핸드폰 이름을 로딩시켜줌
                             $('#phoneName').text(PRICE_DATA['기기명']);
@@ -460,10 +480,9 @@
 
                                 // radio 버튼
                                 $('#radio_color').append('<label><input class="select_color" value="'+i+'"type="radio" name="radio_color"  onclick="onClick_changeColor(this.value)" checked>'+name+'</label>')
-                            }// for문
-                            //컬러 선택의 첫번쨰 radio를 선택으로 바꿔줌
+                            }
                             $('input[name="radio_color"]:radio[value=0]').prop('checked',true);
-
+                            
                             // 해당 기기의 요금제 갯수
                             var plan_number = (Object.keys(PRICE_DATA).length)-11;
                             //현재 있는 요금제를 불러옴
@@ -472,28 +491,39 @@
                                 if(i == plan_number) break;
                                 $('#select_plan').append('<option value="'+name+'">'+name+'</option>');
                                 i++
-                            }//for문
+                            }
 
-                            //출고가 변경
-                            change_phone_price();
-                            //할부개월 변경
-                            change_installment_month();
-                            //특별할인(특가)변경
-                            change_special_discount('공시-sk');
-                            //현재 요금제 얻어옴
-                            change_plan();
-                            //공시지원 변경
-                            change_get_money();
-                            //공통변경
-                            common_calculation();
+                            //for(i=0; i<plan_number; i++){
+                                //let plan_name = PLAN_DATA[i]['name'];
+                                //console.log(PLAN_DATA[i]['name']);
+                                //if( i == 0 )selected_plan_char = PLAN_DATA[i]['name'];
+                                //var key = PLAN_DATA[i]['name'];
+                                //var val = PLAN_DATA[i]['price'];
+                                //plans[key]=val;
+                                // option을 추가해줌
+                                //$('#select_plan').append('<option value="'+plan_name+'">'+plan_name+'</option>');
+                            //}
+
+                                //출고가 변경
+                                change_phone_price();
+                                //할부개월 변경
+                                change_installment_month();
+                                //특별할인(특가)변경
+                                change_special_discount('공시-sk');
+                                //현재 요금제 얻어옴
+                                change_plan();
+                                //공시지원 변경
+                                change_get_money();
+                                //공통변경
+                                common_calculation();
 
 
-                        }//if(oReq.status == 200) {
+                            }
                         else {
                             alert('처리 중 에러가 발생했습니다.')
                         }
-                    }//if(oReq.readyState == 4) {
-                }//function on_ready_state(){
+                    }
+                }
         </script>
         <!--페이지 초기 로딩시 불러오는 스크립트-->
         <script type="text/javascript" language="javascript">
@@ -516,8 +546,21 @@
                 //현재 통신사 선택 radio
                 //특별 할인값을 바꿔준 후 재계산.
                  $('input[name=radio_now_service]').change(function(e){
-                    //특가 변경
-                    change_special_discount();
+                    var seleted_radio_val = $(this).val();
+                    var service;
+                    if(seleted_radio_val == "sk"){
+                        service = "공시-sk"
+                    }
+                    else if(seleted_radio_val == "kt"){
+                        service = "공시-kt"
+                    }
+                    else if(seleted_radio_val == "lg"){
+                        service = "공시-lg"
+                    }
+                    else if(seleted_radio_val == "etc"){
+                        service = "공시-알뜰"
+                    }
+                    change_special_discount(service);
                     common_calculation();
                  })
 
@@ -529,20 +572,18 @@
                 //약정선택 radio
                 $('input[name=radio_contract]').change(function(e){
                     kind_installlment_month = $(this).val();
-                        // 공시일 때
-                        if(kind_installlment_month == "공시"){
-                            $('#get_money').css("display", "block");   
-                            $('#additional_discount').css("display", "block");   
-                            $('#total_sale_contract').css("display", "none");
+                    // 공시일 때
+                    if(kind_installlment_month == 0){
+                        $('#get_money').css("display", "block");   
+                        $('#additional_discount').css("display", "block");   
+                        $('#total_sale_contract').css("display", "none");
                     }
                     //선택약정 일 때
-                    else if(kind_installlment_month == "선약"){
+                    else if(kind_installlment_month == 1){
                         $('#get_money').css("display", "none");   
                         $('#additional_discount').css("display", "none");   
                         $('#total_sale_contract').css("display", "block");   
                     }
-                    //특가 변경
-                    change_special_discount();
                     common_calculation();
                 })
 
@@ -617,19 +658,7 @@
             ///////////////현재 통신사, 할인방법 radio 눌렀을 때에만///////////////
             ///////////////////////////////////////////////////////////////////////
             // 특가를 변경함
-            function change_special_discount(){
-                var seleted_radio_val = $("input[name=radio_now_service]:checked").val();
-                // 공시와 선약 종류.
-                var kind_of_discount = $("input[name=radio_contract]:checked").val();
-
-                var service;
-                switch(seleted_radio_val){
-                    case "sk" : service = kind_of_discount+"-sk"; break;
-                    case "kt" : service = kind_of_discount+"-kt"; break;
-                    case "lg" : service = kind_of_discount+"-lg"; break;
-                    case "etc" : service = kind_of_discount+"-알뜰"; break;
-                }
-                console.log(service);
+            function change_special_discount(service){
                 special_discount = PRICE_DATA[service];
                 $('#special_discount_value').text(numberWithCommas(special_discount+"원"));
             }
