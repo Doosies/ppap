@@ -373,22 +373,22 @@
             <!--초기 const 변수들-->
             <script type="text/javascript" language="javascript">
                 // 선택약정 할인 퍼센트 = 25%
-                const DISCOUNT_PRICE_PERCENT = 0.25;
+                let DISCOUNT_PRICE_PERCENT = 0;
                 // 공시지원 추가지원금 퍼센트 = 15% 
-                const ADDITIONAL_DISCOUNT_PERCENT = 0.15;
-                // 할부이자 = 5.9%
-                const INSTALLMENT_MONTH_PERCENT = 0.0627;
+                let ADDITIONAL_DISCOUNT_PERCENT = 0;
+                // 할부이자 = 6.27%
+                let INSTALLMENT_MONTH_PERCENT = 0;
                 // 보정금액
-                const CORRECTION_NUMBER = 3;
+                let CORRECTION_NUMBER = 0;
                 // 24개월 세금 계산
-                const MONTH_INTEREST = 24;
-
+                let MONTH_INTEREST = 0;
 
                 // 요금제 정보
                 var PLAN_DATA;
                 // 핸드폰 출고가, 보조금 정보
                 var PRICE_DATA;
-
+                // const
+                var CONST_DATA;
 
                 // 핸드폰 모델명
                 // 현재 경로를 전체 url 을 나눈다
@@ -428,7 +428,6 @@
                             
                             workbook.SheetNames.forEach( function(__data, idx){   //시트 여러개하려면 이곳에서 반복문
                                 let sheetName = __data;
-                                //console.log(sheetName);
                                 var worksheet = workbook.Sheets[sheetName];
                                 let datas = XLSX.utils.sheet_to_json(worksheet, {raw: true});
 
@@ -449,6 +448,21 @@
                                         if( data['모델명'] == PHONE_NAME)
                                             PRICE_DATA = data;
                                     })
+                                }
+                                // 시트의 이름이 const 일 경우
+                                else if( sheetName == 'const'){
+                                    CONST_DATA = datas;
+                                    // 선택약정 할인 퍼센트 
+                                    DISCOUNT_PRICE_PERCENT = CONST_DATA[0]['선약할인'];
+                                    // 공시지원 추가지원금 퍼센트 
+                                    ADDITIONAL_DISCOUNT_PERCENT = CONST_DATA[0]['공시추가지원'];
+                                    // 할부이자
+                                    INSTALLMENT_MONTH_PERCENT = CONST_DATA[0]['할부이자'];
+                                    // 보정금액
+                                    CORRECTION_NUMBER = CONST_DATA[0]['이자계산개월수'];
+                                    // 24개월 세금 계산
+                                    MONTH_INTEREST = CONST_DATA[0]['보정금액'];
+
                                 }
                             })//workbook.SheetNames.forEach
 
@@ -577,7 +591,7 @@
             var special_discount;   //특별지원금(특가)
             var month;              //할부개월
             //var selected_plan_char;      //현재 요금제를 불러옴(5GX 슬림 형식)
-            var kind_installlment_month = 0;//현재 선택된 할인방법 0 = 공시 / 1 = 약정
+            var kind_installlment_month = "공시-sk";//현재 선택된 할인방법 0 = 공시 / 1 = 약정
 
             //통신요금 계산용
             //var plan_price = plans[selected_plan_char];
@@ -592,7 +606,6 @@
             //출고가
             function change_phone_price(){
                 phone_price = PRICE_DATA['출고가'];
-                console.log("출고가: "+phone_price);
                 $('#phone_price_value').text(numberWithCommas( phone_price+"원"));
             }
             ///////////////////////////////////////////////////////////////////////
@@ -633,7 +646,6 @@
                     case "lg" : service = kind_of_discount+"-lg"; break;
                     case "etc" : service = kind_of_discount+"-알뜰"; break;
                 }
-                console.log(service);
                 special_discount = PRICE_DATA[service];
                 $('#special_discount_value').text(numberWithCommas(special_discount+"원"));
             }
@@ -678,8 +690,7 @@
                 }
                 else if(kind_installlment_month == "선약"){
                     change_plan_discount();
-                }
-
+                }   
                 //월 할부원금 =  할부원금 / 개월 수
                 var month_price = parseInt(final_phone_price / month);
                 //총 세금 = 할부원금 * 0.0627
