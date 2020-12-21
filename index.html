@@ -645,7 +645,7 @@
                 // 공시지원금을 불러옴
                 spt_price = PRICE_DATA[selected_plan];
                 // 추가할인 = 공시지원 * 0.15
-                additional_discount = spt_price * ADDITIONAL_DISCOUNT_PERCENT;
+                additional_discount = parseInt(spt_price * ADDITIONAL_DISCOUNT_PERCENT);
 
                 //폰통신요금 = 그대로
                 plan_price = PLAN_DATA[selected_plan];
@@ -673,10 +673,10 @@
             ///////////////////////////////////////////////////////////////////////
             function common_calculation(){
 
-                if( kind_installlment_month == 0){
+                if( kind_installlment_month == "공시"){
                     change_get_money();
                 }
-                else if(kind_installlment_month == 1){
+                else if(kind_installlment_month == "선약"){
                     change_plan_discount();
                 }
 
