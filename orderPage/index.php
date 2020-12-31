@@ -20,7 +20,7 @@ $plan_name = $_POST['select_planname'];
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="style_order.css?ver=0.0.4">
+        <link rel="stylesheet" type="text/css" href="style_order.css?ver=0.0.5">
 
     </head>
     <body>
