@@ -13,6 +13,7 @@ html, body {
 }
 
 #header{
+    justify-content: center;
     max-width: 1400px;
     width:100%;
     border-bottom: 2px solid #CCCCCC;
@@ -22,7 +23,6 @@ html, body {
     margin-top:10px;  
     margin-bottom:10px;  
     padding:10px;
-    justify-content: left;
 
     font-weight: bold;
     font-size: 1.38em;
@@ -53,7 +53,7 @@ html, body {
 /* 맨 위 가로가 3칸 */
 @media(min-width:1210px){
     /*가운데 컨테이너 */
-    .containner>#containner_center{
+    #containner_center{
         border-left: 2px solid #CCCCCC;
         border-right: 2px solid #CCCCCC;
     }
@@ -86,13 +86,13 @@ html, body {
     .containner>#containner_right{
         margin-top:-110px;
     }
-    .containner>#containner_center{
+    #containner_center{
         margin-top:-60px;
     } 
 }
 
 .containner_item{
-    height: 465px;
+    /* height: 465px; */
     min-height: 450px;
 }
 /* 왼쪽 컨테이너 */
@@ -102,14 +102,14 @@ html, body {
     flex-flow: column nowrap;
 }
 /*가운데 컨테이너 */
-.containner>#containner_center>div{
+#containner_center>div{
     margin-top:25px;
     margin-bottom:25px;
     border-bottom:2px solid #CCCCCC;
     /* box-shadow: 0px 24px 3px -24px magenta; */
 }
 
-.containner>#containner_center{
+#containner_center{
 
     padding-top: 50px;
 }

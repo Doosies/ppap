@@ -12,16 +12,18 @@
         <script src='dir.php'></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="../setting/style.css?ver=1.03">
+        <link rel="stylesheet" type="text/css" href="../setting/style.css?ver=1.04">
 
     </head>
         <body>
+            <form action="/minhyungWork/order/index.php?ver=1.01" method="post" id="send_form">
             <div id="calc_table">
                 <!--전체 랩-->
                 <div id="first_wrap" class = "containner">
                 <!--상단 핸드폰 이름 -->
                 <div id="header" class="containner">
                     <div id="phoneName" ></div>
+                    <div id="phone_name" style="display:none;"></div>
                 </div>
                     <!--왼쪽 이미지-->
                     <div id="containner_left" class = "containner_item">
@@ -36,29 +38,28 @@
                             <div class="item_left">
                                 색상
                             </div>
-                            <div id="radio_color" class="item_right"  >
-
-                            </div>
+                            <div id="radio_color" class="item_right"  name="testname"> </div>
                         </div>
+                        <!-- <div id="radio_color_name" style="display: none;"></div> -->
                         <div id="select_now_service" >
                             <div class="item_left">
                                 사용중인 통신사
                             </div>
                             <div id="now_service" class="item_right"  >
                                 <label>
-                                    <input class="radio_service" type="radio" name="radio_now_service" value="sk" checked>
+                                    <input class="radio_service" type="radio" name="radio_now_service" value="SK" checked>
                                         SK
                                 </label>
                                 <label>
-                                    <input class="radio_service" type="radio" name="radio_now_service" value="kt" >
+                                    <input class="radio_service" type="radio" name="radio_now_service" value="KT" >
                                         KT
                                 </label>
                                 <label>
-                                    <input class="radio_service" type="radio" name="radio_now_service" value="lg" >
+                                    <input class="radio_service" type="radio" name="radio_now_service" value="LG" >
                                         LG
                                 </label>
                                 <label> 
-                                    <input class="radio_service" type="radio" name="radio_now_service" value="etc" >
+                                    <input class="radio_service" type="radio" name="radio_now_service" value="알뜰폰" >
                                         알뜰폰
                                 </label>
                             </div>
@@ -69,7 +70,7 @@
                             </div>
                             <div id="after_service" class="item_right"  >
                                 <label>
-                                    <input class="radio_service" type="radio" name="radio_after_service" value="sk" checked>
+                                    <input class="radio_service" type="radio" name="radio_after_service" value="SK" checked>
                                         SK
                                 </label>
                             </div>
@@ -80,11 +81,11 @@
                             </div>
                             <div id="contract" class="item_right" >
                                 <label>
-                                    <input class="radio_calc" type="radio" name="radio_contract" value="공시" checked>
+                                    <input class="radio_calc" type="radio" name="radio_contract" value="공시지원" checked>
                                         공시지원
                                 </label>
                                 <label>
-                                    <input class="radio_calc" type="radio" name="radio_contract" value="선약" >
+                                    <input class="radio_calc" type="radio" name="radio_contract" value="선택약정" >
                                         선택약정
                                 </label>
                             </div>
@@ -113,7 +114,7 @@
                                 요금제
                             </div>
                             <div id="plans" class="item_right"  >
-                                <select id="select_plan" class="radio_calc">
+                                <select name="select_planname" id="select_plan" class="radio_calc" form="send_form">
                                     </select>
                             </div>
 
@@ -146,6 +147,7 @@
                             </div>
                         </div>
                     </div><!--가운데 끝-->
+                    <!-- <input type="submit" id="submit" name="submit" style="display:none"> -->
                     <!--오른쪽 표-->
                     <div id="containner_right" class = "containner_item">
                         
@@ -256,26 +258,20 @@
                                 (최종 월 납부액은 부가세 10% 와 분할상환 수수료 5.9% 포함됨)
                             </div>
                         </div>
-                        <div id="send_button" style="padding:0;">
-                            <div id="button_box" style="background:#3235E2; color:white; padding:20px; width:100%; ">
-                                <label style="justify-content:center; display:flex;">
-                                    <div style="width:60px">신  청  하  기</div>
-                                    <div style="width:40px">
-                                        <MARQUEE direction="right" scrollamount="3">&#10132;</MARQUEE>
-                                    </div>
-                                </label>
+                        <div id="send_button" style="padding:0; ">
+                            <input id="submit_"type="submit" id="button_box"  style="display:none;" value="">
+                            <label for="submit_" style="background:hsl(239, 75%, 54%); color:white; padding:20px; justify-content:center; display:flex; width:100%;">
+                                <div style="width:60px">신  청  하  기</div>
+                                <div style="width:40px">
+                                    <MARQUEE direction="right" scrollamount="3">&#10132;</MARQUEE>
+                                </div>
+                            </label>
                             </div>
-                            <!-- <div style="background-color: aquamarine; text-align:center; align-self:center;">
-                                신청하기 버튼
-                            </div>
-                            <div>
-                                <img src="../setting/arrow.png">
-                            </div> -->
-                            <!-- <div class="item_right"></div> -->
                         </div>
                     </div><!--오른쪽 끝-->
                 </div><!--wrap 끝-->
             </div><!--메인 div 끝-->
+            </form>
             <!--초기 const 변수들-->
             <script type="text/javascript" language="javascript">
                 // 선택약정 할인 퍼센트 = 25%
@@ -383,6 +379,8 @@
 
                             // 핸드폰 이름을 로딩시켜줌
                             $('#phoneName').text(PRICE_DATA['기기명']);
+                            $('#phone_name').append('<input name="phone_name_" value="'+PRICE_DATA["기기명"]+'"type="radio" checked>');
+
                             // 메인 이미지를 로딩시켜줌
                             $('#main_image_div').append('<img id="main_image" src="./'+PHONE_IMAGE[0]+'.png" style="width:300px; height:300px;">');
                             // 색 고르는 이미지들을 로딩시켜줌
@@ -392,10 +390,11 @@
                                 $('#color_pick').append('<div class="color_pick_sub"><div class="img_pick"><img src="'+name+'.png" style="width:40px; height:40px;"onclick="onClick_changeColor('+i+')"></div><div class="color_text">'+name+'</div></div>');
 
                                 // radio 버튼
-                                $('#radio_color').append('<label><input class="select_color" value="'+i+'"type="radio" name="radio_color"  onclick="onClick_changeColor(this.value)" checked>'+name+'</label>')
+                                $('#radio_color').append('<label><input class="select_color" value="'+name+'"type="radio" name="radio_color"  onclick="onClick_changeColor('+i+')">'+name+'</label>')
                             }// for문
+                            //$('#radio_color_name').append('<input value="'+PHONE_IMAGE[0]+'"type="radio" id="radio_color_name" checked>')
                             //컬러 선택의 첫번쨰 radio를 선택으로 바꿔줌
-                            $('input[name="radio_color"]:radio[value=0]').prop('checked',true);
+                            $('input[name="radio_color"]:radio[value="'+PHONE_IMAGE[0]+'"]').prop('checked',true);
 
                             // 해당 기기의 요금제 갯수
                             var plan_number = (Object.keys(PRICE_DATA).length)-11;
@@ -427,19 +426,12 @@
                             $('#total_sale_contract').css("display", "none");   
 
 
-                        }//if(oReq.status == 200) {
+                        }//if(oReq.status == 200)
                         else {
                             alert('처리 중 에러가 발생했습니다.')
                         }
-                    }//if(oReq.readyState == 4) {
-                }//function on_ready_state(){
-        </script>
-        <!--페이지 초기 로딩시 불러오는 스크립트-->
-        <script type="text/javascript" language="javascript">
-            //  alert("start plan");
-            //function after_load_xml(){
-            //}
-            //$.when(xml2json()).done(function(){
+                    }//if(oReq.readyState == 4) 
+                }//function on_ready_state()
         </script>
         <!--이벤트 연결 스크립트-->
         <script type="text/javascript" language="javascript">
@@ -447,7 +439,9 @@
             // 이미지 바꾸는 함수
             function onClick_changeColor(number){
                 $("#main_image").attr("src", PHONE_IMAGE[number]+".png");
-                $('input[name="radio_color"]:radio[value='+number+']').prop('checked',true);
+                $('input[name="radio_color"]:radio[value="'+PHONE_IMAGE[number]+'"]').prop('checked',true);
+                //$('input[name="radio_color_name"]:radio[value='+PHONE_IMAGE[number]+']').prop('value',1);
+
                 select_color = number;
             }
             // 이벤트 연결
@@ -469,13 +463,13 @@
                 $('input[name=radio_contract]').change(function(e){
                     kind_installlment_month = $(this).val();
                     // 공시일 때
-                    if(kind_installlment_month == "공시"){
+                    if(kind_installlment_month == "공시지원"){
                         $('#get_money').css("display", "");   
                         //$('#additional_discount').css("display", "");   
                         $('#total_sale_contract').css("display", "none");
                     }
                     //선택약정 일 때
-                    else if(kind_installlment_month == "선약"){
+                    else if(kind_installlment_month == "선택약정"){
                         $('#get_money').css("display", "none");   
                         //$('#additional_discount').css("display", "none");   
                         $('#total_sale_contract').css("display", "");   
@@ -564,13 +558,14 @@
                 var seleted_radio_val = $("input[name=radio_now_service]:checked").val();
                 // 공시와 선약 종류.
                 var kind_of_discount = $("input[name=radio_contract]:checked").val();
-
+                if(kind_of_discount == "공시지원")kind_of_discount = "공시";
+                else if(kind_of_discount == "선택약정") kind_of_discount = "선약";
                 var service;
                 switch(seleted_radio_val){
-                    case "sk" : service = kind_of_discount+"-sk"; break;
-                    case "kt" : service = kind_of_discount+"-kt"; break;
-                    case "lg" : service = kind_of_discount+"-lg"; break;
-                    case "etc" : service = kind_of_discount+"-알뜰"; break;
+                    case "SK" : service = kind_of_discount+"-sk"; break;
+                    case "KT" : service = kind_of_discount+"-kt"; break;
+                    case "LG" : service = kind_of_discount+"-lg"; break;
+                    case "알뜰폰" : service = kind_of_discount+"-알뜰"; break;
                 }
                 //console.log(service);
                 special_discount = PRICE_DATA[service];
