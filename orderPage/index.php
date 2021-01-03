@@ -143,7 +143,7 @@ $plan_name = $_POST['select_planname'];
                             </div>
                             <div class="container_item_right">
                                 <div>
-                                    <input name="email" type="email" size="38" placeholder="honggildong@example.com">
+                                    <input name="email" type="email" size="30" placeholder="honggildong@example.com">
                                 </div>
                             </div>
                         </div>
@@ -162,8 +162,8 @@ $plan_name = $_POST['select_planname'];
                             </div>
                             <div class="container_item_right">
                                 <div>
-                                    <div><input name="addr1" type="text"  placeholder="주소" size="38" required></div>
-                                    <div style="margin-top:10px"><input name="addr2" type="text" placeholder="상세주소" size="38" required></div>
+                                    <div><input name="addr1" type="text"  placeholder="주소" size="30" required></div>
+                                    <div style="margin-top:10px"><input name="addr2" type="text" placeholder="상세주소" size="30" required></div>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +172,7 @@ $plan_name = $_POST['select_planname'];
                                 전달할 사항
                             </div>
                             <div class="container_item_right" style="flex-flow:column nowrap;">
-                                <div><input name="note" type="text" placeholder="전달할 사항" size="38"></div>
+                                <div><input name="note" type="text" placeholder="전달할 사항" size="30"></div>
                             </div>
                         </div>
                     </div>
