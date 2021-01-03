@@ -20,7 +20,7 @@ $plan_name = $_POST['select_planname'];
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="style_order.css?ver=1.0">
+        <link rel="stylesheet" type="text/css" href="style_order.css?ver=0.0.5">
 
     </head>
     <body>
@@ -147,14 +147,15 @@ $plan_name = $_POST['select_planname'];
                                 </div>
                             </div>
                         </div>
-                        <!-- <div>
+                        <div>
                             <div class="container_item_left">
                                 우편번호
+                                <!-- <font size="2px" color="red">*</font> -->
                             </div>
                             <div class="container_item_right">
                                 <div><input name="addr_num" type="text"  placeholder="우편번호" size="10" ></div>
                             </div>
-                        </div> -->
+                        </div>
                         <div>
                             <div class="container_item_left" style="padding-top:25px; padding-bottom:25px;">
                                 주소
@@ -178,14 +179,7 @@ $plan_name = $_POST['select_planname'];
                     </div>
                     <!-- 주문서 작성 완료 -->
                     <div id="complete_button">
-                            <input id="submit_"type="submit" id="button_box"  style="display:none;" value="">
-                            <label id="order_button"for="submit_">
-                                <div style="">주 문 서 작 성 완 료</div>
-                                <div style="width:40px">
-                                    <MARQUEE direction="right" scrollamount="3">&#10132;</MARQUEE>
-                                </div>
-                            </label>
-                        <!-- <input type="submit" value="주 문 서 작 성 완 료" style="background:hsl(239, 75%, 54%); color:white; padding:20px; width:300px; margin-top:10px;cursor: pointer;"> -->
+                        <input type="submit" value="주 문 서 작 성 완 료" style="background:hsl(239, 75%, 54%); color:white; padding:20px; width:300px;">
                     </div>
                 </div>
             </div> 

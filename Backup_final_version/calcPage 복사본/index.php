@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <title>핸드폰 페이지</title>
@@ -13,33 +12,36 @@
         <script src='dir.php'></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="../setting/style.css?ver=1.124">
+        <link rel="stylesheet" type="text/css" href="../setting/style.css?ver=1.04">
 
     </head>
         <body>
-            <form action="/main/setting/order/index.php?ver=1.01" method="post" id="send_form">
-                <div id="wrap" class="container"><!--전체 랩-->
-                    <!--상단 핸드폰 이름 -->
-                    <div id="head_phone_name">
-                        <div id="phoneName" >loading...</div>
-                        <div id="phone_name" style="display:none;"></div><!--데이터 전송을 위한 div-->
-                    </div>
+            <form action="/minhyungWork/order/index.php?ver=1.01" method="post" id="send_form">
+            <div id="calc_table">
+                <!--전체 랩-->
+                <div id="first_wrap" class = "containner">
+                <!--상단 핸드폰 이름 -->
+                <div id="header" class="containner">
+                    <div id="phoneName" ></div>
+                    <div id="phone_name" style="display:none;"></div>
+                </div>
                     <!--왼쪽 이미지-->
-                    <div id="container_left" class = "container_body">
+                    <div id="containner_left" class = "containner_item">
                         <!--핸드폰 이미지 나오는 div-->
                         <div id="main_image_div"></div>
                         <!--색상 고르는 div 시작-->
                         <div id="color_pick" ></div>
                     </div><!--왼쪽 끝-->
                     <!--가운데 표-->
-                    <div id="container_center" class = "container_body">
-                        <div id="select_color" class= "item_body">
+                    <div id="containner_center" class = "containner_item">
+                        <div id="select_color" >
                             <div class="item_left">
                                 색상
                             </div>
                             <div id="radio_color" class="item_right"  name="testname"> </div>
                         </div>
-                        <div id="select_now_service" class= "item_body">
+                        <!-- <div id="radio_color_name" style="display: none;"></div> -->
+                        <div id="select_now_service" >
                             <div class="item_left">
                                 사용중인 통신사
                             </div>
@@ -62,7 +64,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="select_after_service"  class= "item_body">
+                        <div id="select_after_service" >
                             <div class="item_left">
                                 사용하실 통신사
                             </div>
@@ -73,7 +75,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="select_contract" class= "item_body" >
+                        <div id="select_contract" >
                             <div class="item_left">
                                 약정 선택
                             </div>
@@ -88,7 +90,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="select_info" class= "item_body" >
+                        <div id="select_info" >
                             <div class="item_left">
                                 할부개월
                             </div>
@@ -107,7 +109,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="select_plans" class= "item_body">
+                        <div id="select_plans">
                             <div class="item_left">
                                 요금제
                             </div>
@@ -117,111 +119,103 @@
                             </div>
 
                         </div>
-                        <div id="compare_money" class= "item_body" style="padding:0;border:0;">
-                            <!-- xxxx가 더 유리 -->
-                            <div id="compare2">
-                                <div id="select1" style="color:red; display:none;">
-                                        <<< 공시지원금이 더 유리
-                                </div>
-                                <div id="select2" style="color:red; display: none;">
-                                        선택약정이 더 유리 >>>
-                                </div>
-                                <div id="tmp_select"style="color:red;">loading ...</div>
-                            </div>
-                            <div id="compare1">
+                        <div id="test" style="display: flex; flex-flow: column wrap; border:0; align-items:center; padding:0; margin-top:10px; ">
+                            <div style="display: flex; flex-flow: row wrap; justify-content:center; text-align:center; width:100%;">
                                 <!-- 공시지원금 xxx원 -->
-                                <div id="get_money_of_color" >
-                                    <div>
-                                        공  시  지  원  금
+                                <div id="get_money_of_color" style="flex:1; background: #d7d8ea; padding: 10px;">
+                                    <div style="height: 20px;">
+                                        공 시 지 원 금
                                     </div>  
-                                    <div id="get_money_of" >
-                                        loading...
+                                    <div id="get_money_of" style="height: 20px;">
                                     </div>
                                 </div>
                                 <!-- 선택약정 xxx원 -->
-                                <div id="sale_contract_of_color" >
-                                    <div >
-                                        선  택  약  정
+                                <div id="sale_contract_of_color" style="flex:1;  background: #F4F4F4; padding: 10px;">
+                                    <div style="height: 20px;">
+                                        선 택 약 정
                                     </div>
-                                    <div id="sale_contract_of">
-                                        loading...
+                                    <div id="sale_contract_of" style="height: 20px;">
                                     </div>
                                 </div>
                             </div>
+                            <!-- xxxx가 더 유리 -->
+                            <div id="select1" style="background: #d7d8ea; width:100%; height:20px; line-height:20px; text-align:center; color:red;">
+                                공시지원금이 더 유리
+                            </div>
+                            <div id="select2" style="background: #d7d8ea; width:100%; height:20px; line-height:20px; text-align:center; color:red;">
+                                선택약정이 더 유리
+                            </div>
                         </div>
                     </div><!--가운데 끝-->
+                    <!-- <input type="submit" id="submit" name="submit" style="display:none"> -->
                     <!--오른쪽 표-->
-                    <div id="container_right" class = "container_body">
-                        <div id="phone_price"  class= "item_body" >
+                    <div id="containner_right" class = "containner_item">
+                        
+                        <div id="phone_price" >
                             <div class="item_left">
                                 출고가
                             </div>
                             <div id="phone_price_value" class="item_right">
-                                loading...
                             </div>
                         </div>
                         <!--사용자가 입력 가능한 값-->
-                        <div id="special_discount"  class= "item_body" style="color:red">
+                        <div id="special_discount" style="color:red">
                             <div class="item_left">
                                 특별할인
                             </div>
                             <div id="special_discount_value" class="item_right">
-                                loading...
                             </div>
                         </div>
                         <!--공시지원금 버튼 선택시 보임, 요금제 할인 누를시 숨김-->
-                        <div id="get_money" class= "item_body" style="font-weight: bold; ">
+                        <div id="get_money" style="font-weight: bold;">
                             <div style=" display: flex; flex: 1;">
-                                <div style="width:120px; flex:1;">
+                                <div class="item_left" style="width:120px;">
                                     공시지원금
                                 </div>
-                                <div id="get_money_value" class="item_right" style="flex:1;">
+                                <div id="get_money_value" class="item_right">
                                     loading...
                                 </div>
                             </div>
                             <!--사용자가 입력 가능한 값-->
-                            <div  style=" display: flex; flex: 1;">
-                                <div class="item_left" style="flex:1;">
+                            <div style=" display: flex; flex: 1;">
+                                <div class="item_left" style="width:120px;">
                                     추가할인
                                 </div>
-                                <div id="additional_discount_value" class="item_right" style="flex:1;">
+                                <div id="additional_discount_value" class="item_right">
                                     loading...
                                 </div>
                             </div>
                         </div>
                         
-                        <div id="last_price_phone"  class= "item_body" style="background:#F4F4F4; ">
+                        <div id="last_price_phone" style="background:#F4F4F4; ">
                             <div id="tt" class="item_left">
                                 할부원금
                             </div>
                             <div id="last_price_phone_value" class="item_right">
-                                loading...
                             </div>
                         </div>
                         <!--요금제할인 버튼 선택시 보임, 공시지원금 누를시 숨김-->
-                        <div id="total_sale_contract"  class= "item_body" style="display:none;">
+                        <div id="total_sale_contract" >
                             <div class="item_left">
                                 선택약정 총 할인액
                             </div>
                             <div id="plan_discount_value"  class="item_right">
                             </div>
                         </div>
-                        <div id="installment_month"  class= "item_body">
+                        <div id="installment_month" >
                             <div class="item_left">
                                 할부개월
                             </div>
                             <div id="installment_month_value" class="item_right">
-                                loading...
                             </div>
                         </div>
-                        <div id="plan"  class= "item_body">
+                        <div id="plan" >
                             <div class="item_left">
                                 요금제
                             </div>
                             <div id="plan_value"  class="item_right">
-                                loading...
                             </div>
-                        </div><div id="month_price_ui"  class= "item_body" style="background:#F4F4F4;">
+                        </div><div id="month_price_ui" style="background:#F4F4F4;">
                             <div class="calc_ui">
                                 <div class="calc_tap">
                                     월 할부원금
@@ -240,7 +234,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="month_price_calc"  class= "item_body" style="border-bottom: 1px solid #CCCCCC;" >
+                        <div id="month_price_calc" style="border-bottom: 1px solid #CCCCCC;" >
                             <div class="calc_ui">
                                 <div id="calc_result1" class="calc_tap">
                                     loading...
@@ -259,33 +253,25 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="notice"  class= "item_body" >
+                        <div id="notice" >
                             <div id="notice_value" class="">
                                 (최종 월 납부액은 부가세 10% 와 분할상환 수수료 5.9% 포함됨)
                             </div>
                         </div>
-                        <div id="send_button"  class= "item_body" style="padding:0; ">
+                        <div id="send_button" style="padding:0; ">
                             <input id="submit_"type="submit" id="button_box"  style="display:none;" value="">
-                            <label id="order_button"for="submit_">
+                            <label for="submit_" style="background:hsl(239, 75%, 54%); color:white; padding:20px; justify-content:center; display:flex; width:100%;">
                                 <div style="width:60px">신  청  하  기</div>
                                 <div style="width:40px">
                                     <MARQUEE direction="right" scrollamount="3">&#10132;</MARQUEE>
                                 </div>
                             </label>
+                            </div>
                         </div>
                     </div><!--오른쪽 끝-->
                 </div><!--wrap 끝-->
+            </div><!--메인 div 끝-->
             </form>
-            <?php setlocale(LC_ALL,'ko_KR.UTF-8'); ?>
-            <!-- 파일 경로, 사진 로딩-->
-            <script type="text/javascript" language="javascript">
-                var files = <?php $out = array();
-                foreach (glob('*.png') as $filename) {
-                    $p = pathinfo(urldecode($filename));
-                    $out[] = $p['filename'];
-                }
-                echo json_encode($out);?>;
-            </script>
             <!--초기 const 변수들-->
             <script type="text/javascript" language="javascript">
                 // 선택약정 할인 퍼센트 = 25%
@@ -398,10 +384,6 @@
                             // 메인 이미지를 로딩시켜줌
                             $('#main_image_div').append('<img id="main_image" src="./'+PHONE_IMAGE[0]+'.png" style="width:300px; height:300px;">');
                             // 색 고르는 이미지들을 로딩시켜줌
-                            // 이미지가 6개 이상이면 정렬 방법을 바꿈
-                            if( PHONE_IMAGE.length >= 6){
-                                $('#color_pick').css("justify-content","flex-start");
-                            }
                             for(i=0; i<PHONE_IMAGE.length; i++){
                                 var name = PHONE_IMAGE[i]
                                 // 메인이미지 아래
@@ -409,7 +391,6 @@
 
                                 // radio 버튼
                                 $('#radio_color').append('<label><input class="select_color" value="'+name+'"type="radio" name="radio_color"  onclick="onClick_changeColor('+i+')">'+name+'</label>')
-
                             }// for문
                             //$('#radio_color_name').append('<input value="'+PHONE_IMAGE[0]+'"type="radio" id="radio_color_name" checked>')
                             //컬러 선택의 첫번쨰 radio를 선택으로 바꿔줌
@@ -436,16 +417,13 @@
                             change_special_discount();
                             //현재 요금제 얻어옴
                             change_plan();
-                            //선택약정 변경
-                            //change_plan_discount();
+                            change_plan_discount();
                             //공시지원 변경
-                            //change_get_money();
-                            change_discount();
+                            change_get_money();
                             //공통변경
                             common_calculation();
 
                             $('#total_sale_contract').css("display", "none");   
-                            $('#tmp_select').css("display","none");
 
 
                         }//if(oReq.status == 200)
@@ -532,7 +510,7 @@
             var special_discount;   //특별지원금(특가)
             var month;              //할부개월
             //var selected_plan_char;      //현재 요금제를 불러옴(5GX 슬림 형식)
-            var kind_installlment_month = "공시지원";//현재 선택된 할인방법 0 = 공시 / 1 = 약정
+            var kind_installlment_month = "공시";//현재 선택된 할인방법 0 = 공시 / 1 = 약정
             var discount_price;
 
             //통신요금 계산용
@@ -568,7 +546,7 @@
                 //현재 요금제를 문자 형식으로 받아옴
                 //selected_plan_char = PLAN_DATA[selected_plan]['']
                 //현재 요금제를 가격으로 불러옴
-                plan_price = PLAN_DATA[selected_plan];
+                plan_price = PLAN_DATA[selected_plan]
                 //현재 요금을 적용시킴
                 $('#plan_value').text(selected_plan);
             }
@@ -628,12 +606,10 @@
                 if( kind_installlment_month == "공시지원"){
                     change_plan_discount();
                     change_get_money();
-                    //alert("1");
                 }
                 else if(kind_installlment_month == "선택약정"){
                     change_get_money();
                     change_plan_discount();
-                    //alert("2");
                 }   
 
                 $('#get_money_of').text(numberWithCommas( spt_price+additional_discount+"원"));

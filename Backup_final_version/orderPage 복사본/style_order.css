@@ -16,7 +16,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #wrap{
-    padding:10px;
+    
 }
 .container{
     display: flex;
@@ -74,18 +74,6 @@ input[type="number"]::-webkit-inner-spin-button {
 #complete_button{
     margin-top:10px;
 }
-#order_button{
-    background:hsl(239, 75%, 54%); 
-    color:white; 
-    padding:20px; 
-    justify-content:center; 
-    display:flex; 
-    width:400px;
-    cursor: pointer;
-}
-    #order_button:hover{
-        background: #494EDD;
-    }
 
 @media(min-width:1210px){
     .container_header{

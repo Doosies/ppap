@@ -20,9 +20,6 @@
     $addr2 = $_POST['addr2'];
     $note = $_POST['note'];
 
-    if ($now_service == $after_service)$contract = "기기변경";
-    else $contract = "번호이동";
-
 ?>
 
 <?php
@@ -35,8 +32,7 @@
     + $body : 메일 내용 
     + $cc_mail : Cc 메일 있을경우 (옵션값으로 생략가능) 
     + $bcc_mail : Bcc 메일이 있을경우 (옵션값으로 생략가능) */ 
-    // $to="song961003@gmail.com"; 
-    $to="8851011@naver.com";
+    $to="song961003@gmail.com"; 
     $from="하늘통신"; 
     $subject= "휴대폰 개통신청";
     $body="\n\n\n----------------------------=휴대폰 정보=----------------------------\n"

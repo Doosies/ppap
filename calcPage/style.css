@@ -8,160 +8,151 @@ html, body {
     line-height: 100%;
     font-family: 'Noto Sans KR', serif;
 }
-#select_color{
-    border:0;
-}
 
-#header{
-    width:100%;
-    border-bottom: 2px solid #CCCCCC;
-    text-align: center;
-    margin-top:10px;  
-    margin-bottom:10px;  
-    padding:10px;
-    justify-content: center;
-
-    font-weight: bold;
-    font-size: 1.38em;
-}
-
-#calc_table{
-    /* margin-left: 3%; */
-    /* margin-right: 3%; */
-}
-.containner{
-    display:flex;	
+.container{
+    display:flex;
     flex-flow: row wrap;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+
+    padding:5px;
+    padding-top:20px;
+    padding-bottom:20px;
 }
-#first_wrap{
-    /* border-top: 1px solid #CCCCCC; */
-    border-bottom: 2px solid #CCCCCC;
-    width: auto;
-    align-self: center;
-}
-@media(min-width:1210px){
-    
-    #containner_center{
-        border-left: 1px solid #CCCCCC;
-        border-right: 1px solid #CCCCCC;
+    /*상단 핸드폰 이름*/
+    #head_phone_name{
+        width:100%;
+        text-align: center;
+        border-top: solid 1px;
+        border-bottom: solid 1px;
+        padding: 10px;
     }
-    #phoneName{
-        margin-right:150px;
+    /* 컨테이너 바디 */
+    .container_body{
+        display: flex;
+        flex-flow: column nowrap;
+        width:400px;
+        height:442px;
+        padding:5px;
+        border-bottom:solid 1px;
     }
-}@media(min-width:764px) and (max-width:1210px){
-    #phoneName{
-        margin-right:0;
+        /*컨테이너 바디 하단의 아이템바디*/
+        .item_body{
+            display: flex;
+            flex-flow: row nowrap;
+            flex:1;
+            padding:10px;
+            align-items: center;
+        }
+            .item_body>div{
+                padding:5px;
+                width:100%;
+            }
+            .item_left{
+                flex:2.6;
+            }
+            .item_right{
+                display: flex;
+                flex-flow: row wrap;
+                flex:7.5;
+            }
+            /* 월 납부급액 ui */
+            .calc_ui{
+                display: flex;
+                width:100%;
+                text-align: center;
+            }
+                .calc_ui>div:nth-child(1){flex:2;}
+                .calc_ui>div:nth-child(2){flex:1;}
+                .calc_ui>div:nth-child(3){flex:2;}
+                .calc_ui>div:nth-child(4){flex:1;}
+                .calc_ui>div:nth-child(5){flex:2;}
+
+        /* 왼쪽 컨테이너 ( 이미지 노출) */
+        #container_left{
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        #color_pick{
+            display: flex;
+            flex-flow: row wrap;
+            width:300px;
+            padding:10px;
+            justify-content: center;
+        }   
+
+            /* 색상선택 이미지 */
+            .color_pick_sub{
+                width: 50px;
+                padding:5px;
+            }
+                /* 가운데 정렬 */
+                .color_pick_sub>div{
+                    text-align: center;
+                }
+            /* 하단 텍스트*/
+            .color_text{
+                padding:5px;
+            }
+
+        /* 가운데 컨테이너 */
+        #container_center{
+            
+            border-left: solid 1px;
+            /* border-right: solid 1px; */
+        }
+            #container_center>.item_body{
+                border-bottom:solid 1px;
+                /* margin-top:20px; */
+            }
+        /* 오른쪽 컨테이너 ( 계산 ) */
+        /* 어떤 요금제가 더 싼지 알려줌 */
+        #compare_money{
+            display: flex;
+            flex-flow: column;
+            text-align: center;
+            border:0;
+            /* border-top:solid 1px; */
+        }
+            #compare1{
+                display: flex;
+                padding:0;
+            }
+                #compare1>div{
+                    flex:1;
+                    padding:14.5px;
+                }
+                #compare1>div>div{
+                    flex:1;
+                    /* padding:5px; */
+                }
+        #order_button{
+            background:hsl(239, 75%, 54%); 
+            color:white; 
+            padding:20px; 
+            justify-content:center; 
+            display:flex; 
+            width:100%;
+            cursor: pointer;
+        }
+            #order_button:hover{
+                background: #494EDD;
+            }
+
+
+/* 창 크기에 따라 border 조정 */
+@media(min-width:1240px){
+    #container_center{
+        border-left: solid 1px;
+        border-right: solid 1px;
     }
-}@media(max-width:764px){
-    #phoneName{
-        margin-right:0;
+}@media(min-width:847px) and (max-width:1240px){
+    #container_right{
+        border:0;
+    }
+}@media(max-width:847px){
+    #container_center{
+        border-left:0;
     }
 }
-
-.containner_item{
-    height: 460px;
-    min-height: 450px;
-}
-#containner_left{
-    width:300px;
-    display: flex;
-    flex-flow: column nowrap;
-}
-#containner_center>.containner_item{
-    height: 460px;
-    display: flex;
-    flex-flow: column;
-}
-#containner_center>div{
-    margin-top:25px;
-    /* margin-bottom:25px; */
-    border-bottom:1px solid #CCCCCC;
-    /* box-shadow: 0px 24px 3px -24px magenta; */
-}
-
-#containner_right{
-    display: flex;
-    flex-flow: column;
-} 
-#containner_right>div{
-    margin-top:5px;
-    margin-bottom:5px;    
-
-}       
-
-.containner_item{
-    width:450px;
-    margin-top:10px;
-    margin-bottom:10px;
-}
-.containner_item>div{
-    margin-left:10px;
-    margin-right:10px;
-    display:flex;	
-    justify-content: center;
-    flex-flow: row wrap;
-    padding:10px;
-    flex:1;
-}
-.item_left{
-    width:120px;
-}
-.item_right{
-    display:flex;	
-    flex-flow: row wrap;
-    flex: 1 1 20%;
-}
-
-#color_pick{
-    align-self: center;
-    text-align: center;
-    width:310px;
-    justify-content:flex-start;
-}
-#color_pick>.color_pick_sub>.color_text{
-    width:100px;
-    font-size: 0.84em;
-    margin-top:1px;
-    margin-bottom:5px;
-}
-
-
-/* calc_ui */
-.calc_ui{
-    display:flex;	
-    justify-content: center;
-    flex-flow: row wrap;
-    text-align: center;
-}
-/* calc_ui */
-.calc_tap:nth-child(1),.calc_tap:nth-child(3),.calc_tap:nth-child(5){/*,.calc_tap:nth-child(5),.calc_tap:nth-child(7){*/
-    width:100px;
-}
-.calc_tap:nth-child(2),.calc_tap:nth-child(4){
-    width:20px;
-}
-
-
-
-input[type='radio'] {
-    -webkit-appearance:none;
-    width:12px;
-    height:12px;
-    border:1px solid darkgray;
-     border-radius:50%;
-    outline:none;
-    background:#e6e6e6;
-  }
-  input[type='radio']:before {
-    content:'';
-    display:block;
-    width:60%;
-    height:60%;
-    margin: 20% auto;  
-    border-radius:50%;  
-  }
-  input[type='radio']:checked:before {
-  	background:#3235E2;
-  }
