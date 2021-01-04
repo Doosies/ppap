@@ -171,3 +171,33 @@ html, body {
         width:85vw;
     }
 }
+
+
+
+
+/* 플롯메뉴 */
+.float_banner{
+    position: fixed;
+    right:10px;
+    bottom:10px;
+}
+    #scroll_menu{
+        display: flex;
+        flex-flow: column nowrap;
+    }
+        #scroll_menu>div:nth-child(1){
+            background-color: #494EDD;
+        }
+            #scroll_menu>div:nth-child(1):hover{
+                background-color: black;
+            }
+        #scroll_menu>div:nth-child(2){
+            background-color:aqua;
+        }
+            #scroll_menu>div:nth-child(2):hover{
+                background-color: red;
+            }
+    .scroll_menu_item{
+        width:50px;
+        height: 50px;
+    }
