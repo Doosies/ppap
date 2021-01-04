@@ -42,7 +42,8 @@ html, body {
     align-self: center;
 }
 @media(min-width:1210px){
-    .containner>#containner_center{
+    
+    #containner_center{
         border-left: 1px solid #CCCCCC;
         border-right: 1px solid #CCCCCC;
     }
@@ -50,55 +51,45 @@ html, body {
         margin-right:150px;
     }
 }@media(min-width:764px) and (max-width:1210px){
-    /* .containner>#containner_right{
-        margin-top:-110px;
-    } */
     #phoneName{
         margin-right:0;
     }
 }@media(max-width:764px){
-    /* .containner>#containner_right{
-        margin-top:-110px;
-    }
-    .containner>#containner_center{
-        margin-top:-60px;
-    }  */
     #phoneName{
         margin-right:0;
     }
 }
 
 .containner_item{
-    height: 465px;
+    height: 460px;
     min-height: 450px;
 }
-.containner>#containner_left{
+#containner_left{
     width:300px;
     display: flex;
     flex-flow: column nowrap;
 }
-.containner>#containner_center>div{
+#containner_center>.containner_item{
+    height: 460px;
+    display: flex;
+    flex-flow: column;
+}
+#containner_center>div{
     margin-top:25px;
     /* margin-bottom:25px; */
     border-bottom:1px solid #CCCCCC;
     /* box-shadow: 0px 24px 3px -24px magenta; */
 }
 
-/* .containner>#containner_center{
-
-    padding-top: 50px;
-}*/
-.containner>#containner_right{
-    line-height: 1.5;
+#containner_right{
+    display: flex;
+    flex-flow: column;
 } 
-.containner>#containner_right>div{
+#containner_right>div{
     margin-top:5px;
     margin-bottom:5px;    
 
 }       
-    .containner>#containner_right>div>.item_right{
-        /* margin-left: 56%; */
-    }
 
 .containner_item{
     width:450px;
@@ -112,11 +103,12 @@ html, body {
     justify-content: center;
     flex-flow: row wrap;
     padding:10px;
+    flex:1;
 }
-.containner_item>div>.item_left{
+.item_left{
     width:120px;
 }
-.containner_item div>.item_right{
+.item_right{
     display:flex;	
     flex-flow: row wrap;
     flex: 1 1 20%;

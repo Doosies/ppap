@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <title>핸드폰 페이지</title>
+    <title>제목이다</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Expires" content="0">
@@ -12,7 +12,7 @@
         <script src='dir.php'></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="../setting/style.css?ver=1.03">
+        <link rel="stylesheet" type="text/css" href="../setting/style.css?ver=1.0.1.1">
 
     </head>
         <body>
@@ -31,6 +31,7 @@
                         <div id="color_pick" ></div>
                     </div><!--왼쪽 끝-->
                     <!--가운데 표-->
+                    <form action="/minhyungWork/order/index.html" method="get">
                     <div id="containner_center" class = "containner_item">
                         <div id="select_color" >
                             <div class="item_left">
@@ -81,11 +82,11 @@
                             <div id="contract" class="item_right" >
                                 <label>
                                     <input class="radio_calc" type="radio" name="radio_contract" value="공시" checked>
-                                        공시지원
+                                        공시지원금(선택약정)
                                 </label>
                                 <label>
                                     <input class="radio_calc" type="radio" name="radio_contract" value="선약" >
-                                        선택약정
+                                        요금제할인
                                 </label>
                             </div>
                         </div>
@@ -108,7 +109,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div id="select_plans">
+                        <div id="select_plans" style="border:0;">
                             <div class="item_left">
                                 요금제
                             </div>
@@ -118,34 +119,8 @@
                             </div>
 
                         </div>
-                        <div id="test" style="display: flex; flex-flow: column wrap; border:0; align-items:center; padding:0; margin-top:10px; ">
-                            <div style="display: flex; flex-flow: row wrap; justify-content:center; text-align:center; width:100%;">
-                                <!-- 공시지원금 xxx원 -->
-                                <div id="get_money_of_color" style="flex:1; background: #d7d8ea; padding: 10px;">
-                                    <div style="height: 20px;">
-                                        공 시 지 원 금
-                                    </div>  
-                                    <div id="get_money_of" style="height: 20px;">
-                                    </div>
-                                </div>
-                                <!-- 선택약정 xxx원 -->
-                                <div id="sale_contract_of_color" style="flex:1;  background: #F4F4F4; padding: 10px;">
-                                    <div style="height: 20px;">
-                                        선 택 약 정
-                                    </div>
-                                    <div id="sale_contract_of" style="height: 20px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- xxxx가 더 유리 -->
-                            <div id="select1" style="background: #d7d8ea; width:100%; height:20px; line-height:20px; text-align:center; color:red;">
-                                공시지원금이 더 유리
-                            </div>
-                            <div id="select2" style="background: #d7d8ea; width:100%; height:20px; line-height:20px; text-align:center; color:red;">
-                                선택약정이 더 유리
-                            </div>
-                        </div>
                     </div><!--가운데 끝-->
+                    </form>
                     <!--오른쪽 표-->
                     <div id="containner_right" class = "containner_item">
                         
@@ -166,25 +141,20 @@
                         </div>
                         <!--공시지원금 버튼 선택시 보임, 요금제 할인 누를시 숨김-->
                         <div id="get_money" style="font-weight: bold;">
-                            <div style=" display: flex; flex: 1;">
-                                <div class="item_left" style="width:120px;">
-                                    공시지원금
-                                </div>
-                                <div id="get_money_value" class="item_right">
-                                    loading...
-                                </div>
+                            <div class="item_left">
+                                공시지원금
                             </div>
-                            <!--사용자가 입력 가능한 값-->
-                            <div style=" display: flex; flex: 1;">
-                                <div class="item_left" style="width:120px;">
-                                    추가할인
-                                </div>
-                                <div id="additional_discount_value" class="item_right">
-                                    loading...
-                                </div>
+                            <div id="get_money_value" class="item_right">
                             </div>
                         </div>
-                        
+                        <!--사용자가 입력 가능한 값-->
+                        <!-- <div id="additional_discount" >
+                            <div class="item_left">
+                                추가할인
+                            </div>
+                            <div id="additional_discount_value" class="item_right">
+                            </div>
+                        </div> -->
                         <div id="last_price_phone" style="background:#F4F4F4; ">
                             <div id="tt" class="item_left">
                                 할부원금
@@ -195,7 +165,7 @@
                         <!--요금제할인 버튼 선택시 보임, 공시지원금 누를시 숨김-->
                         <div id="total_sale_contract" >
                             <div class="item_left">
-                                선택약정 총 할인액
+                                요금제할인 총금액
                             </div>
                             <div id="plan_discount_value"  class="item_right">
                             </div>
@@ -232,7 +202,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="month_price_calc" style="border-bottom: 1px solid #CCCCCC;" >
+                        <div id="month_price_calc" style="border-bottom: 2px solid #CCCCCC;" >
                             <div class="calc_ui">
                                 <div id="calc_result1" class="calc_tap">
                                     loading...
@@ -256,8 +226,8 @@
                                 (최종 월 납부액은 부가세 10% 와 분할상환 수수료 5.9% 포함됨)
                             </div>
                         </div>
-                        <div id="send_button" style="padding:0;">
-                            <div id="button_box" style="background:#3235E2; color:white; padding:20px; width:100%; ">
+                        <div id="button" style="padding:0;">
+                            <div id="button_box" style="background:hsl(239, 75%, 54%); color:white; padding:20px; width:100%; ">
                                 <label style="justify-content:center; display:flex;">
                                     <div style="width:60px">신  청  하  기</div>
                                     <div style="width:40px">
@@ -418,7 +388,6 @@
                             change_special_discount('공시-sk');
                             //현재 요금제 얻어옴
                             change_plan();
-                            change_plan_discount();
                             //공시지원 변경
                             change_get_money();
                             //공통변경
@@ -468,16 +437,16 @@
                 //약정선택 radio
                 $('input[name=radio_contract]').change(function(e){
                     kind_installlment_month = $(this).val();
-                    // 공시일 때
-                    if(kind_installlment_month == "공시"){
-                        $('#get_money').css("display", "");   
-                        //$('#additional_discount').css("display", "");   
-                        $('#total_sale_contract').css("display", "none");
+                        // 공시일 때
+                        if(kind_installlment_month == "공시"){
+                            $('#get_money').css("display", "");   
+                            $('#additional_discount').css("display", "");   
+                            $('#total_sale_contract').css("display", "none");
                     }
                     //선택약정 일 때
                     else if(kind_installlment_month == "선약"){
                         $('#get_money').css("display", "none");   
-                        //$('#additional_discount').css("display", "none");   
+                        $('#additional_discount').css("display", "none");   
                         $('#total_sale_contract').css("display", "");   
                     }
                     //특가 변경
@@ -497,10 +466,6 @@
                     change_plan();
                     common_calculation();
                 })
-                // 신청하기 버튼
-                $('#send_button').click(function(){
-                    
-                })
 
             });
         </script>
@@ -516,8 +481,7 @@
             var special_discount;   //특별지원금(특가)
             var month;              //할부개월
             //var selected_plan_char;      //현재 요금제를 불러옴(5GX 슬림 형식)
-            var kind_installlment_month = "공시";//현재 선택된 할인방법 0 = 공시 / 1 = 약정
-            var discount_price;
+            var kind_installlment_month = "공시-sk";//현재 선택된 할인방법 0 = 공시 / 1 = 약정
 
             //통신요금 계산용
             //var plan_price = plans[selected_plan_char];
@@ -592,63 +556,32 @@
                 final_phone_price = (phone_price - spt_price - additional_discount - special_discount);
                 //console.log(spt_price+additional_discount);
                 //공시지원금
-                $('#get_money_value').text(numberWithCommas( spt_price+"원"));
+                $('#get_money_value').text(numberWithCommas( spt_price+additional_discount+"원"));
                 //공시지원금 추가지원
-                $('#additional_discount_value').text(numberWithCommas(additional_discount+"원"));
+                //$('#additional_discount_value').text(numberWithCommas(additional_discount+"원"));
             }
             //선택약정용
             function change_plan_discount(){
-                discount_price = PLAN_DATA[selected_plan] * DISCOUNT_PRICE_PERCENT;
+                var discount_price = PLAN_DATA[selected_plan] * DISCOUNT_PRICE_PERCENT;
                 //통신요금 = 통신요금의 25퍼를 뺌
                 plan_price = PLAN_DATA[selected_plan] - discount_price;
                 // 최종 할부원금 = 폰 가격 - 특가
                 final_phone_price = phone_price - special_discount;
 
                 //총 요금 할인액
-                $('#plan_discount_value').text(numberWithCommas(discount_price*24)+"원");
-            }
-            function change_discount(){
-                if( kind_installlment_month == "공시"){
-                    change_plan_discount();
-                    change_get_money();
-                }
-                else if(kind_installlment_month == "선약"){
-                    change_get_money();
-                    change_plan_discount();
-                }   
-
-                $('#get_money_of').text(numberWithCommas( spt_price+additional_discount+"원"));
-                $('#sale_contract_of').text(numberWithCommas(discount_price*24)+"원");
-                //공시지원금
-                var get_money = spt_price+additional_discount;
-                //선택약정
-                var contract = discount_price*24;
-                // 공시지원금이 선택약정보다 클 경우는
-                if( get_money > contract){
-                    // 공시지원금 백그라운드 = 파란색
-                    $('#get_money_of_color').css("background","#d7d8ea");
-                    // 선택약정 백그라운드 = 흰색
-                    $('#sale_contract_of_color').css("background","#F4F4F4");
-                    
-                    $('#select1').css("display", ""); 
-                    $('#select2').css("display", "none"); 
-                }
-                else if( contract > get_money){
-                    // 선택약정 백그라운드 = 흰색
-                    $('#get_money_of_color').css("background","#F4F4F4");
-                    // 공시지원금  백그라운드 = 파란색
-                    $('#sale_contract_of_color').css("background","#d7d8ea");
-                    
-                    $('#select1').css("display", "none"); 
-                    $('#select2').css("display", ""); 
-                }
+                $('#plan_discount_value').text(numberWithCommas(discount_price * month)+"원");
             }
             ///////////////////////////////////////////////////////////////////////
             /////////////////////////////////공통//////////////////////////////////
             ///////////////////////////////////////////////////////////////////////
             function common_calculation(){
-                change_discount();
 
+                if( kind_installlment_month == "공시"){
+                    change_get_money();
+                }
+                else if(kind_installlment_month == "선약"){
+                    change_plan_discount();
+                }   
                 //월 할부원금 =  할부원금 / 개월 수
                 var month_price = parseInt(final_phone_price / month);
                 //총 세금 = 할부원금 * 0.0627
