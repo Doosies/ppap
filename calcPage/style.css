@@ -145,18 +145,29 @@ html, body {
                 }
 
 
-/* 창 크기에 따라 border 조정 */
+/* pc 창크기 */
 @media(min-width:1240px){
     #container_center{
         border-left: solid 1px;
         border-right: solid 1px;
     }
+    #main_image {
+        width:auto;
+    }
+/* 중간 창크기 */
 }@media(min-width:847px) and (max-width:1240px){
     #container_right{
         border:0;
     }
+    #main_image {
+        width:auto;
+    }
+/* 모바일 창크기 */
 }@media(max-width:847px){
     #container_center{
         border-left:0;
+    }
+    #main_image {
+        width:85vw;
     }
 }
