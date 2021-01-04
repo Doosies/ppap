@@ -274,8 +274,12 @@
                             </label>
                         </div>
                     </div><!--오른쪽 끝-->
+                    <div>
+                        <img src="main.jpg" >
+                    </div>
                 </div><!--wrap 끝-->
             </form>
+            <!-- <p align="center"></p> -->
             <?php setlocale(LC_ALL,'ko_KR.UTF-8'); ?>
             <!-- 파일 경로, 사진 로딩-->
             <script type="text/javascript" language="javascript">
