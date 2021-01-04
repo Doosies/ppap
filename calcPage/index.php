@@ -13,7 +13,7 @@
         <script src='dir.php'></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="../setting/style.css?ver=1.3">
+        <link rel="stylesheet" type="text/css" href="../setting/style.css">
 
     </head>
         <body>
@@ -274,8 +274,8 @@
                             </label>
                         </div>
                     </div><!--오른쪽 끝-->
-                    <div>
-                        <img src="main.jpg" >
+                    <div  >
+                        <img id="main_image" src="main.jpg">
                     </div>
                 </div><!--wrap 끝-->
             </form>
