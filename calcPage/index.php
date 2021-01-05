@@ -1,7 +1,9 @@
 
 <!DOCTYPE html>
 <html>
-    <title>핸드폰 페이지</title>
+    <title>SK Telecom 판매 전문점
+
+    </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Expires" content="0">
@@ -10,20 +12,26 @@
     <head>
         <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+        <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
         <!-- <script src='dir.php'></script> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="../setting/style.css">
+        <link rel="stylesheet" type="text/css" href="../setting/style.css?ver=2.1.0">
 
     </head>
     <body>
-        <form action="/main/setting/order/index.php?ver=1.01" method="post" id="send_form">
+        <form action="/main/setting/order/index.php" method="post" id="send_form">
             <div id="wrap" class="container"><!--전체 랩-->
                 <!--상단 핸드폰 이름 -->
-                <div id="head_phone_name">
-                    <div id="phoneName" >loading...</div>
-                    <div id="phone_name" style="display:none;"></div><!--데이터 전송을 위한 div-->
+                <div id="logo">
+                    SK Telecom 판매 전문점
                 </div>
+                <!-- <div id="head_phone_name" style="width:100%"> -->
+                    <div id="head_phone_name" style="width:100%;">
+                        <div id="phoneName" >loading...</div>
+                        <div id="phone_name" style="display:none;"></div><!--데이터 전송을 위한 div-->
+                    </div>
+                <!-- </div> -->
                 <!--왼쪽 이미지-->
                 <div id="container_left" class = "container_body">
                     <!--핸드폰 이미지 나오는 div-->
@@ -274,26 +282,76 @@
                         </label>
                     </div>
                 </div><!--오른쪽 끝-->
-                <div  >
-                    <img id="main_image" src="main.jpg">
+                <div id="main_image_bottom" style="text-align:center;">
+                    <!-- <img id="main_image" src="main.jpg"> -->
+                    <!-- <img src="./main/01_main.jpg"> -->
                 </div>
             </div><!--wrap 끝-->
         </form>
         <!-- 오른쪽 아래 고정메뉴 -->
-        <div class="float_banner">
+        <div id="float_banner" class="float_banner">
+            <!-- 가로메뉴 -->
             <div id="scroll_menu" name="scroll_top">
                 <!-- 최상단 이동 -->
-                <div id="scroll_menu_1" class="scroll_menu_item">
-
-                </div>
+                <div id="scroll_menu_1" class="scroll_menu_item"> > </div>
                 <!-- 최하단 이동-->
-                <div id="scroll_menu_2" class="scroll_menu_item">
+                <div id="scroll_menu_2" class="scroll_menu_item"> > </div>
 
-                </div>
             </div>
+            <!-- 세로메뉴 -->
+            <div id="scroll_menu_kakao">
+                <!-- 카톡 상담 div -->
+                <div id="for_pc">
+                    <div id="scroll_menu_kakao_pc" class="scroll_menu_item_kakao">
+                        <div id="kakao_pc_top">고객센터</div>
+                        <div id="kakao_pc_bottom">
+                            <p style="font-weight:bold">연락처</p>
+                            <p>1600 - 8412</p>
+                            <p style="font-weight:bold">문자수신 번호</p>
+                            <p>010-5929-7227</p>
+                            <p style="font-weight:bold">상담시간</p>
+                            <p>10:00 ~ 19:00</p>
+                            <p style="font-weight:bold">점심</p> 
+                            <p>12:30 ~ 13:30</p>
+                            <div id="support_kakao" >
+                                <div id="support_kakao_add" >
+                                    <div>
+                                        <img src="/main/setting/kakao/add.png" style="width:25px;height:25px;"/>
+                                    </div>
+                                     
+                                    <div>
+                                        채널 추가
+                                    </div>
+                                    
+                                </div>
+                                <div id="support_kakao_chat" >
+                                    <div>
+                                        <img src="/main/setting/kakao/chat.png" style="width:25px;height:25px;"/>
+                                    </div>
+                                    <div>
+                                        카카오 상담
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div id="scroll_menu_kakao_2" class="scroll_menu_item_kakao"></div> -->
+                </div>
+                <div id="for_mobile">
+                    <div id="support_kakao_add_mobile">
+                        <img src="/main/setting/kakao/add.png" style="width:38;height:38;"/>
+                    </div>
+                    
+                    <div id="support_kakao_chat_mobile" >
+                        <img src="/main/setting/kakao/chat.png" style="width:38;height:38; margin-top:2px;"/>
+                    </div>
+                </div>
         </div>
         <!-- <p align="center"></p> -->
         <?php setlocale(LC_ALL,'ko_KR.UTF-8'); ?>
+        <script type="text/javascript">
+        Kakao.init('0dc502d4ec530c54f639753d2b02a71d');
+        </script>
         <!-- 파일 경로, 사진 로딩-->
         <script type="text/javascript" language="javascript">
             var files = <?php $out = array();
@@ -302,6 +360,15 @@
                 $out[] = $p['filename'];
             }
             echo json_encode($out);?>;
+            
+            
+            var files2 = <?php $out = array();
+            foreach (glob("main/*.jpg") as $filename) {
+                $p = pathinfo(urldecode($filename));
+                $out[] = $p['filename'];
+            }
+            echo json_encode($out);?>;
+
         </script>
         <!--초기 const 변수들-->
         <script type="text/javascript" language="javascript">
@@ -331,11 +398,14 @@
             var PHONE_NAME = arFileName
             // 핸드폰 이미지 색깔
             const PHONE_IMAGE = files;
+
+            // 아래쪽 메인 이미지 경로들
+            const MAIN_IMAGE_PATH = files2;
             
         </script>
         <!-- 최초 실행시 설정들 -->
         <script type="text/javascript" language="javascript">
-            var url = "../setting/PriceTable.xlsx?ver=1.0";
+            var url = "../setting/PriceTable.xlsx";
             var oReq = new XMLHttpRequest();
             oReq.open("GET", url, true);
             oReq.responseType = "arraybuffer";
@@ -446,6 +516,13 @@
                             }
                         }//for문
 
+                        // 아래쪽 mainimage 를 불러옴
+                        for(name in MAIN_IMAGE_PATH){
+                            console.log(MAIN_IMAGE_PATH[name]);
+                            $('#main_image_bottom').append('<img  src="./main/'+MAIN_IMAGE_PATH[name]+'.jpg" style="width:100%;">');
+
+                        }
+
                         //출고가 변경
                         change_phone_price();
                         //할부개월 변경
@@ -475,7 +552,6 @@
         </script>
         <!--이벤트 연결 스크립트-->
         <script type="text/javascript" language="javascript">
-
             // 이미지 바꾸는 함수
             function onClick_changeColor(number){
                 $("#main_image").attr("src", PHONE_IMAGE[number]+".png");
@@ -484,8 +560,47 @@
 
                 select_color = number;
             }
+             
+            function scroll_follow( id )
+            {   
+                let size = $(window).width();
+                if( size < 847) return;
+                if( size > 847){
+                    $(window).scroll(function(){ 
+                        var position = $(window).scrollTop();
+                        console.log(position);
+                        if( position < 400 ) position = position + 450;
+                        else position = position + 30;
+                        $( id ).stop().animate({top:position+"px"}, 300);
+                    });
+                }
+            }
+            scroll_follow( "#float_banner" );
+            $( window ).resize(function() {
+                let size = $(window).width();
+                console.log(size);
+                if(size > 847){
+                    // $('#float_banner').css("position","absolute");
+                    // $('#float_banner').css("position","absolute")
+                    // $('#float_banner').css("position","absolute")
+                    // scroll_follow( "#float_banner" );
+                }
+                else{
+                    // $('#float_banner').css("position","fixed");
+                    // $('#float_banner').css("top","0");
+                    // $('#float_banner').css("right","0");
+                    // $('#float_banner').css("bottom","0");
+
+                }
+            });
+
+
             // 이벤트 연결
             $(function(){
+
+                $('#logo').click(function(e){
+                    location.href='http://sktel.co.kr/';
+                })
                 //현재 통신사 선택 radio
                 //특별 할인값을 바꿔준 후 재계산.
                 $('input[name=radio_now_service]').change(function(e){
@@ -544,6 +659,27 @@
                 $('#scroll_menu_2').click(function(){
                     let scr = document.body.scrollHeight; //페이지의 길이를 체크
                     window.scrollTo(0,scr);
+                })
+                // 
+                $('#support_kakao_add').click(function(){
+                    Kakao.Channel.addChannel({
+                        channelPublicId: '_xcexoxaK',
+                    })
+                })
+                $('#support_kakao_chat').click(function(){
+                    Kakao.Channel.chat({
+                    channelPublicId: '_xcexoxaK',
+                    })
+                })
+                $('#support_kakao_add_mobile').click(function(){
+                    Kakao.Channel.addChannel({
+                        channelPublicId: '_xcexoxaK',
+                    })
+                })
+                $('#support_kakao_chat_mobile').click(function(){
+                    Kakao.Channel.chat({
+                    channelPublicId: '_xcexoxaK',
+                    })
                 })
 
             });

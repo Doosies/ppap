@@ -20,13 +20,16 @@ $plan_name = $_POST['select_planname'];
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="style_order.css?ver=1.0">
+        <link rel="stylesheet" type="text/css" href="style_order.css?ver=2.1.3">
 
     </head>
     <body>
         <div id="wrap" class="container">
+            <div id="logo">
+                SK Telecom 판매 전문점
+            </div>
             <!-- 신청내역 -->
-            <div id="order_list" class="container_body">
+            <div id="order_list" class="container_body" style="margin-top:45px;">
                 <div class="container_header">
                     1.신청내역
                 </div>
@@ -92,7 +95,7 @@ $plan_name = $_POST['select_planname'];
                 </div>
             </div>
             <!-- 배송지 정보 -->
-            <form action="/minhyungWork/order/send.php" method="post">
+            <form action="/main/setting/order/send.php" method="post">
                 <div id="info_shipping" class="container_body" style="">
                     <div class="container_header">
                         2.배송지 정보
