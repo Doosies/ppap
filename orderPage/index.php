@@ -181,8 +181,8 @@ $plan_name = $_POST['select_planname'];
                     </div>
                     <!-- 주문서 작성 완료 -->
                     <div id="complete_button">
-                            <input id="submit_"type="submit" id="button_box"  style="display:none;" value="">
-                            <label id="order_button"for="submit_">
+                            <input id="submit_"type="submit" id="button_box"  style="display:none;" value="" onsubmit="">
+                            <label id="order_button"for="submit_" onclick="return checkIt();">
                                 <div style="">주 문 서 작 성 완 료</div>
                                 <div style="width:40px">
                                     <MARQUEE direction="right" scrollamount="3">&#10132;</MARQUEE>
@@ -193,6 +193,7 @@ $plan_name = $_POST['select_planname'];
                 </div>
             </div> 
             <?php echo $name; ?>
+            <input type="hidden" name="submit_chk" value='>
             <input type="hidden" name="phone_name" value='<?php echo $phone_name; ?>'>
             <input type="hidden" name="color" value='<?php echo $color; ?>'>
             <input type="hidden" name="now_service" value='<?php echo $now_service; ?>'>
@@ -202,7 +203,22 @@ $plan_name = $_POST['select_planname'];
             <input type="hidden" name="plan_name" value='<?php echo $plan_name; ?>'>
         </form>
         <script type="text/javascript" language="javascript">
-            
+            function complete(){
+                $("body").css({"cursor":"wait"});
+            }
+            var check = 0;
+            // 폼 필수 항목 체크
+            function checkIt()
+            {
+                if(check == 0){
+                    check = 1;
+                    return true;
+                }
+                if(check == 1){
+                    alert("현재 메일을 전송 중 입니다. 잠시만 기다려주세요.");
+                    return false;
+                }
+            } 
         </script>
     </body>
 </html>
