@@ -274,7 +274,7 @@
                             </label>
                         </div>
                     </div><!--오른쪽 끝-->
-                    <div  >
+                    <div >
                         <img id="main_image" src="main.jpg">
                     </div>
                 </div><!--wrap 끝-->
