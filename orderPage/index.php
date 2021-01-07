@@ -20,13 +20,16 @@ $plan_name = $_POST['select_planname'];
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="style_order.css?ver=1.0">
+        <link rel="stylesheet" type="text/css" href="style_order.css?ver=2.1.3">
 
     </head>
     <body>
         <div id="wrap" class="container">
+            <div id="logo">
+                SK Telecom 판매 전문점
+            </div>
             <!-- 신청내역 -->
-            <div id="order_list" class="container_body">
+            <div id="order_list" class="container_body" style="margin-top:45px;">
                 <div class="container_header">
                     1.신청내역
                 </div>
@@ -92,7 +95,7 @@ $plan_name = $_POST['select_planname'];
                 </div>
             </div>
             <!-- 배송지 정보 -->
-            <form action="/minhyungWork/order/send.php" method="post">
+            <form action="/main/setting/order/send.php" method="post">
                 <div id="info_shipping" class="container_body" style="">
                     <div class="container_header">
                         2.배송지 정보
@@ -178,8 +181,8 @@ $plan_name = $_POST['select_planname'];
                     </div>
                     <!-- 주문서 작성 완료 -->
                     <div id="complete_button">
-                            <input id="submit_"type="submit" id="button_box"  style="display:none;" value="">
-                            <label id="order_button"for="submit_">
+                            <input id="submit_"type="submit" id="button_box"  style="display:none;" value="" onsubmit="">
+                            <label id="order_button"for="submit_" onclick="return checkIt();">
                                 <div style="">주 문 서 작 성 완 료</div>
                                 <div style="width:40px">
                                     <MARQUEE direction="right" scrollamount="3">&#10132;</MARQUEE>
@@ -190,6 +193,7 @@ $plan_name = $_POST['select_planname'];
                 </div>
             </div> 
             <?php echo $name; ?>
+            <input type="hidden" name="submit_chk" value='>
             <input type="hidden" name="phone_name" value='<?php echo $phone_name; ?>'>
             <input type="hidden" name="color" value='<?php echo $color; ?>'>
             <input type="hidden" name="now_service" value='<?php echo $now_service; ?>'>
@@ -199,7 +203,22 @@ $plan_name = $_POST['select_planname'];
             <input type="hidden" name="plan_name" value='<?php echo $plan_name; ?>'>
         </form>
         <script type="text/javascript" language="javascript">
-            
+            function complete(){
+                $("body").css({"cursor":"wait"});
+            }
+            var check = 0;
+            // 폼 필수 항목 체크
+            function checkIt()
+            {
+                if(check == 0){
+                    check = 1;
+                    return true;
+                }
+                if(check == 1){
+                    alert("현재 메일을 전송 중 입니다. 잠시만 기다려주세요.");
+                    return false;
+                }
+            } 
         </script>
     </body>
 </html>
