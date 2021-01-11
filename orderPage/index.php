@@ -95,7 +95,7 @@ $plan_name = $_POST['select_planname'];
                 </div>
             </div>
             <!-- 배송지 정보 -->
-            <form action="/main/setting/order/send.php" method="post">
+            <form action="/main/setting/order/send.php" method="post" onsubmit="return checkIt();">
                 <div id="info_shipping" class="container_body" style="">
                     <div class="container_header">
                         2.배송지 정보
@@ -123,9 +123,9 @@ $plan_name = $_POST['select_planname'];
                                 <font size="2px" color="red">*</font>
                             </div>
                             <div class="container_item_right" style="text-align:center;">
-                                <input name="tel1_1" type="tel" placeholder="010" pattern="^01(?:0|1|[6-9])$" title="형식 010-1234-5678" size="6"  required style="margin-right: 6px;">-
-                                <input name="tel1_2" type="tel" placeholder="1234" pattern="^(?:\d{3}|\d{4})$" title="형식 010-1234-5678" size="6" required style="margin-right: 6px; margin-left:6px;">-
-                                <input name="tel1_3" type="tel" placeholder="5678" pattern="\d{4}$" title="형식 010-1234-5678" size="6" required equired style="margin-left: 6px;">
+                                <input name="tel1_1" type="tel" placeholder="010" pattern="^01(?:0|1|[6-9])$" title="3자리 지역번호" size="6"  required style="margin-right: 6px;">-
+                                <input name="tel1_2" type="tel" placeholder="1234" pattern="^(?:\d{3}|\d{4})$" title="3자리 혹은 4자리 번호" size="6" required style="margin-right: 6px; margin-left:6px;">-
+                                <input name="tel1_3" type="tel" placeholder="5678" pattern="\d{4}$" title="4자리 번호" size="6" required equired style="margin-left: 6px;">
                             </div>
                         </div>
                         <div>
@@ -134,9 +134,9 @@ $plan_name = $_POST['select_planname'];
                                 <font size="2px" color="red">*</font>
                             </div>
                             <div class="container_item_right" style="text-align:center;">
-                                <input name="tel2_1" type="tel" placeholder="010" pattern="^01(?:0|1|[6-9])$" title="형식 010-1234-5678" size="6"  required style="margin-right: 6px;">-
-                                <input name="tel2_2" type="tel" placeholder="1234" pattern="^(?:\d{3}|\d{4})$" title="형식 010-1234-5678" size="6" required style="margin-right: 6px; margin-left:6px;">-
-                                <input name="tel2_3" type="tel" placeholder="5678" pattern="\d{4}$" title="형식 010-1234-5678" size="6" required equired style="margin-left: 6px;">
+                                <input name="tel2_1" type="tel" placeholder="010" pattern="^01(?:0|1|[6-9])$|^0(2|3(?:1|2|3)|4(?:1|2|3|4)|5(?:1|2|3|4|5)|6(?:1|2|3|4))$" title="3자리지역번호" size="6"  required style="margin-right: 6px;">-
+                                <input name="tel2_2" type="tel" placeholder="1234" pattern="^(?:\d{3}|\d{4})$" title="3자리 혹은 4자리 번호" size="6" required style="margin-right: 6px; margin-left:6px;">-
+                                <input name="tel2_3" type="tel" placeholder="5678" pattern="\d{4}$" title="4자리 번호" size="6" required equired style="margin-left: 6px;">
                             </div>
                         </div>
                         <div>
@@ -182,7 +182,7 @@ $plan_name = $_POST['select_planname'];
                     <!-- 주문서 작성 완료 -->
                     <div id="complete_button">
                             <input id="submit_"type="submit" id="button_box"  style="display:none;" value="" onsubmit="">
-                            <label id="order_button"for="submit_" onclick="return checkIt();">
+                            <label id="order_button"for="submit_">
                                 <div style="">주 문 서 작 성 완 료</div>
                                 <div style="width:40px">
                                     <MARQUEE direction="right" scrollamount="3">&#10132;</MARQUEE>
@@ -193,7 +193,7 @@ $plan_name = $_POST['select_planname'];
                 </div>
             </div> 
             <?php echo $name; ?>
-            <input type="hidden" name="submit_chk" value='>
+            <input type="hidden" name="submit_chk" value=''>
             <input type="hidden" name="phone_name" value='<?php echo $phone_name; ?>'>
             <input type="hidden" name="color" value='<?php echo $color; ?>'>
             <input type="hidden" name="now_service" value='<?php echo $now_service; ?>'>
@@ -219,6 +219,13 @@ $plan_name = $_POST['select_planname'];
                     return false;
                 }
             } 
+
+            $(function(){
+
+                $('#logo').click(function(e){
+                    location.href='http://sktel.co.kr/';
+                });
+            });
         </script>
     </body>
 </html>
