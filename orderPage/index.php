@@ -219,7 +219,6 @@ $plan_name = $_POST['select_planname'];
                     return false;
                 }
             } 
-
             $(function(){
 
                 $('#logo').click(function(e){
