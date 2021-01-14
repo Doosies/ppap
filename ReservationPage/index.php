@@ -160,7 +160,7 @@
                     location.href='http://sktel.co.kr/';
                 });
             });
-            
+            //테스트로 추가해봄
             function srvTime() {
                 $(function () {
                     $.ajax({
