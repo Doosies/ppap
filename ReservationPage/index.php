@@ -24,7 +24,7 @@
                 <div id="info_shipping" class="container">
                     <div class="container_items" style="border-top:solid 1px #C0C0C0;">
                         <div id="timmer">
-                            <div>마감시간 2021년 1월 22일</div>
+                            <div>마감시간 2021년 1월 22일<br>사전예약 종료까지</div>
                             <div id="time"></div>
                         </div>
                         <div class="container_body">
@@ -162,54 +162,44 @@
             });
             
             function srvTime() {
-                let xmlHttp;
-                if (window.XMLHttpRequest) { 
-                    xmlHttp = new XMLHttpRequest(); 
-                    xmlHttp.open('HEAD',window.location.href.toString(),false);
-                    xmlHttp.setRequestHeader("Content-Type", "text/html"); 
-                    xmlHttp.send(''); 
-                    // IE 7.0 이상, 크롬, 파이어폭스 등 
-                } else if (window.ActiveXObject) { 
-                    xmlHttp = new ActiveXObject('Msxml2.XMLHTTP'); 
-                    var Url = encodeURIComponent(window.location.href.toString());
-                    xmlHttp.open('HEAD',Url);
-                    xmlHttp.setRequestHeader("Content-Type", "text/html"); 
-                    xmlHttp.send(''); 
-                } else { 
-                    return ; 
-                } 
-                // xmlHttp.open('HEAD', window.location.href.toString(), false); 
-                // xmlHttp.setRequestHeader("Content-Type", "text/html"); xmlHttp.send('');
+                $(function () {
+                    $.ajax({
+                        type: 'GET',
+                        cache: false,
+                        url: location.href,
+                        complete: function (req, textStatus) {
+                            var dateString = req.getResponseHeader('Date');
+                            if (dateString.indexOf('GMT') === -1) {
+                                dateString += ' GMT';
+                            }
+                            var nowDay = new Date(dateString).getTime();
+                            var dday_tmp = "2021-01-22 00:00:00";
+                            var dday = new Date(dday_tmp.replace(/[.-]/gi, '/')).getTime();
+                            // var dday = new Date(dday_tmp.replace(/[.-]/gi, "/")); //정상동작
 
-                //서버의 Date 값 response new Date()객체에 넣기 전엔 시간표준이 GMT로 표시 
-                let serverDate = xmlHttp.getResponseHeader("Date"); 
-                let currentDateClass = new Date(serverDate);
+                            // console.log(nowDay);
+                            // var clock = document.getElementById("time");            // 출력할 장소 선택
+                            
+                            var distance = dday-nowDay;
+                            // console.log(dday);
 
-                return currentDateClass;
+                            var d = Math.floor(distance / (1000 * 60 * 60 * 24));//일
+                            var h = Math.floor((distance / (1000*60*60)) % 24);//시간
+                            var m = Math.floor((distance / (1000*60)) % 60);//분
+                            var s = Math.floor((distance / 1000) % 60);//초
+                                                    // 현재시간
+                            // var nowTime = `${d}일 ${h}시간${m}분 ${s}초 남았습니다!`;
+                            var nowTime = d+"일 "+h+"시간"+m+"분 "+s+"초 남았습니다!";
+
+                            $('#time').text(nowTime);
+                            setTimeout("srvTime()",1000);         // setTimeout(“실행할함수”,시간) 시간은1초의 경우 1000
+                        }
+                    });
+                });
             }
-
-            function printTime(){
-                var dday = new Date("January 21, 2021 24:00:00").getTime();//디데이
-
-                var nowDay = srvTime();
-                var clock = document.getElementById("time");            // 출력할 장소 선택
-                
-                var distance = dday-nowDay;
-
-                var d = Math.floor(distance / (1000 * 60 * 60 * 24));//일
-                var h = Math.floor((distance / (1000*60*60)) % 24);//시간
-                var m = Math.floor((distance / (1000*60)) % 60);//분
-                var s = Math.floor((distance / 1000) % 60);//초
-                                         // 현재시간
-                var nowTime = `사전예약 종료까지 <br>${d}일 ${h}시간 ${m}분 ${s}초 남았습니다!`;
-                clock.innerHTML = nowTime;           // 현재시간을 출력
-                setTimeout("printTime()",1000);         // setTimeout(“실행할함수”,시간) 시간은1초의 경우 1000
-            }
-
-
 
             window.onload = function(){
-                printTime();
+                srvTime();
                 // alert(window.devicePixelRatio );
             }
 
