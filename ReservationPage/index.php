@@ -200,7 +200,6 @@
 
             window.onload = function(){
                 srvTime();
-                // alert(window.devicePixelRatio );
             }
 
         </script>
