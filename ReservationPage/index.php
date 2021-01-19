@@ -79,7 +79,7 @@
                                 기종선택
                                     <font size="2px" color="red">*</font>
                             </div>
-                            <div class="container_item_right">
+                            <div id="radios_pphone" class="container_item_right">
                                 <label><input class="radio" type="radio" name="radio_phone" value="갤럭시s21" checked>갤럭시s21</label>
                                 <label><input class="radio" type="radio" name="radio_phone" value="갤럭시s21+" >갤럭시s21+</label>
                                 <label><input class="radio" type="radio" name="radio_phone" value="갤럭시s21울트라">갤럭시s21울트라</label>
@@ -90,10 +90,11 @@
                                 현재통신사
                                     <font size="2px" color="red">*</font>
                             </div>
-                            <div class="container_item_right">
+                            <div id="radios_service" class="container_item_right">
                                 <label><input class="radio" type="radio" name="radio_service" value="sk" checked>sk</label>
                                 <label><input class="radio" type="radio" name="radio_service" value="kt" >kt</label>
-                                <label><input class="radio" type="radio" name="radio_service" value="lg">lg</label>
+                                <label><input class="radio" type="radio" name="radio_service" value="lg">U+</label>
+                                <label><input class="radio" type="radio" name="radio_service" value="알뜰폰">알뜰폰</label>
                             </div>
                         </div>
                         <div class="container_body">
@@ -101,13 +102,13 @@
                                 색상선택
                                     <font size="2px" color="red">*</font>
                             </div>
-                            <div class="container_item_right">
-                                <label><input class="radio" type="radio" name="radio_color" value="그레이"checked>그레이</label> 
-                                <label><input class="radio" type="radio" name="radio_color" value="화이트" style="color:white;">화이트</label>
-                                <label><input class="radio" type="radio" name="radio_color" value="바이올렛">바이올렛</label>
-                                <label><input class="radio" type="radio" name="radio_color" value="핑크">핑크</label>
-                                <label><input class="radio" type="radio" name="radio_color" value="블랙">블랙</label>
-                                <label><input class="radio" type="radio" name="radio_color" value="실버">실버</label>
+                            <div id="radios_color" class="container_item_right">
+                                <label id="color_gray"><input class="radio" type="radio" name="radio_color" value="그레이"checked>그레이</label> 
+                                <label id="color_white"><input class="radio" type="radio" name="radio_color" value="화이트" style="color:white;">화이트</label>
+                                <label id="color_violet"><input class="radio" type="radio" name="radio_color" value="바이올렛">바이올렛</label>
+                                <label id="color_pink"><input class="radio" type="radio" name="radio_color" value="핑크">핑크</label>
+                                <label id="color_black"><input class="radio" type="radio" name="radio_color" value="블랙">블랙</label>
+                                <label id="color_silver"><input class="radio" type="radio" name="radio_color" value="실버">실버</label>
                             </div>
                         </div>
                         <div class="container_body">
@@ -115,9 +116,9 @@
                                 메모리선택
                                     <font size="2px" color="red">*</font>
                             </div>
-                            <div class="container_item_right">
-                                <label><input class="radio" type="radio" name="radio_memory" value="256GB" checked>256GB</label>
-                                <label><input class="radio" type="radio" name="radio_memory" value="512GB">512GB</label>
+                            <div id="radios_memory" class="container_item_right">
+                                <label id="memory_256"><input class="radio" type="radio" name="radio_memory" value="256GB" checked>256GB</label>
+                                <label id="memory_512"><input class="radio" type="radio" name="radio_memory" value="512GB">512GB</label>
                             </div>
                         </div>
                     </div>
@@ -201,6 +202,58 @@
             window.onload = function(){
                 srvTime();
             }
+            $(function(){
+                $('input[name=radio_phone]').change(function(e){
+                    let phone = $(this).val();
+                    // :nth-child()
+                    if(phone == "갤럭시s21"){
+                        $('#color_gray').show();
+                        $('#color_white').show();
+                        $('#color_violet').show();
+                        $('#color_pink').show();
+                        $('#color_black').hide();
+                        $('#color_silver').hide();
+
+                        $('#memory_256').show();
+                        $('#memory_512').hide();
+                    }
+                    else if(phone =="갤럭시s21+"){
+                        $('#color_gray').hide();
+                        $('#color_white').hide();
+                        $('#color_violet').show();
+                        $('#color_pink').show();
+                        $('#color_black').show();
+                        $('#color_silver').show();
+
+                        $('#memory_256').show();
+                        $('#memory_512').hide();//ss
+                    }
+                    else if(phone =="갤럭시s21울트라"){
+                        $('#color_gray').hide();
+                        $('#color_white').hide();
+                        $('#color_violet').hide();
+                        $('#color_pink').hide();
+                        $('#color_black').show();
+                        $('#color_silver').show();
+
+                        $('#memory_256').show();
+                        $('#memory_512').show();
+                    }
+                });
+            });
+
+            $(window).load(function(){
+                $('#color_gray').show();
+                $('#color_white').show();
+                $('#color_violet').show();
+                $('#color_pink').show();
+                $('#color_black').hide();
+                $('#color_silver').hide();
+
+                $('#memory_256').show();
+                $('#memory_512').hide();
+            });
+
 
         </script>
     </body>
