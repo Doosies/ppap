@@ -1,10 +1,12 @@
 <?php
-
-   
-    $name = $_GET['name'];
-   
-
-    
+  header('Content-Type: text/html; charset=utf-8');
+?>
+<?php
+    $data_plan_data = $_POST['data_plan_data'];
+    $data_price_data = $_POST['data_price_data'];
+    $data_const_data = $_POST['data_const_data'];
+    $data_phone_name = $_POST['data_phone_name'];
+    $data_phone_name_eng = $_POST['data_phone_name_eng'];
 ?>
 
 <!DOCTYPE html>
@@ -24,12 +26,16 @@
         <!-- <script src='dir.php'></script> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="style_calcon.css?ver=3.0.1">
+        <link rel="stylesheet" type="text/css" href="main/setting/style.css?ver=2.1.0">
 
     </head>
     <body>
         <form action="/main/setting/order/index.php" method="post" id="send_form">
             <div id="wrap" class="container"><!--전체 랩-->
+                <!--상단 핸드폰 이름 -->
+                <div id="logo">
+                    SK Telecom 판매 전문점
+                </div>
                 <!-- <div id="head_phone_name" style="width:100%"> -->
                     <div id="head_phone_name" style="width:100%;">
                         <div id="phoneName" >loading...</div>
@@ -276,10 +282,88 @@
                             (최종 월 납부액은 부가세 10% 와 분할상환 수수료 5.9% 포함됨)
                         </div>
                     </div>
-                    
+                    <div id="send_button"  class= "item_body" style="padding:0; ">
+                        <input id="submit_"type="submit" id="button_box"  style="display:none;" value="">
+                        <label id="order_button"for="submit_">
+                            <div style="width:60px">신  청  하  기</div>
+                            <div style="width:40px">
+                                <MARQUEE direction="right" scrollamount="3">&#10132;</MARQUEE>
+                            </div>
+                        </label>
+                    </div>
                 </div><!--오른쪽 끝-->
+                <div id="main_image_bottom" style="text-align:center;">
+
+                <img style="cursor:pointer; " src="http://www.ictmarket.or.kr/getCertIcon.do?cert_icon=KL20122352310V001" onclick="window.open('http://www.ictmarket.or.kr/precon/pop_CertIcon.do?PRECON_REQ_ID=PRE0000145236','_blank','width=600, height=500, toolbar=no, menubar=no, scrollbars=no, resizable=no' )"/>
+                        <img style="cursor:pointer; " src="http://www.ictmarket.or.kr/getCertIcon.do?cert_icon=KP19021936496O003" onclick="window.open('http://www.ictmarket.or.kr/precon/pop_CertIcon.do?PRECON_REQ_ID=PRE0000110286','_blank','width=600, height=500, toolbar=no, menubar=no, scrollbars=no, resizable=no' )"/>
+                    <!-- <img id="main_image" src="main.jpg"> -->
+                    <!-- <img src="./main/01_main.jpg"> -->
+                </div>
             </div><!--wrap 끝-->
         </form>
+        <div>
+        </div>
+        <!-- 오른쪽 아래 고정메뉴 -->
+        <div id="float_banner" class="float_banner">
+            <!-- 가로메뉴 -->
+            <div id="scroll_menu" name="scroll_top">
+                <!-- 최상단 이동 -->
+                <div id="scroll_menu_1" class="scroll_menu_item"> > </div>
+                <!-- 최하단 이동-->
+                <div id="scroll_menu_2" class="scroll_menu_item"> > </div>
+
+            </div>
+            <!-- 세로메뉴 -->
+            <div id="scroll_menu_kakao">
+                <!-- 카톡 상담 div -->
+                <div id="for_pc">
+                    <div id="scroll_menu_kakao_pc" class="scroll_menu_item_kakao">
+                        <div id="kakao_pc_top">고객센터</div>
+                        <div id="kakao_pc_bottom">
+                            <p style="font-weight:bold">연락처</p>
+                            <p>1600 - 8412</p>
+                            <p style="font-weight:bold">문자수신 번호</p>
+                            <p>010-5929-7227</p>
+                            <p style="font-weight:bold">상담시간</p>
+                            <p>10:00 ~ 19:00</p>
+                            <p style="font-weight:bold">점심</p> 
+                            <p>12:30 ~ 13:30</p>
+                            <div id="support_kakao" >
+                                <div id="support_kakao_add" >
+                                    <div>
+                                        <img src="/main/setting/kakao/add.png" style="width:25px;height:25px;"/>
+                                    </div>
+                                     
+                                    <div>
+                                        채널 추가
+                                    </div>
+                                    
+                                </div>
+                                <div id="support_kakao_chat" >
+                                    <div>
+                                        <img src="/main/setting/kakao/chat.png" style="width:25px;height:25px;"/>
+                                    </div>
+                                    <div>
+                                        카카오 상담
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--오른쪽 끝-->
+                    <div >
+                    </div>
+                    <!-- <div id="scroll_menu_kakao_2" class="scroll_menu_item_kakao"></div> -->
+                </div>
+                <div id="for_mobile">
+                    <div id="support_kakao_add_mobile">
+                        <img src="/main/setting/kakao/add.png" style="width:38;height:38;"/>
+                    </div>
+                    
+                    <div id="support_kakao_chat_mobile" >
+                        <img src="/main/setting/kakao/chat.png" style="width:38;height:38; margin-top:2px;"/>
+                    </div>
+                </div>
+        </div>
         <!-- <p align="center"></p> -->
         <?php setlocale(LC_ALL,'ko_KR.UTF-8'); ?>
         <script type="text/javascript">
@@ -288,12 +372,19 @@
         <!-- 파일 경로, 사진 로딩-->
         <script type="text/javascript" language="javascript">
             var files = <?php $out = array();
-            foreach (glob("main/{$name}/*.png") as $filename) {
+            foreach (glob("main/{$data_phone_name_eng}/*.png") as $filename) {
                 $p = pathinfo(urldecode($filename));
                 $out[] = $p['filename'];
             }
             echo json_encode($out);?>;
             
+            
+            var files2 = <?php $out = array();
+            foreach (glob("main/{$data_phone_name_eng}/main/*.jpg") as $filename) {
+                $p = pathinfo(urldecode($filename));
+                $out[] = $p['filename'];
+            }
+            echo json_encode($out);?>;
 
         </script>
         <!--초기 const 변수들-->
@@ -309,155 +400,25 @@
             // 24개월 세금 계산
             let MONTH_INTEREST = 0;
             // 요금제 정보
-            var PLAN_DATA;
-            var PRICE_DATA;
-            var CONST_DATA;
-            var PHONE_NAME = "<?php echo $name; ?>";
-            var PHONE_NAME_ENG = "<?php echo $name; ?>";
+            var PLAN_DATA = <?php echo $data_plan_data;?>;
+            // 핸드폰 출고가, 보조금 정보
+            var PRICE_DATA = <?php echo $data_price_data; ?>;
+            
+            var CONST_DATA = <?php echo $data_const_data; ?>;
+
+            var PHONE_NAME = "<?php echo $data_phone_name; ?>";
+            var PHONE_NAME_ENG = "<?php echo $data_phone_name_eng; ?>";
 
             var NOW_PATH = `main/${PHONE_NAME_ENG}`;
 
             // 핸드폰 이미지 색깔
             const PHONE_COLOR_NAME = files;
+            // 아래쪽 메인 이미지 경로들
+            const MAIN_IMAGE_PATH = files2;
 
             //공시 추가지원 여부
             var IS_AVARIABLE_ADDITIONAL_DISCOUNT = true;
             
-        </script>
-        <script type="text/javascript" language="javascript">
-                var url = "main/setting/PriceTable.xlsx?ver=3.0";
-                var oReq = new XMLHttpRequest();
-                oReq.open("GET", url, true);
-                oReq.responseType = "arraybuffer";
-                oReq.onreadystatechange = on_ready_state;
-                oReq.send();
-
-                function on_ready_state(){
-                    // 4 = 데이터 전송완료
-                    if(oReq.readyState == 4) {
-                        // 200 은 에러 없음을 의미 ( 404 = 페이지가 존재하지 않음 )
-                        if(oReq.status == 200) {
-                            var arraybuffer = oReq.response;
-                            /* convert data to binary string */
-                            var data = new Uint8Array(arraybuffer);
-                            var arr = new Array();
-                            for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-                            var bstr = arr.join("");
-
-                            /* Call XLSX */
-                            var workbook = XLSX.read(bstr, {
-                                type: "binary"
-                            });
-
-                            
-                            workbook.SheetNames.forEach( function(__data, idx){   //시트 여러개하려면 이곳에서 반복문
-                                let sheetName = __data;
-                                var worksheet = workbook.Sheets[sheetName];
-                                let datas = XLSX.utils.sheet_to_json(worksheet, {raw: true});
-                                //datas = datas.toString().replace(/\n/gi,"\\r\\n"); 
-
-                                // 시트의 이름이 plan이면
-                                if(sheetName=='plan'){
-                                    let tmp = {};
-                                    datas.forEach(function(data,idx){
-                                        var key = data['name'].toString().replace(/\n/g, " ").replace(/\r/g, "");
-                                        var value = data[' price '];
-                                        tmp[key] = value;
-                                    })
-                                    PLAN_DATA = tmp;
-                                }
-                                // 시트의 이름이 price면
-                                else if(sheetName == 'price'){
-                                    let tmp={};
-                                    datas.forEach(function(data,idx){
-                                        if( data['모델명'] == PHONE_NAME){
-                                            for( key in data){
-                                                // 모델의 공시지원금이 0이면 값을 넣지 않음
-                                                //if(parseInt(data[key]) != ''){
-                                                    let __key = key.toString().replace(/\n/g, " ").replace(/\r/g, "");//.replace(/\t/g, "\\\\t");
-                                                    tmp[__key] = data[key];
-                                                  //  }
-                                            }
-                                        }
-                                    })
-                                    PRICE_DATA = tmp;
-                                }
-                                // 시트의 이름이 const 일 경우
-                                else if( sheetName == 'const'){
-                                    CONST_DATA = datas;
-                                    // 선택약정 할인 퍼센트 
-                                    DISCOUNT_PRICE_PERCENT = CONST_DATA[0]['선약할인'];
-                                    // 공시지원 추가지원금 퍼센트 
-                                    ADDITIONAL_DISCOUNT_PERCENT = CONST_DATA[0]['공시추가지원'];
-                                    // 할부이자
-                                    INSTALLMENT_MONTH_PERCENT = CONST_DATA[0]['할부이자'];
-                                    // 24개월 세금 계산
-                                    MONTH_INTEREST = CONST_DATA[0]['이자계산개월수'];
-                                    // 보정금액
-                                    CORRECTION_NUMBER = CONST_DATA[0]['보정금액'];
-
-                                }
-                            })//workbook.SheetNames.forEach
-                            
-                            // 핸드폰 이름을 로딩시켜줌
-                            $('#phoneName').text(PRICE_DATA['기기명']);
-                            $('#phone_name').append('<input name="phone_name_" value="'+PRICE_DATA["기기명"]+'"type="radio" checked>');
-
-                            // 메인 이미지를 로딩시켜줌
-                            $('#main_image_div').append(`<img id="main_image" src="${NOW_PATH}/${PHONE_COLOR_NAME[0]}.png" style="width:300px; height:300px;">`);
-                            // 색 고르는 이미지들을 로딩시켜줌
-                            // 이미지가 6개 이상이면 정렬 방법을 바꿈
-                            if( PHONE_COLOR_NAME.length >= 6){
-                                $('#color_pick').css("justify-content","flex-start");
-                            }
-                            for(i=0; i<PHONE_COLOR_NAME.length; i++){
-                                var name = PHONE_COLOR_NAME[i]
-                                // 메인이미지 아래
-                                $('#color_pick').append(`<div class="color_pick_sub"><div class="img_pick"><img src="${NOW_PATH}/${name}.png" style="width:40px; height:40px;"onclick="onClick_changeColor(${i})"></div><div class="color_text">${name}</div></div>`);
-
-                                // radio 버튼
-                                $('#radio_color').append(`<label><input class="select_color" value="${name}"type="radio" name="radio_color"  onclick="onClick_changeColor(${i})">${name}</label>`)
-
-                            }// for문
-                            //$('#radio_color_name').append('<input value="'+PHONE_COLOR_NAME[0]+'"type="radio" id="radio_color_name" checked>')
-                            //컬러 선택의 첫번쨰 radio를 선택으로 바꿔줌
-                            $(`input[name="radio_color"]:radio[value="${PHONE_COLOR_NAME[0]}"]`).prop('checked',true);
-
-                            // 요금제 select를 채워줌 ( 액셀에서 불러온ㄷ=ㅏ아아)
-                            var rep = /공시-(?:sk|kt|lg|알뜰)|선약-(?:sk|kt|lg|알뜰)|공시추가지원|모델명|기기명|출고가/;
-                            for( key in PRICE_DATA){
-                                //요금제에 해당할 때에만 추가해줌
-                                if ( rep.test(key) == false )$('#select_plan').append('<option value="'+key+'">'+key+'</option>');
-                            }
-
-                            //공시 추가지원금 지원여부?
-                            if(PRICE_DATA['공시추가지원'] == 'x'){
-                                ADDITIONAL_DISCOUNT_PERCENT = 0;
-                            }
-
-
-                            //출고가 변경
-                            change_phone_price();
-                            //할부개월 변경
-                            change_installment_month();
-                            //특별할인(특가)변경
-                            change_special_discount();
-                            //현재 요금제 얻어옴
-                            change_plan();
-                            //공시지원 변경
-                            //change_get_money();
-                            change_discount();
-                            //공통변경
-                            common_calculation();
-
-                            $('#total_sale_contract').css("display", "none");   
-                            $('#tmp_select').css("display","none");
-                        }//if(oReq.status == 200)
-                        else {
-                            alert('처리 중 에러가 발생했습니다.')
-                        }
-                    }//if(oReq.readyState == 4) 
-                }//function on_ready_state()
         </script>
         <!--이벤트 연결 스크립트-->
         <script type="text/javascript" language="javascript">
@@ -768,7 +729,76 @@
         </script>
         <!-- 최초 실행시 설정들 -->
         <script type="text/javascript" language="javascript">
+            // 선택약정 할인 퍼센트 
+            DISCOUNT_PRICE_PERCENT = CONST_DATA[0]['선약할인'];
+            // 공시지원 추가지원금 퍼센트 
+            ADDITIONAL_DISCOUNT_PERCENT = CONST_DATA[0]['공시추가지원'];
+            // 할부이자
+            INSTALLMENT_MONTH_PERCENT = CONST_DATA[0]['할부이자'];
+            // 24개월 세금 계산
+            MONTH_INTEREST = CONST_DATA[0]['이자계산개월수'];
+            // 보정금액
+            CORRECTION_NUMBER = CONST_DATA[0]['보정금액'];
 
+            // 핸드폰 이름을 로딩시켜줌
+            $('#phoneName').text(PRICE_DATA['기기명']);
+            $('#phone_name').append('<input name="phone_name_" value="'+PRICE_DATA["기기명"]+'"type="radio" checked>');
+
+            // 메인 이미지를 로딩시켜줌
+            $('#main_image_div').append(`<img id="main_image" src="${NOW_PATH}/${PHONE_COLOR_NAME[0]}.png" style="width:300px; height:300px;">`);
+            // 색 고르는 이미지들을 로딩시켜줌
+            // 이미지가 6개 이상이면 정렬 방법을 바꿈
+            if( PHONE_COLOR_NAME.length >= 6){
+                $('#color_pick').css("justify-content","flex-start");
+            }
+            for(i=0; i<PHONE_COLOR_NAME.length; i++){
+                var name = PHONE_COLOR_NAME[i]
+                // 메인이미지 아래
+                $('#color_pick').append(`<div class="color_pick_sub"><div class="img_pick"><img src="${NOW_PATH}/${name}.png" style="width:40px; height:40px;"onclick="onClick_changeColor(${i})"></div><div class="color_text">${name}</div></div>`);
+
+                // radio 버튼
+                $('#radio_color').append(`<label><input class="select_color" value="${name}"type="radio" name="radio_color"  onclick="onClick_changeColor(${i})">${name}</label>`)
+
+            }// for문
+            //$('#radio_color_name').append('<input value="'+PHONE_COLOR_NAME[0]+'"type="radio" id="radio_color_name" checked>')
+            //컬러 선택의 첫번쨰 radio를 선택으로 바꿔줌
+            $(`input[name="radio_color"]:radio[value="${PHONE_COLOR_NAME[0]}"]`).prop('checked',true);
+
+            // 요금제 select를 채워줌 ( 액셀에서 불러온ㄷ=ㅏ아아)
+            var rep = /공시-(?:sk|kt|lg|알뜰)|선약-(?:sk|kt|lg|알뜰)|공시추가지원|모델명|기기명|출고가/;
+            for( key in PRICE_DATA){
+                //요금제에 해당할 때에만 추가해줌
+                if ( rep.test(key) == false )$('#select_plan').append('<option value="'+key+'">'+key+'</option>');
+            }
+
+            //공시 추가지원금 지원여부?
+            if(PRICE_DATA['공시추가지원'] == 'x'){
+                ADDITIONAL_DISCOUNT_PERCENT = 0;
+            }
+
+            // 아래쪽 mainimage 를 불러옴
+            for(name in MAIN_IMAGE_PATH){
+                // console.log(MAIN_IMAGE_PATH[name]);
+                $('#main_image_bottom').append(`<img  src="${NOW_PATH}//main/${MAIN_IMAGE_PATH[name]}.jpg" style="width:100%;">`);
+
+            }
+
+            //출고가 변경
+            change_phone_price();
+            //할부개월 변경
+            change_installment_month();
+            //특별할인(특가)변경
+            change_special_discount();
+            //현재 요금제 얻어옴
+            change_plan();
+            //공시지원 변경
+            //change_get_money();
+            change_discount();
+            //공통변경
+            common_calculation();
+
+            $('#total_sale_contract').css("display", "none");   
+            $('#tmp_select').css("display","none");
         </script>
     </body>
 </html>

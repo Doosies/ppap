@@ -1,3 +1,6 @@
+<?php
+  header('Content-Type: text/html; charset=utf-8');
+?>
 <!DOCTYPE html>
 <html>
     <title>SK Telecom 판매 전문점</title>
@@ -11,7 +14,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" style="width: 100%; height:auto">
 
-        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="./index.css?ver=10.0.1">
 
     </head>
     <body>
@@ -48,7 +51,7 @@
         </script>
         <!-- 최초 실행시 설정들 -->
         <script type="text/javascript" language="javascript">
-            var url = "/main/setting/PriceTable.xlsx";
+            var url = "./main/setting/PriceTable.xlsx";
             var oReq = new XMLHttpRequest();
             oReq.open("GET", url, true);
             oReq.responseType = "arraybuffer";
