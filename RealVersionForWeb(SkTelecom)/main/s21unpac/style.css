@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap');
+
+html {
+    margin:0; padding:0; width:100%;
+    font-size:1.00em; 
+    letter-spacing: -0.09em;
+    padding-top: 0px;
+    font-family: 'Noto Sans KR', serif;
+}
+
+body{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+#logo{ 
+    font-size:20px; 
+    font-weight:bold; 
+    padding: 20px; 
+    width:100%; 
+    display: flex; 
+    flex-flow: column; 
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left:0px;
+    cursor: pointer;
+    background:white;
+}
+
+#form{
+    width:inherit;
+    margin-top:58px;
+
+}
+#wrap{
+    /* padding:20px; */
+    /* width:400px; */
+}
+
+.container{
+    width:100%;
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+    .container_items{
+        width:100%;
+        /* width:630px; */
+    }
+    .container_body{
+        display:flex;
+        flex-flow:row nowrap;
+        justify-content: center;
+        align-items: center;
+
+        padding:10px;
+    }
+        .container_item_left{
+            /* width:100px; */
+            flex:3.1;
+        }
+        .container_item_right{
+            /* width:550px; */
+            display:flex;
+            flex-flow:row wrap;
+            justify-self: start;
+            flex:8;
+        }
+#complete_button{
+    width:100%;
+    /* margin-top:20px; */
+    margin-bottom:5px;
+}
+    #order_button{
+        background:hsl(239, 75%, 54%); 
+        color:white; 
+        padding:20px 0px;
+        justify-content:center; 
+        display:flex; 
+        width:100%;
+        cursor: pointer;
+    }
+        #order_button:hover{
+            background: #494EDD;
+        }
+
+
+
+
+
+    input[type="email" i] {
+        padding: 1px 2px;
+        height:30px;
+        width:98.5%;
+    }
+    input[type="text" i] {
+        padding: 1px 2px;
+        height:30px;
+        width:98.5%;
+    }
+    input[type="tel" i] {
+        padding: 1px 2px;
+        height:30px;
+    }
+    input[type="radio" i] {
+        /* padding: 10px; */
+        /* margin: 10px; */
+    }
+    
+
+
+/*  ##Device = 랩탑, 데스크탑   */
+@media (min-width: 1025px){
+    #wrap{
+        width:767px;
+    }
+}
+
+/*  ##Device = 태블릿, 아이패드(세로),  ##Screen = 768px에서 1024px 사이  */
+@media (min-width: 767px) and (max-width: 1024px) {
+    #wrap{
+        width:767px;
+    }
+}
+
+/*  ##Device = 태블릿, 아이패드(가로)  ##Screen = 768px에서 1024px 사이  */
+@media (min-width: 767px) and (max-width: 1024px) and (orientation: landscape) {
+    #wrap{
+        width:767px;
+    }
+}
+
+/*  ##Device = 저해상도 태블릿, 모바일(가로)  ##Screen = 481px에서 767px 사이  */
+@media (min-width: 480px) and (max-width: 766px) {
+    #wrap{
+        width:480px;
+    }
+}
+
+/*  ##Device = 대부분의 스마트폰 모바일 기기(세로)  ##Screen = 320px에서 479px 사이  */
+@media (min-width: 320px) and (max-width: 479 px) {
+    #wrap{
+        width:320px;
+    }
+}
