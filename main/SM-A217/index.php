@@ -20,7 +20,7 @@
 
     </head>
     <body>
-        <form action="/main/setting/order/index.php" method="post" id="send_form">
+        <form action="./main/setting/order/index.php" method="post" id="send_form">
             <div id="wrap" class="container"><!--전체 랩-->
                 <!--상단 핸드폰 이름 -->
                 <div id="logo">
@@ -287,7 +287,7 @@
                 <img style="cursor:pointer; " src="http://www.ictmarket.or.kr/getCertIcon.do?cert_icon=KL20122352310V001" onclick="window.open('http://www.ictmarket.or.kr/precon/pop_CertIcon.do?PRECON_REQ_ID=PRE0000145236','_blank','width=600, height=500, toolbar=no, menubar=no, scrollbars=no, resizable=no' )"/>
                         <img style="cursor:pointer; " src="http://www.ictmarket.or.kr/getCertIcon.do?cert_icon=KP19021936496O003" onclick="window.open('http://www.ictmarket.or.kr/precon/pop_CertIcon.do?PRECON_REQ_ID=PRE0000110286','_blank','width=600, height=500, toolbar=no, menubar=no, scrollbars=no, resizable=no' )"/>
                     <!-- <img id="main_image" src="main.jpg"> -->
-                    <!-- <img src="./main/01_main.jpg"> -->
+                    <!-- <img src="../main/01_main.jpg"> -->
                 </div>
             </div><!--wrap 끝-->
         </form>
@@ -321,7 +321,7 @@
                             <div id="support_kakao" >
                                 <div id="support_kakao_add" >
                                     <div>
-                                        <img src="/main/setting/kakao/add.png" style="width:25px;height:25px;"/>
+                                        <img src="./main/setting/kakao/add.png" style="width:25px;height:25px;"/>
                                     </div>
                                      
                                     <div>
@@ -331,7 +331,7 @@
                                 </div>
                                 <div id="support_kakao_chat" >
                                     <div>
-                                        <img src="/main/setting/kakao/chat.png" style="width:25px;height:25px;"/>
+                                        <img src="./main/setting/kakao/chat.png" style="width:25px;height:25px;"/>
                                     </div>
                                     <div>
                                         카카오 상담
@@ -346,11 +346,11 @@
                 </div>
                 <div id="for_mobile">
                     <div id="support_kakao_add_mobile">
-                        <img src="/main/setting/kakao/add.png" style="width:38;height:38;"/>
+                        <img src="./main/setting/kakao/add.png" style="width:38;height:38;"/>
                     </div>
                     
                     <div id="support_kakao_chat_mobile" >
-                        <img src="/main/setting/kakao/chat.png" style="width:38;height:38; margin-top:2px;"/>
+                        <img src="./main/setting/kakao/chat.png" style="width:38;height:38; margin-top:2px;"/>
                     </div>
                 </div>
         </div>
