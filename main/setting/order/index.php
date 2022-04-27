@@ -52,7 +52,7 @@ echo $plan_name;
                     </div>
                     <div>
                         <div class="container_item_left">
-                            색상
+                            색상<? echo $color ?>
                         </div>
                         <div class="container_item_right">
                             <? echo $color ?>
