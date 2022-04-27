@@ -65,6 +65,6 @@
     echo "
     <script>
         alert('신청서를 성공적으로 작성했습니다.\\n빠른시일내에 요청하신 순서대로 연락 드리겠습니다.\\n확인을 누르시면 잠시 후 메인페이지로 돌아갑니다.');
-        location.href='/';
+        location.href='/sktel';
     </script>";
 ?>
