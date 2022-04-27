@@ -47,7 +47,7 @@ echo $plan_name;
                             신청기기11
                         </div>
                         <div class="container_item_right">
-                            <? echo $phone_name; ?>
+                            <?php echo $phone_name; ?>
                         </div>
                     </div>
                     <div>
