@@ -401,7 +401,6 @@
             let MONTH_INTEREST = 0;
             // 요금제 정보
             var PLAN_DATA = <?php echo $data_plan_data;?>;
-            console.log(PLAN_DATA);
             // 핸드폰 출고가, 보조금 정보
             var PRICE_DATA = <?php echo $data_price_data; ?>;
             
