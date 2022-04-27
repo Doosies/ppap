@@ -103,7 +103,7 @@ echo $plan_name;
                 </div>
             </div>
             <!-- 배송지 정보 -->
-            <form action="sktel/main/setting/order/send.php" method="post" onsubmit="return checkIt();">
+            <form action="/sktel/main/setting/order/send.php" method="post" onsubmit="return checkIt();">
                 <div id="info_shipping" class="container_body" style="">
                     <div class="container_header">
                         2. 배송지 정보
