@@ -223,7 +223,7 @@ $plan_name = $_POST['select_planname'];
             $(function(){
 
                 $('#logo').click(function(e){
-                    location.href='http://songminhyung.com/sktel';
+                    location.href='https://songminhyung.com/sktel';
                 });
             });
         </script>
