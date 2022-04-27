@@ -29,7 +29,7 @@ $plan_name = $_POST['select_planname'];
                 SK Telecom 판매 전문점
             </div>
             <!-- 신청내역 -->
-            <div id="order_list" class="container_body" style="margin-top:47px;">
+            <div id="order_list" class="container_body" style="margin-top250px;">
                 <div class="container_header">
                     1. 신청내역
                 </div>
