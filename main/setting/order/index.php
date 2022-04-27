@@ -6,9 +6,10 @@ $after_service = $_POST['radio_after_service'];
 $contract = $_POST['radio_contract'];
 $month = $_POST['radio_month'];
 $plan_name = $_POST['select_planname'];
-echo "!!!";
-echo $phone_name;
-echo $color;
+
+// echo "!!!";
+// echo $phone_name;
+// echo $color;
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,7 +43,7 @@ echo $color;
                             신청기기
                         </div>
                         <div class="container_item_right">
-                            <? echo $phone_name; ?>
+                            <?php echo $phone_name; ?>
                             sldfkjsdlfkjsdflk
                         </div>
                     </div>
@@ -51,7 +52,7 @@ echo $color;
                             색상
                         </div>
                         <div class="container_item_right">
-                            <? echo $color ?>
+                            <?php echo $color ?>
                         </div>
                     </div>
                     <div>
@@ -59,7 +60,7 @@ echo $color;
                             사용중인 통신사
                         </div>
                         <div class="container_item_right">
-                            <? echo $now_service ?>
+                            <?php echo $now_service ?>
                         </div>
                     </div>
                     <div>
@@ -67,7 +68,7 @@ echo $color;
                             사용할 통신사
                         </div>
                         <div class="container_item_right">
-                            <? echo $after_service; ?>
+                            <?php echo $after_service; ?>
                         </div>
                     </div>
                     <div>
@@ -75,7 +76,7 @@ echo $color;
                             약정선택
                         </div>
                         <div class="container_item_right">
-                            <? echo $contract ?>
+                            <?php echo $contract ?>
                         </div>
                     </div>
                     <div>
@@ -92,7 +93,7 @@ echo $color;
                         </div>
                         <div class="container_item_right">
                             <div>
-                            <? echo $plan_name ?>
+                            <?php echo $plan_name ?>
                             </div>
                         </div>
                     </div>
