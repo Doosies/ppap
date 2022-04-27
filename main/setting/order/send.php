@@ -36,7 +36,7 @@
     + $cc_mail : Cc 메일 있을경우 (옵션값으로 생략가능) 
     + $bcc_mail : Bcc 메일이 있을경우 (옵션값으로 생략가능) */ 
     // $to="song961003@gmail.com"; 
-    $to="8851011@naver.com";
+    $to="song961003@icloud.com";
     // $to="song961003@gmail.com";
     $from="하늘통신"; 
     $subject= "휴대폰 개통신청";
