@@ -7,7 +7,6 @@ $contract = $_POST['radio_contract'];
 $month = $_POST['radio_month'];
 $plan_name = $_POST['select_planname'];
 
-echo $phone_name;
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,10 +37,11 @@ echo $phone_name;
                 <div class="container_items" style="border-top:solid 1px #C0C0C0;">
                     <div>
                         <div class="container_item_left">
-                            신청기기11
+                            신청기기
                         </div>
                         <div class="container_item_right">
                             <? echo $phone_name; ?>
+                            sldfkjsdlfkjsdflk
                         </div>
                     </div>
                     <div>
