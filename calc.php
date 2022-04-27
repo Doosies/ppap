@@ -1,7 +1,4 @@
 <?php
-  header('Content-Type: text/html; charset=utf-8');
-?>
-<?php
     $data_plan_data = $_POST['data_plan_data'];
     $data_price_data = $_POST['data_price_data'];
     $data_const_data = $_POST['data_const_data'];
@@ -30,7 +27,7 @@
 
     </head>
     <body>
-        <form action="/sktel/main/setting/order/index.php" method="post" id="send_form">
+        <form action="/main/setting/order/index.php" method="post" id="send_form">
             <div id="wrap" class="container"><!--전체 랩-->
                 <!--상단 핸드폰 이름 -->
                 <div id="logo">
@@ -331,7 +328,7 @@
                             <div id="support_kakao" >
                                 <div id="support_kakao_add" >
                                     <div>
-                                        <img src="/sktel/main/setting/kakao/add.png" style="width:25px;height:25px;"/>
+                                        <img src="/main/setting/kakao/add.png" style="width:25px;height:25px;"/>
                                     </div>
                                      
                                     <div>
@@ -341,7 +338,7 @@
                                 </div>
                                 <div id="support_kakao_chat" >
                                     <div>
-                                        <img src="/sktel/main/setting/kakao/chat.png" style="width:25px;height:25px;"/>
+                                        <img src="/main/setting/kakao/chat.png" style="width:25px;height:25px;"/>
                                     </div>
                                     <div>
                                         카카오 상담
@@ -356,11 +353,11 @@
                 </div>
                 <div id="for_mobile">
                     <div id="support_kakao_add_mobile">
-                        <img src="/sktel/main/setting/kakao/add.png" style="width:38;height:38;"/>
+                        <img src="/main/setting/kakao/add.png" style="width:38;height:38;"/>
                     </div>
                     
                     <div id="support_kakao_chat_mobile" >
-                        <img src="/sktel/main/setting/kakao/chat.png" style="width:38;height:38; margin-top:2px;"/>
+                        <img src="/main/setting/kakao/chat.png" style="width:38;height:38; margin-top:2px;"/>
                     </div>
                 </div>
         </div>
@@ -469,7 +466,7 @@
             $(function(){
 
                 $('#logo').click(function(e){
-                    location.href='https://songminhyung.com/sktel';
+                    location.href='http://sktel.co.kr/';
                 })
                 //현재 통신사 선택 radio
                 //특별 할인값을 바꿔준 후 재계산.
@@ -779,7 +776,7 @@
             // 아래쪽 mainimage 를 불러옴
             for(name in MAIN_IMAGE_PATH){
                 // console.log(MAIN_IMAGE_PATH[name]);
-                $('#main_image_bottom').append(`<img  src="${NOW_PATH}/main/${MAIN_IMAGE_PATH[name]}.jpg" style="width:100%;">`);
+                $('#main_image_bottom').append(`<img  src="${NOW_PATH}//main/${MAIN_IMAGE_PATH[name]}.jpg" style="width:100%;">`);
 
             }
 
