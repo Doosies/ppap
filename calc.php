@@ -27,7 +27,7 @@
 
     </head>
     <body>
-        <form action="/main/setting/order/index.php" method="post" id="send_form">
+        <form action="/sktel/main/setting/order/index.php" method="post" id="send_form">
             <div id="wrap" class="container"><!--전체 랩-->
                 <!--상단 핸드폰 이름 -->
                 <div id="logo">
@@ -328,7 +328,7 @@
                             <div id="support_kakao" >
                                 <div id="support_kakao_add" >
                                     <div>
-                                        <img src="/main/setting/kakao/add.png" style="width:25px;height:25px;"/>
+                                        <img src="/sktel/main/setting/kakao/add.png" style="width:25px;height:25px;"/>
                                     </div>
                                      
                                     <div>
@@ -338,7 +338,7 @@
                                 </div>
                                 <div id="support_kakao_chat" >
                                     <div>
-                                        <img src="/main/setting/kakao/chat.png" style="width:25px;height:25px;"/>
+                                        <img src="/sktel/main/setting/kakao/chat.png" style="width:25px;height:25px;"/>
                                     </div>
                                     <div>
                                         카카오 상담
@@ -353,11 +353,11 @@
                 </div>
                 <div id="for_mobile">
                     <div id="support_kakao_add_mobile">
-                        <img src="/main/setting/kakao/add.png" style="width:38;height:38;"/>
+                        <img src="/sktel/main/setting/kakao/add.png" style="width:38;height:38;"/>
                     </div>
                     
                     <div id="support_kakao_chat_mobile" >
-                        <img src="/main/setting/kakao/chat.png" style="width:38;height:38; margin-top:2px;"/>
+                        <img src="/sktel/main/setting/kakao/chat.png" style="width:38;height:38; margin-top:2px;"/>
                     </div>
                 </div>
         </div>
