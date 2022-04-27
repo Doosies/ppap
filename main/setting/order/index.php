@@ -6,6 +6,14 @@ $after_service = $_POST['radio_after_service'];
 $contract = $_POST['radio_contract'];
 $month = $_POST['radio_month'];
 $plan_name = $_POST['select_planname'];
+
+echo $phone_name;
+echo $color;
+echo $now_service;
+echo $after_service;
+echo $contract;
+echo $month;
+echo $plan_name;
 ?>
 <!DOCTYPE html>
 <html>
