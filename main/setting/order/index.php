@@ -306,7 +306,7 @@ $plan_name = $_POST['select_planname'];
             $(function(){
 
                 $('#logo').click(function(e){
-                    location.href='http://sktel.co.kr/';
+                    location.href='https://songminhyung.com/sktel';
                 });
             });
         </script>
