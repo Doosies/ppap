@@ -1,5 +1,5 @@
 <?php
-$phone_name = $_POST['phone_name_'];
+$phone_name = $_POST['phone_name'];
 $color = $_POST['radio_color'];
 $now_service = $_POST['radio_now_service'];
 $after_service = $_POST['radio_after_service'];
@@ -7,7 +7,7 @@ $contract = $_POST['radio_contract'];
 $month = $_POST['radio_month'];
 $plan_name = $_POST['select_planname'];
 echo "!!!";
-echo $phone_name_;
+echo $phone_name;
 echo $color;
 ?>
 <!DOCTYPE html>
