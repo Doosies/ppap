@@ -466,7 +466,7 @@
             $(function(){
 
                 $('#logo').click(function(e){
-                    location.href='http://sktel.co.kr/';
+                    location.href='https://songminhyung.com/sktel';
                 })
                 //현재 통신사 선택 radio
                 //특별 할인값을 바꿔준 후 재계산.
