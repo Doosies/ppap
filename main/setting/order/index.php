@@ -52,10 +52,10 @@ echo $plan_name;
                     </div>
                     <div>
                         <div class="container_item_left">
-                            색상<? echo $color ?>
+                            색상
                         </div>
                         <div class="container_item_right">
-                            <? echo $color ?>
+                            <?php echo $color ?>
                         </div>
                     </div>
                     <div>
@@ -63,7 +63,7 @@ echo $plan_name;
                             사용중인 통신사
                         </div>
                         <div class="container_item_right">
-                            <? echo $now_service ?>
+                            <?php echo $now_service ?>
                         </div>
                     </div>
                     <div>
@@ -71,7 +71,7 @@ echo $plan_name;
                             사용할 통신사
                         </div>
                         <div class="container_item_right">
-                            <? echo $after_service; ?>
+                            <?php echo $after_service; ?>
                         </div>
                     </div>
                     <div>
@@ -79,7 +79,7 @@ echo $plan_name;
                             약정선택
                         </div>
                         <div class="container_item_right">
-                            <? echo $contract ?>
+                            <?php echo $contract ?>
                         </div>
                     </div>
                     <div>
@@ -96,7 +96,7 @@ echo $plan_name;
                         </div>
                         <div class="container_item_right">
                             <div>
-                            <? echo $plan_name ?>
+                            <?php echo $plan_name ?>
                             </div>
                         </div>
                     </div>
