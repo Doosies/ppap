@@ -7,9 +7,14 @@ $contract = $_POST['radio_contract'];
 $month = $_POST['radio_month'];
 $plan_name = $_POST['select_planname'];
 
-// echo "!!!";
-// echo $phone_name;
-// echo $color;
+echo "!!!";
+echo $phone_name;
+echo $color;
+echo $now_service;
+echo $after_service;
+echo $contract;
+echo $month;
+echo $plan_name;
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,7 +48,7 @@ $plan_name = $_POST['select_planname'];
                             신청기기
                         </div>
                         <div class="container_item_right">
-                            <?php echo $phone_name; ?>
+                            <? echo $phone_name; ?>
                             sldfkjsdlfkjsdflk
                         </div>
                     </div>
@@ -52,7 +57,7 @@ $plan_name = $_POST['select_planname'];
                             색상
                         </div>
                         <div class="container_item_right">
-                            <?php echo $color ?>
+                            <? echo $color ?>
                         </div>
                     </div>
                     <div>
@@ -60,7 +65,7 @@ $plan_name = $_POST['select_planname'];
                             사용중인 통신사
                         </div>
                         <div class="container_item_right">
-                            <?php echo $now_service ?>
+                            <? echo $now_service ?>
                         </div>
                     </div>
                     <div>
@@ -68,7 +73,7 @@ $plan_name = $_POST['select_planname'];
                             사용할 통신사
                         </div>
                         <div class="container_item_right">
-                            <?php echo $after_service; ?>
+                            <? echo $after_service; ?>
                         </div>
                     </div>
                     <div>
@@ -76,7 +81,7 @@ $plan_name = $_POST['select_planname'];
                             약정선택
                         </div>
                         <div class="container_item_right">
-                            <?php echo $contract ?>
+                            <? echo $contract ?>
                         </div>
                     </div>
                     <div>
@@ -93,7 +98,7 @@ $plan_name = $_POST['select_planname'];
                         </div>
                         <div class="container_item_right">
                             <div>
-                            <?php echo $plan_name ?>
+                            <? echo $plan_name ?>
                             </div>
                         </div>
                     </div>
