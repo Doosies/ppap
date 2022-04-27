@@ -31,7 +31,7 @@
 
     </head>
     <body>
-        <form action="/main/setting/order/index.php" method="post" id="send_form">
+        <form action="/sktel/main/setting/order/index.php" method="post" id="send_form">
             <div id="wrap" class="container"><!--전체 랩-->
                 <!-- <div id="head_phone_name" style="width:100%"> -->
                     <div id="head_phone_name" style="width:100%;">

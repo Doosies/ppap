@@ -779,7 +779,7 @@
             // 아래쪽 mainimage 를 불러옴
             for(name in MAIN_IMAGE_PATH){
                 // console.log(MAIN_IMAGE_PATH[name]);
-                $('#main_image_bottom').append(`<img  src="${NOW_PATH}//zmain/${MAIN_IMAGE_PATH[name]}.jpg" style="width:100%;">`);
+                $('#main_image_bottom').append(`<img  src="${NOW_PATH}/zmain/${MAIN_IMAGE_PATH[name]}.jpg" style="width:100%;">`);
 
             }
 
