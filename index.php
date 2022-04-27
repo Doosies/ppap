@@ -23,7 +23,7 @@
                 SK Telecom 판매 전문점
             </div>
             <div id="header">
-                <div><img src="sktel/main/setting/main/logo.png" style="width:100%"></div>
+                <div><img src="/main/setting/main/logo.png" style="width:100%"></div>
             </div>
             <form action="./calc.php" method="post"  style="display:flex; justify-content:center; align-items:center;">
                 <div id="body" class="containner">
