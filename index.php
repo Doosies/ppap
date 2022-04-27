@@ -118,7 +118,7 @@
                                                     </div>
                                                     <div >
                                                         <input type="image" onClick="Onclick_image('${PHONE_NAME[i]}');" 
-                                                        class="phone_image" src="/main/${PHONE_NAME[i]}/first/first.png">
+                                                        class="phone_image" src="/sktel/main/${PHONE_NAME[i]}/first/first.png">
                                                     </div>
                                                </div>`);
                         }
