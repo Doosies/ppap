@@ -19,7 +19,7 @@ class Sendmail {
 	/* smtp 계정 아이디 입력 */
     var $smtp_id="song961003.mail.master@gmail.com";
     /* smtp 계정 비밀번호 입력 */
-	var $smtp_pw="thdalsgud1";
+	var $smtp_pw="Thdalsgud1";
 	
     /* 디버그모드 - 활성 :1, 비활성 : 0; */
     var $debug = 0; 
